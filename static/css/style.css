@@ -1,0 +1,17 @@
+/* static/css/style.css */
+
+/* ለምሳሌ፣ የ Navbarን ቀለም ለመቀየር */
+.navbar-dark {
+    background-color: #004AAD !important; /* የመረጥከው ዋና ሰማያዊ ቀለም */
+}
+
+/* የዋና ቁልፎችን (buttons) ቀለም ለመቀየር */
+.btn-primary {
+    background-color: #FFA500; /* የመረጥከው ሁለተኛ ብርቱካናማ ቀለም */
+    border-color: #FFA500;
+}
+
+/* የሊንኮችን ቀለም ለመቀየር */
+a {
+    color: #004AAD;
+}
