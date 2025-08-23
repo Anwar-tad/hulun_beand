@@ -10,6 +10,30 @@ class Category(models.Model):
     def __str__(self):
       return self.name
 # Product Model
+# --- የድሮውን Product ሞዴል በዚህ ቀይረው ---
+class Product(models.Model):
+    CONDITION_CHOICES = [
+        ('New', 'አዲስ (Brand New)'),
+        ('Used', 'ያገለገለ (Used)'),
+        ('Refurbished', 'የታደሰ (Refurbished)'),
+    ]
+
+    name = models.CharField(max_length=200, verbose_name="የእቃው ስም")
+    description = models.TextField(verbose_name="ዝርዝር መግለጫ")
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="ዋጋ (በብር)")
+    image = models.ImageField(upload_to='product_images/', null=True, blank=True, verbose_name="ፎቶ")
+    
+    # --- አዲሶቹ መስኮች (Fields) ---
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=False, verbose_name="ምድብ")
+    brand = models.CharField(max_length=100, blank=True, verbose_name="ዓይነት (Brand)")
+    condition = models.CharField(max_length=20, choices=CONDITION_CHOICES, blank=True, verbose_name="ሁኔታ (Condition)")
+    location = models.CharField(max_length=200, blank=True, verbose_name="የሚገኝበት ቦታ")
+    
+    seller = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="ሻጭ")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
 class Product(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
@@ -20,7 +44,16 @@ class Product(models.Model):
     
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-
+    CONDITION_CHOICES = [
+        ('New', 'አዲስ (Brand New)'),
+        ('Used', 'ያገለገለ (Used)'),
+        ('Refurbished', 'የታደሰ (Refurbished)'),
+    ]
+    
+    brand = models.CharField(max_length=100, blank=True, verbose_name="የእቃው አይነት (Brand)")
+    condition = models.CharField(max_length=20, choices=CONDITION_CHOICES, blank=True, verbose_name="ሁኔታ (Condition)")
+    location = models.CharField(max_length=200, blank=True, verbose_name="የሚገኝበት ቦታ (Location)")
+    
     def __str__(self):
         return self.name
 
@@ -34,10 +67,10 @@ class Profile(models.Model):
           #  output_size = (300, 300)
          #   img.thumbnail(output_size)
           #  img.save(self.profile_picture.path)
-   user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = models.ImageField(default='default_avatar.png', upload_to='profile_pics/')
     bio = models.TextField(max_length=500, blank=True)
     phone_number = models.CharField(max_length=15, blank=True)
 
     def __str__(self):
-        return f'{self.user.username} Profile'       
+        return f'{self.user.username} Profile'

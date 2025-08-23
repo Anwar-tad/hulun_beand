@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+ {% load humanize %}
 {% block content %}
    <div class="text-center mb-4">
     <h1>Welcome to Hulun-Be'And!</h1>
@@ -34,7 +34,7 @@
            <a href="{% url 'product_detail' product.id %}">
     <h5 class="card-title">{{ product.name }}</h5>
 </a>
-            <p class="card-text">Price: {{ product.price }} Br.</p>
+            <p class="card-text">Price: {{ product.price|intcomma }} Br.</p>
             <p class="card-text"><small class="text-muted">Seller: {{ product.seller.username }}</small></p>
           </div>
         </div>
