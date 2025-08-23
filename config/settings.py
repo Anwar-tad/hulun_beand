@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -130,4 +131,35 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Media files (user-uploaded files)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+JAZZMIN_SETTINGS = {
+    # Title on the login screen (can be full title or shortened)
+    "site_title": "Hulun-BeAnd Admin",
+
+    # Title on the brand text
+    "site_header": "Hulun-BeAnd",
+
+    # Title inside the navbar
+    "site_brand": "Hulun-BeAnd",
+
+    # Logo to use for your site, must be present in static files
+    "site_logo": "images/logo.png",
+
+    # Welcome text on the login screen
+    "welcome_sign": "Welcome to the Hulun-BeAnd Admin Panel",
+
+    # Copyright on the footer
+    "copyright": "Hulun-BeAnd Ltd.",
+
+    # Theming
+    "theme": "flatly", # Try "darkly" for a dark theme or "cerulean" for a different look
+
+    # Links to put along the top menu
+    "topmenu_links": [
+        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "View Site", "url": "/", "new_window": True},
+        {"model": "auth.User"},
+        {"model": "users.Product"},
+    ],
+}
 
