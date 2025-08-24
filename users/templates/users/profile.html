@@ -1,32 +1,76 @@
 {% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}{{ profile_user.username }}'s Profile | Hulun-BeAnd{% endblock %}
 
 {% block content %}
-  <h2 class="mb-4">My Posted Items</h2>
-  
-  <div class="row">
-    {% for product in products %}
-      <div class="col-md-4 mb-3">
-        <div class="card">
-          {% if product.image %}
-            <a href="{% url 'product_detail' product.id %}">
-                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
-            </a>
-          {% endif %}
-          <div class="card-body">
-            <a href="{% url 'product_detail' product.id %}">
-                <h5 class="card-title">{{ product.name }}</h5>
-            </a>
-            <p class="card-text">Price: {{ product.price }} Br.</p>
-            <div>
-                <a href="{% url 'product_update' product.id %}" class="btn btn-sm btn-warning">Edit</a>
-                <a href="{% url 'product_delete' product.id %}" class="btn btn-sm btn-danger">Delete</a>
+  <div class="container">
+    <!-- ================================== -->
+    <!-- ==== Profile Header Section ==== -->
+    <!-- ================================== -->
+    <div class="row mb-4">
+        <div class="col-md-3 text-center">
+            <!-- This displays the profile picture -->
+            <img src="{{ profile_user.profile.profile_picture.url }}" class="img-fluid rounded-circle" alt="{{ profile_user.username }}'s Profile Picture" style="width: 150px; height: 150px; object-fit: cover;">
+        </div>
+        <div class="col-md-9 align-self-center">
+            <!-- This displays the username -->
+            <h2>{{ profile_user.username }}</h2>
+            <!-- This displays the user's bio -->
+            <p class="text-muted">{{ profile_user.profile.bio|default:"No bio provided." }}</p>
+            
+            {% if profile_user.profile.phone_number %}
+                <p><strong>Contact:</strong> {{ profile_user.profile.phone_number }}</p>
+            {% endif %}
+
+            <!-- This shows the "Edit Profile" button ONLY to the profile owner -->
+            {% if user == profile_user %}
+                <a href="{% url 'profile_update' %}" class="btn btn-outline-secondary btn-sm">Edit Profile</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- ===================================== -->
+    <!-- ==== User's Posted Items Section ==== -->
+    <!-- ===================================== -->
+    <h3 class="mb-4">Items posted by {{ profile_user.username }}</h3>
+    <div class="row">
+      <!-- This loops through the user's products -->
+      {% for product in products %}
+        <div class="col-md-4 col-sm-6 mb-3">
+          <div class="card h-100">
+            {% if product.image %}
+              <a href="{% url 'product_detail' product.id %}">
+                  <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: cover;">
+              </a>
+            {% endif %}
+            <div class="card-body d-flex flex-column">
+              <a href="{% url 'product_detail' product.id %}">
+                  <h5 class="card-title">{{ product.name }}</h5>
+              </a>
+              <p class="card-text"><strong>Price:</strong> {{ product.price|intcomma }} Br.</p>
+              
+              <!-- This shows Edit/Delete buttons ONLY to the profile owner -->
+              {% if user == profile_user %}
+                <div class="mt-auto">
+                    <a href="{% url 'product_update' product.id %}" class="btn btn-sm btn-warning">Edit Item</a>
+                    <a href="{% url 'product_delete' product.id %}" class="btn btn-sm btn-danger">Delete Item</a>
+                </div>
+              {% endif %}
             </div>
           </div>
         </div>
-      </div>
-    {% empty %}
-      <p>You have not posted any products yet.</p>
-      <a href="{% url 'create_product' %}" class="btn btn-primary">Post Your First Item</a>
-    {% endfor %}
+      <!-- This runs if the user has no products -->
+      {% empty %}
+        <div class="col">
+            <p>{{ profile_user.username }} has not posted any products yet.</p>
+            {% if user == profile_user %}
+              <a href="{% url 'create_product' %}" class="btn btn-primary">Post Your First Item</a>
+            {% endif %}
+        </div>
+      {% endfor %}
+    </div>
   </div>
 {% endblock %}

@@ -5,7 +5,31 @@ from .models import Product,Category
 from django.contrib.auth import login
 from django.contrib import messages
 from django.core.paginator import Paginator
+from .forms import UserUpdateForm, ProfileUpdateForm # አዲሶቹን ፎርሞች እናስገባለን
+from django.contrib.auth.models import User
+# ... (የድሮ ቪዎች አሉ) ...
 
+@login_required
+def profile_update(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST,
+                                   request.FILES,
+                                   instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, 'Your profile has been updated!')
+            return redirect('profile', username=request.user.username)
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    return render(request, 'users/profile_update.html', context)
 
 def register(request):
     if request.user.is_authenticated:
@@ -105,12 +129,20 @@ def product_delete(request, pk):
     }
     return render(request, 'users/product_delete.html', context)
 
-@login_required
 def profile(request, username):
-    user_products = Product.objects.filter(seller=request.user).order_by('-created_at')
+    # 1. Get the user object for the profile being viewed
+    profile_owner = get_object_or_404(User, username=username)
+
+    # 2. Filter products that belong ONLY to that user
+    user_products = Product.objects.filter(seller=profile_owner).order_by('-created_at')
+
+    # 3. Create the context dictionary to send to the template
     context = {
-        'products': user_products
+        'profile_user': profile_owner, # The user whose profile it is
+        'products': user_products      # The list of their products
     }
+    
+    # 4. Render the template with the context
     return render(request, 'users/profile.html', context)
 # users/views.py
 def home(request):
