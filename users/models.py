@@ -22,8 +22,7 @@ class Product(models.Model):
     name = models.CharField(max_length=200, verbose_name="የእቃው ስም")
     description = models.TextField(verbose_name="ዝርዝር መግለጫ")
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="ዋጋ (በብር)")
-    image = models.ImageField(upload_to='product_images/', null=True, blank=True, verbose_name="ፎቶ")
-    
+  
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, blank=False, verbose_name="ምድብ")
     brand = models.CharField(max_length=100, blank=True, verbose_name="ዓይነት (Brand)")
     condition = models.CharField(max_length=20, choices=CONDITION_CHOICES, blank=True, verbose_name="ሁኔታ (Condition)")
@@ -44,7 +43,12 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-        
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='product_images/')
+
+    def __str__(self):
+        return f"Image for {self.product.name}"
 class Profile(models.Model):
   
     def save(self, *args, **kwargs):
@@ -62,3 +66,29 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user.username} Profile'
+        
+class Conversation(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='conversations')
+    participants = models.ManyToManyField(User, related_name='conversations')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-updated_at']
+
+    def __str__(self):
+        participant_names = ", ".join([user.username for user in self.participants.all()])
+        return f'Conversation about "{self.product.name}" between {participant_names}'
+
+class Message(models.Model):
+    conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, related_name='messages')
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['timestamp']
+
+    def __str__(self):
+        return f'Message from {self.sender.username} at {self.timestamp.strftime("%Y-%m-%d %H:%M")}'

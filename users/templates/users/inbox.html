@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}My Inbox | Menalesh{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">My Inbox</h2>
+    <div class="list-group">
+        {% for conversation in conversations %}
+            <a href="{% url 'conversation_detail' conversation.id %}" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Conversation about: {{ conversation.product.name }}</h5>
+                    <small>{{ conversation.updated_at|naturaltime }}</small>
+                </div>
+                <p class="mb-1">
+                    {% for participant in conversation.participants.all %}
+                        {% if participant != user %}
+                            With: {{ participant.username }}
+                        {% endif %}
+                    {% endfor %}
+                </p>
+                {% with last_message=conversation.messages.last %}
+                    {% if last_message %}
+                        <small class="text-muted">
+                            {% if last_message.sender == user %}You:{% else %}{{ last_message.sender.username }}:{% endif %}
+                            {{ last_message.content|truncatechars:50 }}
+                        </small>
+                    {% endif %}
+                {% endwith %}
+            </a>
+        {% empty %}
+            <div class="list-group-item">
+                <p class="mb-1">You have no conversations yet.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,10 +1,9 @@
 {% extends "base.html" %}
- {% load humanize %}
+{% load humanize %}
 {% block content %}
    <div class="text-center mb-4">
-    <h1>Welcome to Hulun-Be'And!</h1>
- <h1>እንኳን  ወደ  ሁሉ  በአንድ  ገበያ  መጡ!</h1>
-    <p>The Digital Marketplace for Ethiopia.</p>
+    <h1>Welcome to Menalesh!</h1>
+    <p>ማንኛውንም እቃ እዚሁ ይሸምቱ እዚሁ  ይሽጡ</p>
   </div>
 <form method="GET" action="{% url 'home' %}" class="mb-4">
       <div class="input-group">
@@ -22,25 +21,30 @@
     {% endfor %}
 </div>
   <!-- የተለጠፉ እቃዎች ዝርዝር -->
+
   <h2>Latest Products</h2>
   <div class="row">
     {% for product in products %}
       <div class="col-md-4 mb-3">
-        <div class="card">
-          {% if product.image %}
-            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+        <div class="card h-100">
+          {% if product.images.first %}
+            <a href="{% url 'product_detail' product.id %}">
+              <img src="{{ product.images.first.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: cover;">
+            </a>
           {% endif %}
           <div class="card-body">
-           <a href="{% url 'product_detail' product.id %}">
-    <h5 class="card-title">{{ product.name }}</h5>
-</a>
+            <h5 class="card-title">
+                <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
+            </h5>
+            <!-- የተስተካከለው የዋጋ መስመር -->
             <p class="card-text">Price: {{ product.price|intcomma }} Br.</p>
             <p class="card-text"><small class="text-muted">Seller: {{ product.seller.username }}</small></p>
           </div>
         </div>
       </div>
-    
-</div>
+
+  <!-- ... (የ Pagination ክፍል) ... -->
+
 
 {% if products.has_other_pages %}
   <nav aria-label="Page navigation">
@@ -68,7 +72,7 @@
   
 {% endif %}
 
-    {% empty %}
+        {% empty %}
       <p>No products posted yet.</p>
     {% endfor %}
   </div>

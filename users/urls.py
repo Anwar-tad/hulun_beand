@@ -11,4 +11,9 @@ urlpatterns = [
     path('profile/update/', views.profile_update, name='profile_update'),
     path('product/<int:pk>/like/', views.like_product, name='like_product'),
     path('product/<int:pk>/dislike/', views.dislike_product, name='dislike_product'),
+    
+    # --- አዲስ የምንጨምራቸው የ Chat ዩአርኤሎች ---
+    path('inbox/', views.inbox, name='inbox'),
+    path('conversation/start/<int:product_pk>/', views.start_conversation, name='start_conversation'),
+    path('conversation/<int:pk>/', views.conversation_detail, name='conversation_detail'),
 ]

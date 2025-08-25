@@ -1,7 +1,9 @@
+from django.db.models import Q # ይህንን ጨምር
+from .models import Conversation, Message 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required 
 from .forms import RegisterForm, ProductForm
-from .models import Product,Category
+from .models import Product,Category, ProductImage
 from django.contrib.auth import login
 from django.contrib import messages
 from django.core.paginator import Paginator
@@ -72,6 +74,9 @@ def create_product(request):
             product = form.save(commit=False) # ዳታቤዝ ላይ ወዲያው አያስቀምጠው
             product.seller = request.user # ሻጩ አሁን የገባው ተጠቃሚ ነው
             product.save() # አሁን ዳታቤዝ ላይ ያስቀምጠዋል
+            images = request.FILES.getlist('images')
+            for image in images:
+                ProductImage.objects.create(product=product, image=image)
             messages.success(request, 'Your product has been posted successfully!') # <-- መልዕክት ጨምር
             return redirect('home') # እቃውን ከለጠፈ በኋላ ወደ መነሻ ገጽ ይመልሰዋል
     else:
@@ -92,24 +97,40 @@ def product_detail(request, pk):
     return render(request, 'users/product_detail.html', context)
 
 @login_required
+# users/views.py
+
+@login_required
 def product_update(request, pk):
-    product = Product.objects.get(id=pk)
+    product = get_object_or_404(Product, id=pk)
+    
+    # ሻጩ ትክክለኛ መሆኑን ማረጋገጥ
     if product.seller != request.user:
-        # Optional: Add a message here that access is denied
-        return redirect('home') # If the user is not the seller, redirect
+        messages.error(request, "You are not authorized to edit this product.")
+        return redirect('home')
 
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Your product has been updated!') # <-- መልዕክት ጨምር
-   
+            form.save() # የጽሑፍ መረጃውን ያስቀምጣል
+
+            # --- አዲስ የምንጨምረው የፎቶ ማስተናገጃ ክፍል ---
+            new_images = request.FILES.getlist('images')
+            if new_images:
+                # ተጠቃሚው አዲስ ፎቶ ከሰቀለ፣ የድሮዎቹን በሙሉ እናጠፋለን
+                # (ይህ አንድ አማራጭ ነው፤ የድሮዎቹም እንዲቆዩ ማድረግ ይቻላል)
+                product.images.all().delete()
+                for image in new_images:
+                    ProductImage.objects.create(product=product, image=image)
+            # --- አዲስ የምንጨምረው ክፍል እዚህ ያበቃል ---
+
+            messages.success(request, 'Your product has been updated!')
             return redirect('product_detail', pk=product.id)
     else:
         form = ProductForm(instance=product)
     
     context = {
-        'form': form
+        'form': form,
+        'product': product # የድሮ ፎቶዎችን ለማሳየት
     }
     return render(request, 'users/product_update.html', context)
 
@@ -192,4 +213,54 @@ def dislike_product(request, pk):
         product.dislikes.add(request.user)
         
     return redirect('product_detail', pk=product.id)
+
+# --- አዲስ የምንጨምራቸው የ Chat ቪዎች ---
+@login_required
+def start_conversation(request, product_pk):
+    product = get_object_or_404(Product, pk=product_pk)
+    
+    # ገዢው ለራሱ እቃ መልዕክት እንዳይልክ መከልከል
+    if product.seller == request.user:
+        messages.error(request, "You cannot start a conversation on your own product.")
+        return redirect('product_detail', pk=product_pk)
+
+    # ገዢው እና ሻጩ ከዚህ በፊት በዚህ እቃ ላይ ውይይት ጀምረው እንደሆነ ማረጋገጥ
+    conversation = Conversation.objects.filter(product=product, participants=request.user).filter(participants=product.seller).first()
+
+    # ውይይት ከሌለ፣ አዲስ እንፈጥራለን
+    if not conversation:
+        conversation = Conversation.objects.create(product=product)
+        conversation.participants.add(request.user, product.seller)
+
+    return redirect('conversation_detail', pk=conversation.pk)
+
+@login_required
+def inbox(request):
+    # ተጠቃሚው ተሳታፊ የሆነባቸውን ውይይቶች በሙሉ ማምጣት
+    conversations = request.user.conversations.all()
+    context = {
+        'conversations': conversations
+    }
+    return render(request, 'users/inbox.html', context)
+
+@login_required
+def conversation_detail(request, pk):
+    conversation = get_object_or_404(Conversation, pk=pk)
+    
+    # ተጠቃሚው የዚህ ውይይት ተሳታፊ መሆኑን ማረጋገጥ
+    if request.user not in conversation.participants.all():
+        messages.error(request, "You are not authorized to view this conversation.")
+        return redirect('inbox')
+    conversation.messages.filter(is_read=False).exclude(sender=request.user).update(is_read=True)
+    # አዲስ መልዕክት ከተላከ
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        if content:
+            Message.objects.create(conversation=conversation, sender=request.user, content=content)
+            return redirect('conversation_detail', pk=pk)
+
+    context = {
+        'conversation': conversation
+    }
+    return render(request, 'users/conversation_detail.html', context)
 

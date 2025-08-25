@@ -1,17 +1,70 @@
 /* static/css/style.css */
 
-/* ለምሳሌ፣ የ Navbarን ቀለም ለመቀየር */
-.navbar-dark {
-    background-color: #004AAD !important; /* የመረጥከው ዋና ሰማያዊ ቀለም */
+/* =================================
+   1. Global Styles & Body Background
+   ================================= */
+body {
+    /* This sets a soft, light grey background for the entire page */
+    background-color: #f8f9fa; 
 }
 
-/* የዋና ቁልፎችን (buttons) ቀለም ለመቀየር */
-.btn-primary {
-    background-color: #FFA500; /* የመረጥከው ሁለተኛ ብርቱካናማ ቀለም */
-    border-color: #FFA500;
+/* =================================
+   2. Card Styles
+   ================================= */
+.card {
+    /* This adds a slightly more pronounced shadow to all cards */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    border: none; /* Removes the default card border for a cleaner look */
+    transition: transform .2s; /* Animation for hover effect */
 }
 
-/* የሊንኮችን ቀለም ለመቀየር */
-a {
-    color: #004AAD;
+.card:hover {
+    transform: scale(1.02); /* Slightly enlarges the card on hover */
 }
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover; /* Ensures images fill the space without distortion */
+}
+
+/* =================================
+   3. Navbar Customization
+   ================================= */
+.navbar {
+    border-bottom: 1px solid #dee2e6; /* Adds a subtle line below the navbar */
+}
+
+.navbar-brand img {
+    margin-right: 5px; /* Adds space between logo and text */
+}
+
+/* =================================
+   4. Profile Page Enhancements
+   ================================= */
+.profile-picture-lg {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+/* =================================
+   5. Form Customizations
+   ================================= */
+.auth-card {
+    max-width: 800px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* To keep the rounded corners with the image */
+}
+.auth-image-section {
+    background: url('/static/images/auth-bg.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 40px;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+.auth-form-section {
+    padding: 40px;
+}
+
+/* You can add any other custom styles you want here in the future */

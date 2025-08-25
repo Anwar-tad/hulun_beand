@@ -1,15 +1,27 @@
 {% extends "base.html" %}
 {% load humanize %}
 {% block content %}
-  <div class="container mt-4">
-    <div class="row">
-      <div class="col-md-6">
-        {% if product.image %}
-          <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.name }}">
-        {% else %}
-          <p>No image available.</p>
-        {% endif %}
-      </div>
+ <div class="container mt-4">
+  <div class="row">
+ <div class="col-md-6">
+  {% if product.images.all %}
+    <!-- ዋና ፎቶ -->
+    <a href="{{ product.images.first.image.url }}" data-lightbox="product-gallery" data-title="{{ product.name }}">
+        <img src="{{ product.images.first.image.url }}" class="img-fluid rounded mb-2" id="main-product-image" ...>
+    </a>
+   <div class="d-flex overflow-auto pb-2">
+      {% for p_image in product.images.all %}
+        <!-- Each thumbnail is also a link to its full-size version -->
+        <a href="{{ p_image.image.url }}" data-lightbox="product-gallery" data-title="{{ product.name }}">
+            <img src="{{ p_image.image.url }}" class="img-thumbnail me-2" ...>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <!-- ፎቶ ከሌለ የሚታየው -->
+    <p>No image available.</p>
+  {% endif %}
+</div>
       <div class="col-md-6">
         <h2>{{ product.name }}</h2>
         <p><small class="text-muted">Posted by: {{ product.seller.username }} on {{ product.created_at|date:"F d, Y" }}</small></p>
@@ -35,7 +47,16 @@
     </button>
 </div>
 {% endif %}
-<!-- --- አዲስ የምንጨምረው ክፍል እዚህ ያበቃል --- -->
+
+{% if user.is_authenticated and user != product.seller %}
+    <a href="{% url 'start_conversation' product.id %}" class="btn btn-primary btn-lg ms-2">
+        Chat with Seller
+    </a>
+{% endif %}
+
+<hr>
+<h5>Specifications</h5>
+<!-- ... -->
     <hr>
        <h5>Specifications</h5>
 <!-- ... (የሰንጠረዡ ኮድ እንዳለ ይቀጥላል) ... -->

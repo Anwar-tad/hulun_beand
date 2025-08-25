@@ -1,12 +1,26 @@
 {% extends "base.html" %}
-
 {% block content %}
   <div class="card">
     <div class="card-body">
       <h2 class="card-title text-center">Update Product</h2>
       <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <div class="mb-3">
+        <h6>Current Images:</h6>
+        {% for p_image in product.images.all %}
+            <div class="d-inline-block position-relative">
+                <img src="{{ p_image.image.url }}" class="img-thumbnail" width="100">
+            </div>
+        {% empty %}
+            <p>No images uploaded yet.</p>
+        {% endfor %}
+    </div>
+    <hr>
         {{ form.as_p }}
+        <div class="mb-3">
+        <label for="images" class="form-label">Upload Images (Multiple Allowed)</label>
+        <input class="form-control" type="file" id="images" name="images" multiple>
+    </div>
         <div class="d-grid">
           <button type="submit" class="btn btn-primary">Save Changes</button>
         </div>
