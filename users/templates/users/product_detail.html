@@ -74,6 +74,22 @@
 <hr>
 <h5>Description</h5>
 <p>{{ product.description|linebreaks }}</p>
+
+<div class="mt-4">
+    <form action="{% url 'like_product' product.id %}" method="POST" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-primary">
+            👍 Like <span class="badge bg-secondary">{{ product.total_likes }}</span>
+        </button>
+    </form>
+
+    <form action="{% url 'dislike_product' product.id %}" method="POST" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-secondary">
+            👎 Dislike <span class="badge bg-secondary">{{ product.total_dislikes }}</span>
+        </button>
+    </form>
+</div>
         <br>
         {% if product.seller == user %}
   <a href="{% url 'product_update' product.id %}" class="btn btn-warning">Edit</a>

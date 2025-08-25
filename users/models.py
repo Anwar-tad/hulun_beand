@@ -10,7 +10,8 @@ class Category(models.Model):
     def __str__(self):
       return self.name
 # Product Model
-# --- የድሮውን Product ሞዴል በዚህ ቀይረው ---
+# -# (Keep your other models like Category and Profile as they are)
+
 class Product(models.Model):
     CONDITION_CHOICES = [
         ('New', 'አዲስ (Brand New)'),
@@ -23,8 +24,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="ዋጋ (በብር)")
     image = models.ImageField(upload_to='product_images/', null=True, blank=True, verbose_name="ፎቶ")
     
-    # --- አዲሶቹ መስኮች (Fields) ---
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=False, verbose_name="ምድብ")
+    category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, blank=False, verbose_name="ምድብ")
     brand = models.CharField(max_length=100, blank=True, verbose_name="ዓይነት (Brand)")
     condition = models.CharField(max_length=20, choices=CONDITION_CHOICES, blank=True, verbose_name="ሁኔታ (Condition)")
     location = models.CharField(max_length=200, blank=True, verbose_name="የሚገኝበት ቦታ")
@@ -32,31 +32,19 @@ class Product(models.Model):
     seller = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="ሻጭ")
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.name
-class Product(models.Model):
-    name = models.CharField(max_length=200)
-    description = models.TextField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField(upload_to='product_images/', null=True, blank=True)
-    
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-    
-    seller = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    CONDITION_CHOICES = [
-        ('New', 'አዲስ (Brand New)'),
-        ('Used', 'ያገለገለ (Used)'),
-        ('Refurbished', 'የታደሰ (Refurbished)'),
-    ]
-    
-    brand = models.CharField(max_length=100, blank=True, verbose_name="የእቃው አይነት (Brand)")
-    condition = models.CharField(max_length=20, choices=CONDITION_CHOICES, blank=True, verbose_name="ሁኔታ (Condition)")
-    location = models.CharField(max_length=200, blank=True, verbose_name="የሚገኝበት ቦታ (Location)")
-    
-    def __str__(self):
-        return self.name
+    # These are the fields causing the error. Let's make sure they are perfect.
+    likes = models.ManyToManyField(User, related_name='liked_products', blank=True)
+    dislikes = models.ManyToManyField(User, related_name='disliked_products', blank=True)
 
+    def total_likes(self):
+        return self.likes.count()
+
+    def total_dislikes(self):
+        return self.dislikes.count()
+
+    def __str__(self):
+        return self.name
+        
 class Profile(models.Model):
   
     def save(self, *args, **kwargs):

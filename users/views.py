@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from .forms import UserUpdateForm, ProfileUpdateForm # አዲሶቹን ፎርሞች እናስገባለን
 from django.contrib.auth.models import User
-# ... (የድሮ ቪዎች አሉ) ...
+from django.http import JsonResponse
 
 @login_required
 def profile_update(request):
@@ -156,4 +156,40 @@ def home(request):
         'products': products
     }
     return render(request, 'home.html', context)
+    
+@login_required
+def like_product(request, pk):
+    product = get_object_or_404(Product, id=pk)
+    
+    # ተጠቃሚው ከዚህ በፊት dislike አድርጎ ከሆነ ከ dislike ዝርዝር ውስጥ እናስወግደዋለን
+    if product.dislikes.filter(id=request.user.id).exists():
+        product.dislikes.remove(request.user)
+
+    # ተጠቃሚው ከዚህ በፊት like አድርጎ ከሆነ ከ like ዝርዝር ውስጥ እናስወግደዋለን (unlike)
+    if product.likes.filter(id=request.user.id).exists():
+        product.likes.remove(request.user)
+    # ካልሆነ ደግሞ እንጨምረዋለን (like)
+    else:
+        product.likes.add(request.user)
+    
+    # ገጹን refresh ሳናደርግ የ like/dislike ቁጥሩን ለማዘመን
+    return redirect('product_detail', pk=product.id)
+
+
+@login_required
+def dislike_product(request, pk):
+    product = get_object_or_404(Product, id=pk)
+
+    # ተጠቃሚው ከዚህ በፊት like አድርጎ ከሆነ ከ like ዝርዝር ውስጥ እናስወግደዋለን
+    if product.likes.filter(id=request.user.id).exists():
+        product.likes.remove(request.user)
+
+    # ተጠቃሚው ከዚህ በፊት dislike አድርጎ ከሆነ ከ dislike ዝርዝር ውስጥ እናስወግደዋለን (undislike)
+    if product.dislikes.filter(id=request.user.id).exists():
+        product.dislikes.remove(request.user)
+    # ካልሆነ ደግሞ እንጨምረዋለን (dislike)
+    else:
+        product.dislikes.add(request.user)
+        
+    return redirect('product_detail', pk=product.id)
 
