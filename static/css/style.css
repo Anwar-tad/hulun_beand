@@ -1,17 +1,135 @@
 /* static/css/style.css */
 
-/* ለምሳሌ፣ የ Navbarን ቀለም ለመቀየር */
-.navbar-dark {
-    background-color: #004AAD !important; /* የመረጥከው ዋና ሰማያዊ ቀለም */
+/* 1. Global Styles & Body Background */
+body {
+    background-color: #f4f7f6; /* A slightly warmer, softer grey */
 }
 
-/* የዋና ቁልፎችን (buttons) ቀለም ለመቀየር */
-.btn-primary {
-    background-color: #FFA500; /* የመረጥከው ሁለተኛ ብርቱካናማ ቀለም */
-    border-color: #FFA500;
+/* 2. Navbar and Primary Colors */
+:root {
+    --primary-color: #D4AF37; /* A rich Gold/Ochre color */
+    --secondary-color: #2c3e50; /* A dark slate blue */
 }
 
-/* የሊንኮችን ቀለም ለመቀየር */
+.navbar.navbar-dark.bg-dark {
+    background-color: var(--secondary-color) !important; /* Dark Slate Blue */
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color) !important;
+    border-color: var(--secondary-color) !important;
+}
+
+.btn-outline-secondary.active {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
 a {
-    color: #004AAD;
+    color: var(--secondary-color);
+}
+.card-title a:hover {
+    color: var(--primary-color);
+}
+
+/* 3. Hero (Welcome) Section */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/images/hero-bg.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* 4. Card Styles */
+.card {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border: none;
+    transition: transform .2s, box-shadow .2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+/* static/css/style.css (ADD THIS AT THE END) */
+
+/* =================================
+   NEW: Hero Section V2
+   ================================= */
+.hero-section-v2 {
+    background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.7)), url('/static/images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 6rem 1rem;
+    color: white;
+}
+
+.hero-section-v2 .display-4 {
+    font-weight: 700;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+.hero-section-v2 .form-control {
+    border-radius: 50px 0 0 50px;
+    border: none;
+    padding: 1.5rem;
+}
+
+.hero-section-v2 .btn-primary {
+    border-radius: 0 50px 50px 0;
+    padding: 1.5rem;
+    font-weight: 600;
+}
+
+/* =================================
+   NEW: Category Icons Section
+   ================================= */
+.category-section {
+    padding: 4rem 0;
+}
+
+.category-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #2c3e50; /* Dark Slate Blue from our theme */
+    transition: transform 0.2s;
+}
+
+.category-icon:hover {
+    transform: scale(1.1);
+    color: var(--primary-color); /* Gold color from our theme */
+}
+
+.category-icon .icon-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.category-icon img {
+    width: 30px;
+    height: 30px;
+}
+
+.category-icon span {
+    font-weight: 600;
 }

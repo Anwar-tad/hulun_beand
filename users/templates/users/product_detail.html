@@ -1,154 +1,139 @@
 {% extends "base.html" %}
 {% load humanize %}
+{% load static %}
+
+{% block title %}
+  {{ product.name }} | Menalesh
+{% endblock %}
+
 {% block content %}
- <div class="container mt-4">
-  <div class="row">
- <div class="col-md-6">
-  {% if product.images.all %}
-    <!-- ዋና ፎቶ -->
-    <a href="{{ product.images.first.image.url }}" data-lightbox="product-gallery" data-title="{{ product.name }}">
-        <img src="{{ product.images.first.image.url }}" class="img-fluid rounded mb-2" id="main-product-image" ...>
-    </a>
-   <div class="d-flex overflow-auto pb-2">
-      {% for p_image in product.images.all %}
-        <!-- Each thumbnail is also a link to its full-size version -->
-        <a href="{{ p_image.image.url }}" data-lightbox="product-gallery" data-title="{{ product.name }}">
-            <img src="{{ p_image.image.url }}" class="img-thumbnail me-2" ...>
-        </a>
-      {% endfor %}
-    </div>
-  {% else %}
-    <!-- ፎቶ ከሌለ የሚታየው -->
-    <p>No image available.</p>
-  {% endif %}
-</div>
-      <div class="col-md-6">
-        <h2>{{ product.name }}</h2>
-        <p><small class="text-muted">Posted by: {{ product.seller.username }} on {{ product.created_at|date:"F d, Y" }}</small></p>
-        <hr>
+<div class="container mt-4">
+    <div class="row">
 
-       <h4>Price: {{ product.price|intcomma }} Birr</h4>
-
-<!-- --- አዲስ የምንጨምረው ክፍል --- -->
-      {% if product.seller.profile.phone_number %}
-  <div id="contact-section" class="mt-3 mb-3">
-    <!-- ስልክ ቁጥሩ መጀመሪያ ላይ ተደብቆ ይቀመጣል -->
-    <div id="contact-info" style="display:none;">
-        <p class="fs-5"><strong>Phone:</strong> 
-            <a href="tel:{{ product.seller.profile.phone_number }}">{{ product.seller.profile.phone_number }}</a>
-        </p>
-    </div>
-    <!-- "Show contact" ቁልፍ -->
-    <button id="show-contact-btn" class="btn btn-success btn-lg">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.28 1.464l-2.094 2.094a.25.25 0 0 0 .03.341l2.32 2.32c.092.092.22.103.34.03l2.094-2.094a1.745 1.745 0 0 1 1.464.28l2.31 2.31c.262.262.163.742-.163 1.018l-1.313 1.313c-.329.329-.93.262-1.353-.163l-3.6-3.6a.25.25 0 0 0-.353 0l-3.6 3.6c-.423.425-1.024.492-1.353.163l-1.313-1.313a1.745 1.745 0 0 1 .163-2.61l2.31-2.31Z"/>
-        </svg>
-        Show Contact
-    </button>
-</div>
-{% endif %}
-
-{% if user.is_authenticated and user != product.seller %}
-    <a href="{% url 'start_conversation' product.id %}" class="btn btn-primary btn-lg ms-2">
-        Chat with Seller
-    </a>
-{% endif %}
-
-<hr>
-<h5>Specifications</h5>
-<!-- ... -->
-    <hr>
-       <h5>Specifications</h5>
-<!-- ... (የሰንጠረዡ ኮድ እንዳለ ይቀጥላል) ... -->
-        <table class="table table-striped">
-           <tbody>
-        {% if product.category %}
-        <tr>
-            <th scope="row">ምድብ</th>
-            <td>{{ product.category.name }}</td>
-        </tr>
-        {% endif %}
-
-        {% if product.brand %}
-        <tr>
-            <th scope="row">ዓይነት (Brand)</th>
-            <td>{{ product.brand }}</td>
-        </tr>
-        {% endif %}
-
-        {% if product.condition %}
-        <tr>
-            <th scope="row">ሁኔታ (Condition)</th>
-            <td>{{ product.get_condition_display }}</td>
-        </tr>
-        {% endif %}
-
-        {% if product.location %}
-        <tr>
-            <th scope="row">የሚገኝበት ቦታ</th>
-            <td>{{ product.location }}</td>
-        </tr>
-        {% endif %}
-    </tbody>
-</table>
-
-<hr>
-<h5>Description</h5>
-<p>{{ product.description|linebreaks }}</p>
-
-<div class="mt-4">
-    <form action="{% url 'like_product' product.id %}" method="POST" style="display: inline;">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-outline-primary">
-            👍 Like <span class="badge bg-secondary">{{ product.total_likes }}</span>
-        </button>
-    </form>
-
-    <form action="{% url 'dislike_product' product.id %}" method="POST" style="display: inline;">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-outline-secondary">
-            👎 Dislike <span class="badge bg-secondary">{{ product.total_dislikes }}</span>
-        </button>
-    </form>
-</div>
-        <br>
-        {% if product.seller == user %}
-  <a href="{% url 'product_update' product.id %}" class="btn btn-warning">Edit</a>
-  <a href="{% url 'product_delete' product.id %}" class="btn btn-danger">Delete</a>
-{% endif %}
-        <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
-        <hr>
-        <h3>Related Products</h3>
-        
-<div class="row">
-    {% for product in related_products %}
-        <div class="col-md-3 col-6 mb-3">
-            <div class="card h-100">
-              {% if product.image %}
-                <a href="{% url 'product_detail' product.id %}">
-                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
-                </a>
-              {% endif %}
-              <div class="card-body">
-                <a href="{% url 'product_detail' product.id %}">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                </a>
-                <p class="card-text">Price: {{ product.price }} Br.</p>
-              </div>
-            </div>
+        <!-- ============================= -->
+        <!-- ==== Image Carousel Column ==== -->
+        <!-- ============================= -->
+        <div class="col-md-6">
+            {% if product.images.all %}
+                <div id="productImageCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner rounded">
+                        {% for p_image in product.images.all %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <a href="{{ p_image.image.url }}" data-lightbox="product-gallery" data-title="{{ product.name }}">
+                                    <img src="{{ p_image.image.url }}" class="d-block w-100" alt="Product Image" style="height: 400px; object-fit: cover;">
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#productImageCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#productImageCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                    <div class="carousel-indicators">
+                        {% for p_image in product.images.all %}
+                            <button type="button" data-bs-target="#productImageCarousel" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}" aria-current="true"></button>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <img src="{% static 'images/default_product.png' %}" class="img-fluid rounded" alt="No Image Available" style="height: 400px; width: 100%; object-fit: cover;">
+            {% endif %}
         </div>
-    {% empty %}
-        <p>No related products found.</p>
-        <script>
-    // "Show Contact" ቁልፍ ሲጫን የሚሰራ ኮድ
-    document.getElementById("show-contact-btn").addEventListener("click", function() {
-        // ስልክ ቁጥሩ ያለበትን ክፍል አሳይ
-        document.getElementById("contact-info").style.display = "block";
-        // ቁልፉን እራሱን ደብቀው
-        this.style.display = "none";
-    });
-</script>
-    {% endfor %} <!-- === ሉፑ እዚህ በትክክል ተዘግቷል === -->
+
+        <!-- ============================== -->
+        <!-- ==== Product Details Column ==== -->
+        <!-- ============================== -->
+        <div class="col-md-6">
+            <h2>{{ product.name }}</h2>
+            <p><small class="text-muted">Posted by: <a href="{% url 'profile' username=product.seller.username %}">{{ product.seller.username }}</a> on {{ product.created_at|date:"F d, Y" }}</small></p>
+            <hr>
+            <h4>Price: {{ product.price|intcomma }} Birr</h4>
+
+            <!-- Contact and Chat Buttons -->
+            {% if product.seller.profile.phone_number %}
+                <div id="contact-section" class="mt-3 mb-3">
+                    <div id="contact-info" style="display:none;">
+                        <p class="fs-5"><strong>Phone:</strong> <a href="tel:{{ product.seller.profile.phone_number }}">{{ product.seller.profile.phone_number }}</a></p>
+                    </div>
+                    <button id="show-contact-btn" class="btn btn-success btn-lg">Show Contact</button>
+                </div>
+            {% endif %}
+            {% if user.is_authenticated and user != product.seller %}
+                <a href="{% url 'start_conversation' product.id %}" class="btn btn-primary btn-lg ms-2">Chat with Seller</a>
+            {% endif %}
+
+            <hr>
+            <h5>Specifications</h5>
+            <table class="table table-striped">
+                <tbody>
+                    {% if product.category %}<tr><th scope="row">ምድብ</th><td>{{ product.category.name }}</td></tr>{% endif %}
+                    {% if product.brand %}<tr><th scope="row">ዓይነት (Brand)</th><td>{{ product.brand }}</td></tr>{% endif %}
+                    {% if product.condition %}<tr><th scope="row">ሁኔታ (Condition)</th><td>{{ product.get_condition_display }}</td></tr>{% endif %}
+                    {% if product.location %}<tr><th scope="row">የሚገኝበት ቦታ</th><td>{{ product.location }}</td></tr>{% endif %}
+                </tbody>
+            </table>
+
+            <hr>
+            <h5>Description</h5>
+            <p>{{ product.description|linebreaks }}</p>
+
+            <!-- Like/Dislike Buttons -->
+            <div class="mt-4">
+                <form action="{% url 'like_product' product.id %}" method="POST" style="display: inline;">
+                    {% csrf_token %}<button type="submit" class="btn btn-outline-primary">👍 Like <span class="badge bg-secondary">{{ product.total_likes }}</span></button>
+                </form>
+                <form action="{% url 'dislike_product' product.id %}" method="POST" style="display: inline;">
+                    {% csrf_token %}<button type="submit" class="btn btn-outline-secondary">👎 Dislike <span class="badge bg-secondary">{{ product.total_dislikes }}</span></button>
+                </form>
+            </div>
+            <br>
+
+            <!-- Action Buttons -->
+            {% if product.seller == user %}
+              <a href="{% url 'product_update' product.id %}" class="btn btn-warning">Edit</a>
+              <a href="{% url 'product_delete' product.id %}" class="btn btn-danger">Delete</a>
+            {% endif %}
+            <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+        </div>
+    </div>
+
+    <!-- Related Products Section -->
+    <hr class="mt-5">
+    <h3>Related Products</h3>
+    <div class="row">
+        {% for related_prod in related_products %}
+            <div class="col-md-3 col-6 mb-3">
+                <div class="card h-100">
+                  {% if related_prod.images.first %}
+                    <a href="{% url 'product_detail' related_prod.id %}"><img src="{{ related_prod.images.first.image.url }}" class="card-img-top" alt="{{ related_prod.name }}"></a>
+                  {% endif %}
+                  <div class="card-body">
+                    <a href="{% url 'product_detail' related_prod.id %}"><h5 class="card-title">{{ related_prod.name }}</h5></a>
+                    <p class="card-text">Price: {{ related_prod.price|intcomma }} Br.</p>
+                  </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-muted">No related products found in this category.</p>
+        {% endfor %}
+    </div>
 </div>
-  </div>
-  {% endblock %}
+
+<!-- ============================================= -->
+<!-- ==== JavaScript for the "Show Contact" button ==== -->
+<!-- ============================================= -->
+<script>
+    const showContactBtn = document.getElementById("show-contact-btn");
+    if (showContactBtn) {
+        showContactBtn.addEventListener("click", function() {
+            document.getElementById("contact-info").style.display = "block";
+            this.style.display = "none";
+        });
+    }
+</script>
+
+{% endblock %}

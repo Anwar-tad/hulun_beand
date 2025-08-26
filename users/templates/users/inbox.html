@@ -1,37 +1,35 @@
 {% extends "base.html" %}
 {% load humanize %}
-
+{% load user_filters %}
 {% block title %}My Inbox | Menalesh{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
     <h2 class="mb-4">My Inbox</h2>
-    <div class="list-group">
+    <div class="list-group shadow-sm">
         {% for conversation in conversations %}
-            <a href="{% url 'conversation_detail' conversation.id %}" class="list-group-item list-group-item-action">
+            <a href="{% url 'conversation_detail' conversation.id %}" class="list-group-item list-group-item-action p-3">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Conversation about: {{ conversation.product.name }}</h5>
-                    <small>{{ conversation.updated_at|naturaltime }}</small>
+                    <h5 class="mb-1">Re: {{ conversation.product.name }}</h5>
+                    <small class="text-muted">{{ conversation.updated_at|naturaltime }}</small>
                 </div>
-                <p class="mb-1">
-                    {% for participant in conversation.participants.all %}
-                        {% if participant != user %}
-                            With: {{ participant.username }}
-                        {% endif %}
-                    {% endfor %}
-                </p>
+                {% with other_participant=conversation.participants.all|get_other_participant:user %}
+                    <p class="mb-1 text-muted">With: <strong>{{ other_participant.username }}</strong></p>
+                {% endwith %}
                 {% with last_message=conversation.messages.last %}
                     {% if last_message %}
                         <small class="text-muted">
-                            {% if last_message.sender == user %}You:{% else %}{{ last_message.sender.username }}:{% endif %}
-                            {{ last_message.content|truncatechars:50 }}
+                            {% if last_message.sender == user %}
+                                <span class="fw-bold">You:</span>
+                            {% endif %}
+                            {{ last_message.content|truncatechars:70 }}
                         </small>
                     {% endif %}
                 {% endwith %}
             </a>
         {% empty %}
-            <div class="list-group-item">
-                <p class="mb-1">You have no conversations yet.</p>
+            <div class="list-group-item text-center p-5">
+                <p class="lead text-muted">You have no conversations yet.</p>
             </div>
         {% endfor %}
     </div>

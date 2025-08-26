@@ -1,79 +1,85 @@
 {% extends "base.html" %}
 {% load humanize %}
+{% load static %}
+
+{% block title %}Menalesh | The Modern Marketplace for Ethiopia{% endblock %}
+
 {% block content %}
-   <div class="text-center mb-4">
-    <h1>Welcome to Menalesh!</h1>
-    <p>ማንኛውንም እቃ እዚሁ ይሸምቱ እዚሁ  ይሽጡ</p>
-  </div>
-<form method="GET" action="{% url 'home' %}" class="mb-4">
-      <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search for products..." value="{{ request.GET.q }}">
-          <button class="btn btn-outline-secondary" type="submit">Search</button>
-      </div>
-  </form>
-
-
-  <hr>
-<div class="mb-4">
-    <a href="{% url 'home' %}" class="btn btn-sm btn-secondary">All</a>
-    {% for category in categories %}
-        <a href="?category={{ category.name }}" class="btn btn-sm btn-outline-primary">{{ category.name }}</a>
-    {% endfor %}
-</div>
-  <!-- የተለጠፉ እቃዎች ዝርዝር -->
-
-  <h2>Latest Products</h2>
-  <div class="row">
-    {% for product in products %}
-      <div class="col-md-4 mb-3">
-        <div class="card h-100">
-          {% if product.images.first %}
-            <a href="{% url 'product_detail' product.id %}">
-              <img src="{{ product.images.first.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: cover;">
-            </a>
-          {% endif %}
-          <div class="card-body">
-            <h5 class="card-title">
-                <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
-            </h5>
-            <!-- የተስተካከለው የዋጋ መስመር -->
-            <p class="card-text">Price: {{ product.price|intcomma }} Br.</p>
-            <p class="card-text"><small class="text-muted">Seller: {{ product.seller.username }}</small></p>
-          </div>
+    <!-- ============================== -->
+    <!-- ==== NEW HERO SECTION V2 ==== -->
+    <!-- ============================== -->
+    <div class="hero-section-v2 text-center">
+        <div class="container">
+            <h1 class="display-4">Menalesh - ሁሉን በአንድ ቦታ</h1>
+            <p class="lead mb-4">የሚፈልጉትን ይግዙ፣ የማይፈልጉትን ይሽጡ። ቀላል፣ ፈጣን እና አስተማማኝ።</p>
+            <form method="GET" action="{% url 'home' %}" class="mt-4">
+                <div class="input-group input-group-lg w-75 mx-auto">
+                    <input type="text" name="q" class="form-control" placeholder="እዚህ ይፈልጉ (ለምሳሌ፡ Toyota Vitz)" value="{{ request.GET.q }}">
+                    <button class="btn btn-primary" type="submit" aria-label="Search">
+                      <i class="bi bi-search"></i>
+                       </button>
+                </div>
+            </form>
         </div>
-      </div>
+    </div>
 
-  <!-- ... (የ Pagination ክፍል) ... -->
-
-
-{% if products.has_other_pages %}
-  <nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center">
-      {% if products.has_previous %}
-        <li class="page-item"><a class="page-link" href="?page={{ products.previous_page_number }}">Previous</a></li>
-      {% else %}
-        <li class="page-item disabled"><span class="page-link">Previous</span></li>
-      {% endif %}
-
-      {% for num in products.paginator.page_range %}
-        {% if products.number == num %}
-          <li class="page-item active"><span class="page-link">{{ num }}</span></li>
-        {% else %}
-          <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-        {% endif %}
-      {% endfor %}
-
-      {% if products.has_next %}
-        <li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}">Next</a></li>
-      {% else %}
-        <li class="page-item disabled"><span class="page-link">Next</span></li>
-      {% endif %}
-    </ul>
-  
-{% endif %}
-
-        {% empty %}
-      <p>No products posted yet.</p>
-    {% endfor %}
-  </div>
+    <!-- =================================== -->
+    <!-- ==== NEW CATEGORY ICON SECTION ==== -->
+    <!-- =================================== -->
+    <div class="category-section">
+        <div class="container">
+            <h2 class="text-center mb-5">በምድብ ይፈልጉ</h2>
+            <div class="row text-center">
+                {% for category in categories %}
+                    <div class="col-3 mb-4">
+                     <a href="?category={{ category.name }}" class="category-icon">
+                       <div class="icon-circle">
+                                <!-- This will try to find an icon with the category's name. e.g., Electronics.png -->
+                                <img src="{% static 'images/icons/'|add:category.name|add:'.png' %}" alt="{{ category.name }}">
+                            </div>
+                            <span>{{ category.name }}</span>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+    <!-- ================================= -->
+    <!-- ==== LATEST PRODUCTS SECTION ==== -->
+    <!-- ================================= -->
+    <div class="container">
+        <h2 class="mb-4">Latest Products</h2>
+        <div class="row">
+            {% for product in products %}
+              <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card h-100">
+                  <a href="{% url 'product_detail' product.id %}">
+                      {% if product.images.first %}
+                        <img src="{{ product.images.first.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                      {% else %}
+                        <img src="{% static 'images/default_product.png' %}" class="card-img-top" alt="No Image">
+                      {% endif %}
+                  </a>
+                  <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">
+                        <a href="{% url 'product_detail' product.id %}" class="text-decoration-none text-dark">{{ product.name }}</a>
+                    </h5>
+                    <p class="card-text text-primary fw-bold mb-2">Price: {{ product.price|intcomma }} Br.</p>
+                    <p class="card-text mt-auto pt-2 border-top"><small class="text-muted">Seller: 
+                        <a href="{% url 'profile' username=product.seller.username %}">{{ product.seller.username }}</a>
+                    </small></p>
+                  </div>
+                </div>
+              </div>
+            {% empty %}
+              <div class="col">
+                <p class="text-center text-muted">No products found matching your criteria.</p>
+              </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Pagination Section -->
+        {% include 'partials/pagination.html' %}
+    </div>
 {% endblock %}
