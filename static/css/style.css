@@ -8,7 +8,7 @@ body {
 /* 2. Navbar and Primary Colors */
 :root {
     --primary-color: #D4AF37; /* A rich Gold/Ochre color */
-    --secondary-color: #2c3e50; /* A dark slate blue */
+    --secondary-color: darkblue; /* A dark slate blue */
 }
 
 .navbar.navbar-dark.bg-dark {
@@ -132,4 +132,85 @@ a {
 
 .category-icon span {
     font-weight: 600;
+}
+.floating-post-button {
+    position: fixed; /* Makes it stay in one place */
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary-color); /* Uses our theme's gold color */
+    color: white;
+    border-radius: 50%; /* Makes it a circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem; /* Makes the '+' icon bigger */
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 1000; /* Makes it stay on top of other elements */
+    transition: transform 0.2s;
+}
+
+.floating-post-button:hover {
+    transform: scale(1.1);
+    color: white;
+}
+/* static/css/style.css (ADD THIS AT THE END) */
+
+/* Language Switcher in Navbar */
+.language-switcher-form {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+}
+.language-switcher-form select {
+    background-color: transparent;
+    color: rgba(255,255,255,.75);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 5px;
+    padding: 0.2rem 0.5rem;
+}
+.language-switcher-form select option {
+    background-color: var(--secondary-color);
+    color: white;
+}
+@media (max-width: 991.98px) {
+    .language-switcher-form {
+        margin-left: 0;
+        margin-top: 1rem;
+        justify-content: center;
+    }
+}
+/* static/css/style.css */
+
+/* Floating Button with Text */
+.floating-post-container {
+    position: fixed;
+    bottom: 25px; /* Increased spacing from bottom */
+    right: 25px;  /* Increased spacing from right */
+    z-index: 1030; /* Ensure it's above most elements */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.floating-post-text {
+    background-color: white;
+    color: var(--secondary-color);
+    padding: 10px 18px; /* Slightly larger padding */
+    border-radius: 50px; /* Pill shape */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    font-weight: 600;
+    white-space: nowrap;
+    
+}
+.floating-post-container:hover .floating-post-text {
+    /* Text appears on hover on desktop */
+    opacity: 1;
+    transform: translateX(0);
+}
+.floating-post-button {
+    width: 60px;
+    height: 60px;
+    /* ... existing styles are fine ... */
 }

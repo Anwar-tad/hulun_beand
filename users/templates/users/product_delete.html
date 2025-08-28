@@ -1,14 +1,28 @@
 {% extends "base.html" %}
+{% load i18n %} <!-- 1. Load the translation library -->
+
+{% block title %}{% translate "Delete Product" %} | Menalesh{% endblock %}
 
 {% block content %}
-  <div class="container text-center">
-    <h2>Delete Product</h2>
-    <p>Are you sure you want to delete the product "{{ product.name }}"?</p>
-    
-    <form method="post">
-      {% csrf_token %}
-      <button type="submit" class="btn btn-danger">Yes, Delete</button>
-      <a href="{% url 'product_detail' product.id %}" class="btn btn-secondary">Cancel</a>
-    </form>
-  </div>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm text-center">
+                <div class="card-body p-5">
+                    <h2 class="card-title">{% translate "Delete Product" %}</h2>
+                    <p class="lead text-muted mt-3">
+                        {% blocktranslate %}Are you sure you want to permanently delete the product "{{ product.name }}"?{% endblocktranslate %}
+                    </p>
+                    <p class="mt-4"><strong>{% translate "This action cannot be undone." %}</strong></p>
+                    
+                    <form method="post" class="mt-4">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-danger btn-lg me-2">{% translate "Yes, Delete" %}</button>
+                      <a href="{{ product.get_absolute_url }}" class="btn btn-secondary btn-lg">{% translate "Cancel" %}</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

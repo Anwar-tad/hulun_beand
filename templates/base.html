@@ -1,34 +1,48 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+{% load i18n %}
+
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>{% block title %}Menalesh | ሁሉን-በአንድ{% endblock %}</title>
 
-    <!-- Bootswatch Theme (Flatly) -->
+    <!-- CSS -->
     <link rel="stylesheet" href="https://bootswatch.com/5/flatly/bootstrap.min.css">
-    
-    <!-- Your Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    
-    <!-- Lightbox2 CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm mb-4">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
       <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}">
           <img src="{% static 'images/logo.png' %}" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
           Menalesh
-       </a>
+        </a>
+        
+        <form action="{% url 'set_language' %}" method="post" class="language-switcher-form">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="/{{ request.get_full_path|slice:'4:' }}">
+            <select name="language" class="form-select form-select-sm" onchange="this.form.submit()">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% for lang_code, lang_name in LANGUAGES %}
+                    <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>
+                        {{ lang_name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+    
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             {% if user.is_authenticated %}
@@ -40,27 +54,27 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'inbox' %}">
-                  Inbox
+                  {% translate "Inbox" %}
                   {% if unread_count > 0 %}
                     <span class="badge bg-danger rounded-pill">{{ unread_count }}</span>
                   {% endif %}
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'create_product' %}">Post Item</a>
+                <a class="nav-link" href="{% url 'create_product' %}">{% translate "Post Item" %}</a>
               </li>
               <li class="nav-item">
                 <form class="d-inline" method="post" action="{% url 'logout' %}">
                    {% csrf_token %}
-                   <button class="nav-link btn btn-link" type="submit">Logout</button>
+                   <button class="nav-link btn btn-link" type="submit">{% translate "Logout" %}</button>
                 </form>
               </li>
             {% else %}
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Login</a>
+                <a class="nav-link" href="{% url 'login' %}">{% translate "Login" %}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}">Register</a>
+                <a class="nav-link" href="{% url 'register' %}">{% translate "Register" %}</a>
               </li>
             {% endif %}
           </ul>
@@ -68,7 +82,7 @@
       </div>
     </nav>
     
-    <div class="container">
+    <div class="container mt-4">
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
@@ -84,12 +98,21 @@
         </main>
     </div>
 
+    <!-- Floating Action Button -->
+    <div class="floating-post-container">
+        <span class="floating-post-text">{% translate "Post Your Item" %}</span>
+        <a href="{% if user.is_authenticated %}{% url 'create_product' %}{% else %}{% url 'login' %}{% endif %}" class="floating-post-button" title="Post Your Item">
+            <i class="bi bi-plus-lg"></i>
+        </a>
+    </div>
+
     <footer class="bg-light text-center text-muted p-4 mt-5">
         <div class="container">
             <p>&copy; {% now "Y" %} Menalesh. All Rights Reserved.</p>
         </div>
     </footer>
 
+    <!-- JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

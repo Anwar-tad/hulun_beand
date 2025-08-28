@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% load humanize %}
+{% load i18n %} <!-- 1. Load the translation library -->
 
-{% block title %}Post a New Item | Menalesh{% endblock %}
+{% block title %}{% translate "Post a New Item" %} | Menalesh{% endblock %}
 
 {% block content %}
 <div class="container mt-4 mb-5">
@@ -9,7 +9,7 @@
         <div class="col-md-8">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h2 class="card-title text-center mb-4">Post Your Item</h2>
+                    <h2 class="card-title text-center mb-4">{% translate "Post Your Item" %}</h2>
                     
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
@@ -54,12 +54,12 @@
 
                         <!-- Manual field for multiple image upload -->
                         <div class="mb-3">
-                            <label for="images" class="form-label">Upload Images (you can select multiple)</label>
+                            <label for="images" class="form-label">{% translate "Upload Images" %} <small class="text-muted">({% translate "you can select multiple" %})</small></label>
                             <input class="form-control" type="file" id="images" name="images" multiple>
                         </div>
                         
                         <div class="d-grid mt-4">
-                            <button class="btn btn-primary btn-lg" type="submit">Post Product</button>
+                            <button class="btn btn-primary btn-lg" type="submit">{% translate "Post Product" %}</button>
                         </div>
                     </form>
                 </div>

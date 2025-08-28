@@ -1,0 +1,206 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-28 13:52-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Oromo <LL@li.org>\n"
+"Language: om\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: config/settings.py:80
+msgid "English"
+msgstr "Afaan Ingilizii"
+
+#: config/settings.py:81
+msgid "Amharic"
+msgstr "Afaan Amhaaraa"
+
+#: config/settings.py:82
+msgid "Oromo"
+msgstr "Afaan Oromoo"
+
+#: templates/base.html:57
+msgid "Inbox"
+msgstr "Saanduqa Ergaa"
+
+#: templates/base.html:64
+msgid "Post Item"
+msgstr "Meeshaa Maxxansi"
+
+#: templates/base.html:69
+msgid "Logout"
+msgstr "Bahi"
+
+#: templates/base.html:74
+msgid "Login"
+msgstr "Seeni"
+
+#: templates/base.html:77
+msgid "Register"
+msgstr "Galmaa'i"
+
+#: templates/base.html:103
+msgid "Post Your Item"
+msgstr "Meeshaa Kee Maxxansi"
+
+#: templates/home.html:6
+msgid "Welcome to"
+msgstr "Baga Nagaan Gara"
+
+#: templates/home.html:12
+msgid "All in One Place"
+msgstr "Waan Hundaa Bakka Tokkotti"
+
+#: templates/home.html:13
+msgid "Buy what you want, sell what you don't. Simple, fast, and reliable."
+msgstr "Waan barbaaddu biti, waan hin barbaanne gurguri. Salphaa, saffisaa fi amansiisaa."
+
+#: templates/home.html:16
+msgid "Search here (e.g., Toyota Vitz)"
+msgstr "Asitti barbaadi (fkn., Toyota Vitz)"
+
+#: templates/home.html:28
+msgid "Browse by Category"
+msgstr "Ramaddiin Barbaadi"
+
+#: templates/home.html:47
+msgid "Latest Products"
+msgstr "Meeshaalee Haaraa"
+
+#: templates/home.html:63
+msgid "Price"
+msgstr "Gatii"
+
+#: templates/home.html:64
+msgid "Seller"
+msgstr "Gurguraa"
+
+#: templates/home.html:72
+msgid "No products found matching your criteria."
+msgstr "Meeshaan barbaadame hin argamne."
+
+#: templates/partials/pagination.html:7 templates/partials/pagination.html:9
+msgid "Previous"
+msgstr "Isa Duraa"
+
+#: templates/partials/pagination.html:21 templates/partials/pagination.html:23
+msgid "Next"
+msgstr "Isa Itti Aanu"
+
+#: templates/registration/login.html:13
+msgid "Welcome Back!"
+msgstr "Baga Nagaan Deebitan!"
+
+#: templates/registration/login.html:14
+msgid "Log in to discover great deals, or post your own items for sale. Your next opportunity is just a click away."
+msgstr "Gatii gaarii argachuuf yookiin meeshaalee keessan gurguruuf seenaa. Carraan keessan kan itti aanu cuqaasuu qofa."
+
+#: templates/registration/login.html:20 templates/registration/login.html:46
+msgid "Log In"
+msgstr "Seeni"
+
+#: templates/registration/login.html:50
+msgid "Don't have an account? <a href=\"{% url 'register' %}\">Sign up</a>"
+msgstr "Herrega hin qabduu? <a href=\"{% url 'register' %}\">Galmaa'i</a>"
+
+#: users/forms.py:24 users/forms.py:72
+msgid "Username"
+msgstr "Maqaa Fayyadamaa"
+
+#: users/forms.py:22
+msgid "Enter your username"
+msgstr "Maqaa fayyadamaa keessan galchaa"
+
+#: users/forms.py:25
+msgid "Password"
+msgstr "Jecha Darbii"
+
+#: users/forms.py:16
+msgid "Enter your email"
+msgstr "Emeelii keessan galchaa"
+
+#: users/forms.py:26
+msgid "Confirm Password"
+msgstr "Jecha Darbii Mirkaneessi"
+
+#: users/forms.py:44
+msgid "Product Name"
+msgstr "Maqaa Meeshaa"
+
+#: users/forms.py:45
+msgid "Category"
+msgstr "Ramaddii"
+
+#: users/forms.py:46
+msgid "Brand"
+msgstr "Gosa"
+
+#: users/forms.py:47
+msgid "Condition"
+msgstr "Haala"
+
+#: users/forms.py:48
+msgid "Location"
+msgstr "Bakka"
+
+#: users/forms.py:49
+msgid "Price (in Birr)"
+msgstr "Gatii (Birriin)"
+
+#: users/forms.py:50
+msgid "Description"
+msgstr "Ibsa"
+
+#: users/forms.py:85
+msgid "Profile Picture"
+msgstr "Suuraa Piroofayilii"
+
+#: users/forms.py:86
+msgid "Bio"
+msgstr "Seenaa Gabaabaa"
+
+#: users/forms.py:87
+msgid "Phone Number"
+msgstr "Lakkofsa Bilbilaa"
+
+#: users/models.py:24
+msgid "Brand New"
+msgstr "Haaraa Guutuu"
+
+#: users/models.py:25
+msgid "Used"
+msgstr "Kan Hojjetame"
+
+#: users/models.py:26
+msgid "Refurbished"
+msgstr "Kan Haarome"
+
+#: users/templates/users/register.html:13
+msgid "Join Our Community!"
+msgstr "Hawaasa Keenyaatti Dabalamaa!"
+
+#: users/templates/users/register.html:14
+msgid "Create an account to start buying and selling in Ethiopia's fastest-growing marketplace."
+msgstr "Gabaa saffisaan guddataa jiru keessatti bituu fi gurguruu jalqabuuf herrega uummadhaa."
+
+#: users/templates/users/register.html:20
+msgid "Create an Account"
+msgstr "Herrega Uummadhaa"
+
+#: users/templates/users/register.html:45
+msgid "Email"
+msgstr "Emeelii"
+
+#: users/templates/users/register.html:74
+msgid "Already have an account? <a href=\"{% url 'login' %}\">Log in</a>"
+msgstr "Kanaan dura herrega qabduu? <a href=\"{% url 'login' %}\">Seenaa</a>"

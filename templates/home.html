@@ -1,43 +1,40 @@
 {% extends "base.html" %}
 {% load humanize %}
 {% load static %}
+{% load i18n %} <!-- 1. Load the translation library -->
 
-{% block title %}Menalesh | The Modern Marketplace for Ethiopia{% endblock %}
+{% block title %}{% translate "Welcome to" %} Menalesh{% endblock %}
 
 {% block content %}
-    <!-- ============================== -->
-    <!-- ==== NEW HERO SECTION V2 ==== -->
-    <!-- ============================== -->
+    <!-- Hero Section -->
     <div class="hero-section-v2 text-center">
         <div class="container">
-            <h1 class="display-4">Menalesh - ሁሉን በአንድ ቦታ</h1>
-            <p class="lead mb-4">የሚፈልጉትን ይግዙ፣ የማይፈልጉትን ይሽጡ። ቀላል፣ ፈጣን እና አስተማማኝ።</p>
+            <h1 class="display-4">Menalesh - {% translate "All in One Place" %}</h1>
+            <p class="lead mb-4">{% translate "Buy what you want, sell what you don't. Simple, fast, and reliable." %}</p>
             <form method="GET" action="{% url 'home' %}" class="mt-4">
                 <div class="input-group input-group-lg w-75 mx-auto">
-                    <input type="text" name="q" class="form-control" placeholder="እዚህ ይፈልጉ (ለምሳሌ፡ Toyota Vitz)" value="{{ request.GET.q }}">
+                    <input type="text" name="q" class="form-control" placeholder="{% translate 'Search here (e.g., Toyota Vitz)' %}" value="{{ request.GET.q }}">
                     <button class="btn btn-primary" type="submit" aria-label="Search">
                       <i class="bi bi-search"></i>
-                       </button>
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- =================================== -->
-    <!-- ==== NEW CATEGORY ICON SECTION ==== -->
-    <!-- =================================== -->
+    <!-- Category Icon Section -->
     <div class="category-section">
         <div class="container">
-            <h2 class="text-center mb-5">በምድብ ይፈልጉ</h2>
+            <h2 class="text-center mb-5">{% translate "Browse by Category" %}</h2>
             <div class="row text-center">
                 {% for category in categories %}
                     <div class="col-3 mb-4">
                      <a href="?category={{ category.name }}" class="category-icon">
                        <div class="icon-circle">
-                                <!-- This will try to find an icon with the category's name. e.g., Electronics.png -->
+                                <!-- The category name itself is dynamic, so it does not need a translate tag here -->
                                 <img src="{% static 'images/icons/'|add:category.name|add:'.png' %}" alt="{{ category.name }}">
                             </div>
-                            <span>{{ category.name }}</span>
+                            <span>{% translate category.name %}</span>
                         </a>
                     </div>
                 {% endfor %}
@@ -45,11 +42,9 @@
         </div>
     </div>
     
-    <!-- ================================= -->
-    <!-- ==== LATEST PRODUCTS SECTION ==== -->
-    <!-- ================================= -->
+    <!-- Latest Products Section -->
     <div class="container">
-        <h2 class="mb-4">Latest Products</h2>
+        <h2 class="mb-4">{% translate "Latest Products" %}</h2>
         <div class="row">
             {% for product in products %}
               <div class="col-md-4 col-sm-6 mb-4">
@@ -65,8 +60,8 @@
                     <h5 class="card-title">
                         <a href="{% url 'product_detail' product.id %}" class="text-decoration-none text-dark">{{ product.name }}</a>
                     </h5>
-                    <p class="card-text text-primary fw-bold mb-2">Price: {{ product.price|intcomma }} Br.</p>
-                    <p class="card-text mt-auto pt-2 border-top"><small class="text-muted">Seller: 
+                    <p class="card-text text-primary fw-bold mb-2">{% translate "Price" %}: {{ product.price|intcomma }} Br.</p>
+                    <p class="card-text mt-auto pt-2 border-top"><small class="text-muted">{% translate "Seller" %}: 
                         <a href="{% url 'profile' username=product.seller.username %}">{{ product.seller.username }}</a>
                     </small></p>
                   </div>
@@ -74,7 +69,7 @@
               </div>
             {% empty %}
               <div class="col">
-                <p class="text-center text-muted">No products found matching your criteria.</p>
+                <p class="text-center text-muted">{% translate "No products found matching your criteria." %}</p>
               </div>
             {% endfor %}
         </div>

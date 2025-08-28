@@ -1,26 +1,28 @@
 {% extends "base.html" %}
 {% load humanize %}
 {% load user_filters %}
-{% block title %}My Inbox | Menalesh{% endblock %}
+{% load i18n %} <!-- 1. Load the translation library -->
+
+{% block title %}{% translate "My Inbox" %} | Menalesh{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
-    <h2 class="mb-4">My Inbox</h2>
+    <h2 class="mb-4">{% translate "My Inbox" %}</h2>
     <div class="list-group shadow-sm">
         {% for conversation in conversations %}
             <a href="{% url 'conversation_detail' conversation.id %}" class="list-group-item list-group-item-action p-3">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Re: {{ conversation.product.name }}</h5>
+                    <h5 class="mb-1">{% translate "Re:" %} {{ conversation.product.name }}</h5>
                     <small class="text-muted">{{ conversation.updated_at|naturaltime }}</small>
                 </div>
                 {% with other_participant=conversation.participants.all|get_other_participant:user %}
-                    <p class="mb-1 text-muted">With: <strong>{{ other_participant.username }}</strong></p>
+                    <p class="mb-1 text-muted">{% translate "With:" %} <strong>{{ other_participant.username }}</strong></p>
                 {% endwith %}
                 {% with last_message=conversation.messages.last %}
                     {% if last_message %}
                         <small class="text-muted">
                             {% if last_message.sender == user %}
-                                <span class="fw-bold">You:</span>
+                                <span class="fw-bold">{% translate "You:" %}</span>
                             {% endif %}
                             {{ last_message.content|truncatechars:70 }}
                         </small>
@@ -29,7 +31,7 @@
             </a>
         {% empty %}
             <div class="list-group-item text-center p-5">
-                <p class="lead text-muted">You have no conversations yet.</p>
+                <p class="lead text-muted">{% translate "You have no conversations yet." %}</p>
             </div>
         {% endfor %}
     </div>
