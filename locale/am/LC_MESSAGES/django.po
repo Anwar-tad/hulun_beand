@@ -1,3 +1,4 @@
+
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
@@ -77,13 +78,21 @@ msgstr "በምድብ ያስሱ"
 msgid "Latest Products"
 msgstr "አዳዲስ እቃዎች"
 
-#: templates/home.html:63
-msgid "Price"
-msgstr "ዋጋ"
+#: templates/home.html:60
+msgid "Showing items in"
+msgstr "እቃዎች የታዩት በ"
 
-#: templates/home.html:64
-msgid "Seller"
-msgstr "ሻጭ"
+#: templates/home.html:61
+msgid "Back to all categories"
+msgstr "ወደ ሁሉም ምድቦች ተመለስ"
+
+#: templates/home.html:63
+msgid "Search results for"
+msgstr "የፍለጋ ውጤቶች ለ"
+
+#: templates/home.html:65
+msgid "Latest Products"
+msgstr "አዳዲስ እቃዎች"
 
 #: templates/home.html:72
 msgid "No products found matching your criteria."
@@ -109,21 +118,63 @@ msgstr "ድንቅ ቅናሾችን ለማግኘት ወይም የራስዎን እ�
 msgid "Log In"
 msgstr "ይግቡ"
 
-#: templates/registration/login.html:50
+#: templates/registration/login.html:42
+msgid "Enter your password"
+msgstr "የይለፍ ቃልዎን ያስገቡ"
+
+#: templates/registration/login.html:49
 msgid "Don't have an account? <a href=\"{% url 'register' %}\">Sign up</a>"
 msgstr "አካውንት የለዎትም? <a href=\"{% url 'register' %}\">ይመዝገቡ</a>"
 
-#: users/forms.py:24 users/forms.py:72
-msgid "Username"
-msgstr "የተጠቃሚ ስም"
+#: templates/registration/password_reset_complete.html:3
+msgid "Password Reset Complete"
+msgstr "የይለፍ ቃል ለውጥ ተጠናቋል"
 
-#: users/forms.py:22
-msgid "Enter your username"
-msgstr "የተጠቃሚ ስምዎን ያስገቡ"
+#: templates/registration/password_reset_complete.html:7
+msgid "Your password has been set. You may go ahead and log in now."
+msgstr "የይለፍ ቃልዎ ተቀይሯል። አሁን መግባት ይችላሉ።"
 
-#: users/forms.py:25
-msgid "Password"
-msgstr "የይለፍ ቃል"
+#: templates/registration/password_reset_complete.html:9
+msgid "Log in"
+msgstr "ይግቡ"
+
+#: templates/registration/password_reset_confirm.html:3
+#: templates/registration/password_reset_confirm.html:10
+msgid "Enter New Password"
+msgstr "አዲስ የይለፍ ቃል ያስገቡ"
+
+#: templates/registration/password_reset_confirm.html:16
+msgid "Change Password"
+msgstr "የይለፍ ቃል ቀይር"
+
+#: templates/registration/password_reset_confirm.html:20
+msgid "The password reset link was invalid, possibly because it has already been used. Please request a new password reset."
+msgstr "የይለፍ ቃል መቀየሪያ ሊንኩ የተሳሳተ ነው፤ ምናልባት ከዚህ በፊት ጥቅም ላይ ውሎ ሊሆን ይችላል። እባክዎ እንደ አዲስ ይጠይቁ።"
+
+#: templates/registration/password_reset_done.html:3
+msgid "Reset Email Sent"
+msgstr "የይለፍ ቃል መቀየሪያ ኢሜይል ተልኳል"
+
+#: templates/registration/password_reset_done.html:7
+msgid "Check your inbox."
+msgstr "ኢሜይልዎን ይመልከቱ።"
+
+#: templates/registration/password_reset_done.html:8
+msgid "We've emailed you instructions for setting your password. You should receive the email shortly!"
+msgstr "የይለፍ ቃልዎን እንዴት መቀየር እንደሚችሉ መመሪያ በኢሜይል ልከንልዎታል። በቅርቡ ይደርስዎታል!"
+
+#: templates/registration/password_reset_form.html:3
+#: templates/registration/password_reset_form.html:10
+msgid "Reset Password"
+msgstr "የይለፍ ቃል ዳግም ያስጀምሩ"
+
+#: templates/registration/password_reset_form.html:11
+msgid "Enter your email address below, and we'll email instructions for setting a new one."
+msgstr "ከታች የኢሜይል አድራሻዎን ያስገቡ፤ አዲስ የይለፍ ቃል ለማዘጋጀት መመሪያ እንልክልዎታለን።"
+
+#: templates/registration/password_reset_form.html:16
+msgid "Send Reset Email"
+msgstr "የመቀየሪያ ኢሜይል ላክ"
 
 #: users/forms.py:15 users/forms.py:73
 msgid "Email Address"
@@ -133,7 +184,7 @@ msgstr "የኢሜይል አድራሻ"
 msgid "Enter your email"
 msgstr "ኢሜይልዎን ያስገቡ"
 
-#: users/forms.py:26
+#: users/forms.py:26 users/templates/users/register.html:61
 msgid "Confirm Password"
 msgstr "የይለፍ ቃል ያረጋግጡ"
 
@@ -149,7 +200,7 @@ msgstr "ምድብ"
 msgid "Brand"
 msgstr "ዓይነት"
 
-#: users/forms.py:47
+#: users/forms.py:47 users/models.py:35
 msgid "Condition"
 msgstr "ሁኔታ"
 
@@ -161,7 +212,7 @@ msgstr "ቦታ"
 msgid "Price (in Birr)"
 msgstr "ዋጋ (በብር)"
 
-#: users/forms.py:50
+#: users/forms.py:50 users/templates/users/product_detail.html:79
 msgid "Description"
 msgstr "መግለጫ"
 
@@ -189,12 +240,209 @@ msgstr "ያገለገለ"
 msgid "Refurbished"
 msgstr "የታደሰ"
 
+#: users/templates/users/conversation_detail.html:5
+#: users/templates/users/conversation_detail.html:11
+msgid "Conversation about"
+msgstr "ውይይት ስለ"
+
+#: users/templates/users/conversation_detail.html:30
+msgid "Type your message..."
+msgstr "መልዕክትዎን ይጻፉ..."
+
+#: users/templates/users/conversation_detail.html:31
+msgid "Send"
+msgstr "ላክ"
+
+#: users/templates/users/conversation_detail.html:35
+msgid "Back to Inbox"
+msgstr "ወደ ገቢ መልዕክቶች ተመለስ"
+
+#: users/templates/users/create_product.html:4
+msgid "Post a New Item"
+msgstr "አዲስ እቃ ይለጥፉ"
+
+#: users/templates/users/create_product.html:57
+msgid "Upload Images"
+msgstr "ፎቶዎችን ይስቀሉ"
+
+#: users/templates/users/create_product.html:57
+msgid "you can select multiple"
+msgstr "ከአንድ በላይ መምረጥ ይችላሉ"
+
+#: users/templates/users/create_product.html:62
+msgid "Post Product"
+msgstr "እቃውን ለጥፍ"
+
+#: users/templates/users/inbox.html:6 users/templates/users/inbox.html:10
+msgid "My Inbox"
+msgstr "የገቢ መልዕክት ሳጥኔ"
+
+#: users/templates/users/inbox.html:15
+msgid "Re:"
+msgstr "ምላሽ ለ:"
+
+#: users/templates/users/inbox.html:19
+msgid "With:"
+msgstr "ከ:"
+
+#: users/templates/users/inbox.html:25
+msgid "You:"
+msgstr "አንተ:"
+
+#: users/templates/users/inbox.html:34
+msgid "You have no conversations yet."
+msgstr "እስካሁን ምንም አይነት ውይይት የለዎትም።"
+
+#: users/templates/users/product_delete.html:4
+#: users/templates/users/product_delete.html:12
+msgid "Delete Product"
+msgstr "እቃን ሰርዝ"
+
+#: users/templates/users/product_delete.html:14
+#, python-format
+msgid ""
+"Are you sure you want to permanently delete the product \"%(product.name)s\"?"
+msgstr ""
+"እርግጠኛ ነዎት \"% (product.name)s\" የተባለውን እቃ በቋሚነት መሰረዝ ይፈልጋሉ?"
+
+#: users/templates/users/product_delete.html:16
+msgid "This action cannot be undone."
+msgstr "ይህንን ድርጊት መቀልበስ አይቻልም።"
+
+#: users/templates/users/product_delete.html:20
+msgid "Yes, Delete"
+msgstr "አዎ, ይሰረዝ"
+
+#: users/templates/users/product_delete.html:21
+#: users/templates/users/product_update.html:76
+msgid "Cancel"
+msgstr "አቁም"
+
+#: users/templates/users/product_detail.html:42
+msgid "No Image Available"
+msgstr "ምንም ፎቶ የለም።"
+
+#: users/templates/users/product_detail.html:49
+msgid "Posted by:"
+msgstr "የለጠፈው:"
+
+#: users/templates/users/product_detail.html:49
+msgid "on"
+msgstr "በ"
+
+#: users/templates/users/product_detail.html:57
+msgid "Phone"
+msgstr "ስልክ"
+
+#: users/templates/users/product_detail.html:59
+msgid "Show Contact"
+msgstr "ስልክ ቁጥር አሳይ"
+
+#: users/templates/users/product_detail.html:63
+msgid "Chat with Seller"
+msgstr "ከሻጩ ጋር ይወያዩ"
+
+#: users/templates/users/product_detail.html:67
+msgid "Specifications"
+msgstr "ዝርዝር መግለጫዎች"
+
+#: users/templates/users/product_detail.html:85
+msgid "Like"
+msgstr "ላይክ"
+
+#: users/templates/users/product_detail.html:88
+msgid "Dislike"
+msgstr "ዲስላይክ"
+
+#: users/templates/users/product_detail.html:95
+msgid "Edit"
+msgstr "አስተካክል"
+
+#: users/templates/users/product_detail.html:96
+#: venv/lib/python3.12/site-packages/django/forms/formsets.py:499
+msgid "Delete"
+msgstr "ሰርዝ"
+
+#: users/templates/users/product_detail.html:98
+msgid "Back to Home"
+msgstr "ወደ መነሻ ገጽ ተመለስ"
+
+#: users/templates/users/product_detail.html:104
+msgid "Related Products"
+msgstr "ተመሳሳይ እቃዎች"
+
+#: users/templates/users/product_detail.html:119
+msgid "No related products found in this category."
+msgstr "በዚህ ምድብ ውስጥ ምንም ተመሳሳይ እቃ አልተገኘም።"
+
+#: users/templates/users/product_update.html:4
+msgid "Update Product"
+msgstr "እቃ አስተካክል"
+
+#: users/templates/users/product_update.html:12
+msgid "Update Your Product"
+msgstr "እቃዎን ያዘምኑ"
+
+#: users/templates/users/product_update.html:19
+msgid "Current Images"
+msgstr "ያሉ ፎቶዎች"
+
+#: users/templates/users/product_update.html:23
+msgid "No images uploaded yet."
+msgstr "እስካሁን የተሰቀለ ፎቶ የለም።"
+
+#: users/templates/users/product_update.html:68
+msgid "Upload New Images"
+msgstr "አዲስ ፎቶዎችን ይስቀሉ"
+
+#: users/templates/users/product_update.html:68
+msgid "this will replace all current images"
+msgstr "ይህ ያሉትን ፎቶዎች በሙሉ ይተካል"
+
+#: users/templates/users/product_update.html:73
+msgid "Save Changes"
+msgstr "ለውጦችን አስቀምጥ"
+
+#: users/templates/users/profile.html:6
+msgid "Profile"
+msgstr "ፕሮፋይል"
+
+#: users/templates/users/profile.html:20
+msgid "Contact"
+msgstr "የግንኙነት መረጃ"
+
+#: users/templates/users/profile.html:24
+msgid "Edit Profile"
+msgstr "ፕሮፋይል አስተካክል"
+
+#: users/templates/users/profile.html:32
+msgid "Items posted by"
+msgstr "የተለጠፉ እቃዎች በ"
+
+#: users/templates/users/profile.html:53
+msgid "Edit Item"
+msgstr "እቃ አስተካክል"
+
+#: users/templates/users/profile.html:54
+msgid "Delete Item"
+msgstr "እቃ ሰርዝ"
+
+#: users/templates/users/profile.html:62
+msgid "has not posted any products yet."
+msgstr "እስካሁን ምንም አይነት እቃ አልለጠፈም።"
+
+#: users/templates/users/profile.html:64
+msgid "Post Your First Item"
+msgstr "የመጀመሪያ እቃዎን ይለጥፉ"
+
 #: users/templates/users/register.html:13
 msgid "Join Our Community!"
 msgstr "ማህበረሰባችንን ይቀላቀሉ!"
 
 #: users/templates/users/register.html:14
-msgid "Create an account to start buying and selling in Ethiopia's fastest-growing marketplace."
+msgid ""
+"Create an account to start buying and selling in Ethiopia's fastest-growing "
+"marketplace."
 msgstr "በኢትዮጵያ በፍጥነት እያደገ ባለው የገበያ መድረክ ላይ መግዛትና መሸጥ ለመጀመር አካውንት ይፍጠሩ።"
 
 #: users/templates/users/register.html:20
@@ -208,3 +456,6 @@ msgstr "ኢሜይል"
 #: users/templates/users/register.html:74
 msgid "Already have an account? <a href=\"{% url 'login' %}\">Log in</a>"
 msgstr "አስቀድመው አካውንት አለዎት? <a href=\"{% url 'login' %}\">ይግቡ</a>"
+```
+
+

@@ -98,13 +98,23 @@
         </main>
     </div>
 
-    <!-- Floating Action Button -->
-    <div class="floating-post-container">
-        <span class="floating-post-text">{% translate "Post Your Item" %}</span>
-        <a href="{% if user.is_authenticated %}{% url 'create_product' %}{% else %}{% url 'login' %}{% endif %}" class="floating-post-button" title="Post Your Item">
+<!-- Floating Action Button -->
+<div class="floating-post-container">
+    <span class="floating-post-text">{% translate "Post Your Item" %}</span>
+    
+    {% if user.is_authenticated %}
+        <!-- If the user is logged in, link to the create product page -->
+        <a href="{% url 'create_product' %}" class="floating-post-button" title="Post Your Item">
             <i class="bi bi-plus-lg"></i>
         </a>
-    </div>
+    {% else %}
+        <!-- If the user is NOT logged in, link to the login page -->
+        <a href="{% url 'login' %}" class="floating-post-button" title="Post Your Item">
+            <i class="bi bi-plus-lg"></i>
+        </a>
+    {% endif %}
+    
+</div>
 
     <footer class="bg-light text-center text-muted p-4 mt-5">
         <div class="container">

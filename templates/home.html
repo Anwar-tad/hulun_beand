@@ -1,11 +1,22 @@
 {% extends "base.html" %}
 {% load humanize %}
 {% load static %}
-{% load i18n %} <!-- 1. Load the translation library -->
+{% load i18n %}
 
-{% block title %}{% translate "Welcome to" %} Menalesh{% endblock %}
+{% block title %}
+    {% if selected_category %}
+        {{ selected_category }} | Menalesh
+    {% else %}
+        {% translate "Welcome to" %} Menalesh
+    {% endif %}
+{% endblock %}
 
 {% block content %}
+
+<!-- ==================================================================== -->
+<!-- ==== ይህ ክፍል የሚታየው ምንም አይነት ምድብ ካልተመረጠ ብቻ ነው ==== -->
+<!-- ==================================================================== -->
+{% if not selected_category and not request.GET.q %}
     <!-- Hero Section -->
     <div class="hero-section-v2 text-center">
         <div class="container">
@@ -14,15 +25,13 @@
             <form method="GET" action="{% url 'home' %}" class="mt-4">
                 <div class="input-group input-group-lg w-75 mx-auto">
                     <input type="text" name="q" class="form-control" placeholder="{% translate 'Search here (e.g., Toyota Vitz)' %}" value="{{ request.GET.q }}">
-                    <button class="btn btn-primary" type="submit" aria-label="Search">
-                      <i class="bi bi-search"></i>
-                    </button>
+                    <button class="btn btn-primary" type="submit" aria-label="Search"><i class="bi bi-search"></i></button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Category Icon Section -->
+    <!-- Category Icons Section -->
     <div class="category-section">
         <div class="container">
             <h2 class="text-center mb-5">{% translate "Browse by Category" %}</h2>
@@ -31,50 +40,61 @@
                     <div class="col-3 mb-4">
                      <a href="?category={{ category.name }}" class="category-icon">
                        <div class="icon-circle">
-                                <!-- The category name itself is dynamic, so it does not need a translate tag here -->
                                 <img src="{% static 'images/icons/'|add:category.name|add:'.png' %}" alt="{{ category.name }}">
                             </div>
-                            <span>{% translate category.name %}</span>
+                            <span>{{ category.name }}</span>
                         </a>
                     </div>
                 {% endfor %}
             </div>
         </div>
     </div>
-    
-    <!-- Latest Products Section -->
-    <div class="container">
+{% endif %}
+<!-- ============================== -->
+<!-- ==== የማጣሪያ ክፍል እዚህ ያበቃል ==== -->
+<!-- ============================== -->
+
+<div class="container mt-4">
+    <!-- ይህ ርዕስ የሚታየው አንድ ምድብ ሲመረጥ ወይም ፍለጋ ሲካሄድ ነው -->
+    {% if selected_category %}
+        <h2 class="mb-4">{% translate "Showing items in" %}: <strong>{{ selected_category }}</strong></h2>
+        <a href="{% url 'home' %}">‹ {% translate "Back to all categories" %}</a>
+    {% elif request.GET.q %}
+        <h2 class="mb-4">{% translate "Search results for" %}: <strong>"{{ request.GET.q }}"</strong></h2>
+    {% else %}
         <h2 class="mb-4">{% translate "Latest Products" %}</h2>
-        <div class="row">
-            {% for product in products %}
-              <div class="col-md-4 col-sm-6 mb-4">
-                <div class="card h-100">
-                  <a href="{% url 'product_detail' product.id %}">
-                      {% if product.images.first %}
-                        <img src="{{ product.images.first.image.url }}" class="card-img-top" alt="{{ product.name }}">
-                      {% else %}
-                        <img src="{% static 'images/default_product.png' %}" class="card-img-top" alt="No Image">
-                      {% endif %}
-                  </a>
-                  <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">
-                        <a href="{% url 'product_detail' product.id %}" class="text-decoration-none text-dark">{{ product.name }}</a>
-                    </h5>
-                    <p class="card-text text-primary fw-bold mb-2">{% translate "Price" %}: {{ product.price|intcomma }} Br.</p>
-                    <p class="card-text mt-auto pt-2 border-top"><small class="text-muted">{% translate "Seller" %}: 
-                        <a href="{% url 'profile' username=product.seller.username %}">{{ product.seller.username }}</a>
-                    </small></p>
-                  </div>
-                </div>
+    {% endif %}
+
+    <div class="row mt-4">
+        {% for product in products %}
+          <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card h-100">
+              <a href="{% url 'product_detail' product.id %}">
+                  {% if product.images.first %}
+                    <img src="{{ product.images.first.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                  {% else %}
+                    <img src="{% static 'images/default_product.png' %}" class="card-img-top" alt="No Image">
+                  {% endif %}
+              </a>
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">
+                    <a href="{% url 'product_detail' product.id %}" class="text-decoration-none text-dark">{{ product.name }}</a>
+                </h5>
+                <p class="card-text text-primary fw-bold mb-2">{% translate "Price" %}: {{ product.price|intcomma }} Br.</p>
+                <p class="card-text mt-auto pt-2 border-top"><small class="text-muted">{% translate "Seller" %}: 
+                    <a href="{% url 'profile' username=product.seller.username %}">{{ product.seller.username }}</a>
+                </small></p>
               </div>
-            {% empty %}
-              <div class="col">
-                <p class="text-center text-muted">{% translate "No products found matching your criteria." %}</p>
-              </div>
-            {% endfor %}
-        </div>
-        
-        <!-- Pagination Section -->
-        {% include 'partials/pagination.html' %}
+            </div>
+          </div>
+        {% empty %}
+          <div class="col">
+            <p class="text-center text-muted">{% translate "No products found matching your criteria." %}</p>
+          </div>
+        {% endfor %}
     </div>
+    
+    <!-- Pagination Section -->
+    {% include 'partials/pagination.html' %}
+</div>
 {% endblock %}

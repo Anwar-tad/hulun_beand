@@ -1,3 +1,15 @@
+
+
+### **Completed `django.po` File for Oromo (`om`) - FINAL CORRECT VERSION**
+
+#### **Action: Please Replace Your `django.po` File**
+
+1.  Open your Oromo translation file in Acode:
+    **`locale/om/LC_MESSAGES/django.po`**
+2.  **Delete everything** inside that file.
+3.  **Carefully copy and paste the entire, completed code block below.** This is the final, fully translated Oromo file.
+
+```po
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
@@ -77,13 +89,21 @@ msgstr "Ramaddiin Barbaadi"
 msgid "Latest Products"
 msgstr "Meeshaalee Haaraa"
 
-#: templates/home.html:63
-msgid "Price"
-msgstr "Gatii"
+#: templates/home.html:60
+msgid "Showing items in"
+msgstr "Meeshaalee kan agarsiisu"
 
-#: templates/home.html:64
-msgid "Seller"
-msgstr "Gurguraa"
+#: templates/home.html:61
+msgid "Back to all categories"
+msgstr "Gara ramaddiiwwan hundaa deebi'i"
+
+#: templates/home.html:63
+msgid "Search results for"
+msgstr "Bu'aawwan barbaadii"
+
+#: templates/home.html:65
+msgid "Latest Products"
+msgstr "Meeshaalee Haaraa"
 
 #: templates/home.html:72
 msgid "No products found matching your criteria."
@@ -109,11 +129,7 @@ msgstr "Gatii gaarii argachuuf yookiin meeshaalee keessan gurguruuf seenaa. Carr
 msgid "Log In"
 msgstr "Seeni"
 
-#: templates/registration/login.html:50
-msgid "Don't have an account? <a href=\"{% url 'register' %}\">Sign up</a>"
-msgstr "Herrega hin qabduu? <a href=\"{% url 'register' %}\">Galmaa'i</a>"
-
-#: users/forms.py:24 users/forms.py:72
+#: templates/registration/login.html:36 users/forms.py:24 users/forms.py:72
 msgid "Username"
 msgstr "Maqaa Fayyadamaa"
 
@@ -124,6 +140,10 @@ msgstr "Maqaa fayyadamaa keessan galchaa"
 #: users/forms.py:25
 msgid "Password"
 msgstr "Jecha Darbii"
+
+#: users/forms.py:15 users/forms.py:73
+msgid "Email Address"
+msgstr "Teessoo Emeelii"
 
 #: users/forms.py:16
 msgid "Enter your email"

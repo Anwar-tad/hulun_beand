@@ -1,102 +1,75 @@
-/* static/css/style.css */
+ 
+/* static/css/style.css - FINAL CLEAN VERSION */
 
-/* 1. Global Styles & Body Background */
-body {
-    background-color: #f4f7f6; /* A slightly warmer, softer grey */
-}
-
-/* 2. Navbar and Primary Colors */
+/* =================================
+   1. Global Styles & Color Variables
+   ================================= */
 :root {
     --primary-color: #D4AF37; /* A rich Gold/Ochre color */
-    --secondary-color: darkblue; /* A dark slate blue */
+    --secondary-color: #2c3e50; /* A dark slate blue */
 }
 
-.navbar.navbar-dark.bg-dark {
-    background-color: var(--secondary-color) !important; /* Dark Slate Blue */
-}
-
-.btn-primary, .btn-primary:hover, .btn-primary:active {
-    background-color: var(--primary-color) !important;
-    border-color: var(--primary-color) !important;
-    color: white !important;
-}
-
-.btn-secondary {
-    background-color: var(--secondary-color) !important;
-    border-color: var(--secondary-color) !important;
-}
-
-.btn-outline-secondary.active {
-    background-color: var(--secondary-color);
-    color: white;
+body {
+    background-color: #f8f9fa; /* A soft, light grey background */
 }
 
 a {
     color: var(--secondary-color);
 }
-.card-title a:hover {
-    color: var(--primary-color);
-}
-
-/* 3. Hero (Welcome) Section */
-.hero-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/images/hero-bg.jpg') no-repeat center center;
-    background-size: cover;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-/* 4. Card Styles */
-.card {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    border: none;
-    transition: transform .2s, box-shadow .2s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-}
-
-.card-img-top {
-    height: 200px;
-    object-fit: cover;
-}
-/* static/css/style.css (ADD THIS AT THE END) */
 
 /* =================================
-   NEW: Hero Section V2
+   2. Navbar
+   ================================= */
+.navbar.navbar-dark {
+    background-color: var(--secondary-color) !important; /* Dark Slate Blue */
+}
+
+.language-switcher-form select {
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    padding: 0.2rem 0.5rem;
+}
+
+.language-switcher-form select option {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* =================================
+   3. Hero Section (Homepage)
    ================================= */
 .hero-section-v2 {
-    background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.7)), url('/static/images/hero-bg.jpg');
+    background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.7)), url('../images/hero-bg.jpg');
     background-size: cover;
     background-position: center;
     padding: 6rem 1rem;
     color: white;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
 }
 
 .hero-section-v2 .display-4 {
     font-weight: 700;
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
 }
 
 .hero-section-v2 .form-control {
     border-radius: 50px 0 0 50px;
     border: none;
-    padding: 1.5rem;
+    padding: 1.2rem; /* Adjusted padding */
 }
 
 .hero-section-v2 .btn-primary {
     border-radius: 0 50px 50px 0;
-    padding: 1.5rem;
+    padding: 1.2rem 1.5rem; /* Adjusted padding */
     font-weight: 600;
 }
 
 /* =================================
-   NEW: Category Icons Section
+   4. Category Icons (Homepage)
    ================================= */
 .category-section {
-    padding: 4rem 0;
+    padding: 3rem 0;
 }
 
 .category-icon {
@@ -104,51 +77,97 @@ a {
     flex-direction: column;
     align-items: center;
     text-decoration: none;
-    color: #2c3e50; /* Dark Slate Blue from our theme */
+    color: var(--secondary-color);
     transition: transform 0.2s;
 }
 
 .category-icon:hover {
     transform: scale(1.1);
-    color: var(--primary-color); /* Gold color from our theme */
+    color: var(--primary-color);
 }
 
 .category-icon .icon-circle {
-    width: 40px;
-    height: 40px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     background-color: #ffffff;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
 
 .category-icon img {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
 }
 
 .category-icon span {
-    font-weight: 600;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-align: center;
 }
+
+/* =================================
+   5. Card Styles (General)
+   ================================= */
+.card {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    border: none;
+    transition: transform .2s, box-shadow .2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-title a:hover {
+    color: var(--primary-color);
+}
+
+/* =================================
+   6. Floating Action Button
+   ================================= */
+.floating-post-container {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 1030;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.floating-post-text {
+    background-color: white;
+    color: var(--secondary-color);
+    padding: 10px 18px;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
 .floating-post-button {
-    position: fixed; /* Makes it stay in one place */
-    bottom: 20px;
-    right: 20px;
     width: 60px;
     height: 60px;
-    background-color: var(--primary-color); /* Uses our theme's gold color */
+    background-color: var(--primary-color);
     color: white;
-    border-radius: 50%; /* Makes it a circle */
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem; /* Makes the '+' icon bigger */
+    font-size: 2rem;
     text-decoration: none;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    z-index: 1000; /* Makes it stay on top of other elements */
     transition: transform 0.2s;
 }
 
@@ -156,61 +175,32 @@ a {
     transform: scale(1.1);
     color: white;
 }
-/* static/css/style.css (ADD THIS AT THE END) */
 
-/* Language Switcher in Navbar */
-.language-switcher-form {
+/* =================================
+   7. Auth Page Styles
+   ================================= */
+.auth-container {
     display: flex;
+    justify-content: center;
     align-items: center;
-    margin-left: 1rem;
+    min-height: 80vh;
 }
-.language-switcher-form select {
-    background-color: transparent;
-    color: rgba(255,255,255,.75);
-    border: 1px solid rgba(255,255,255,.2);
-    border-radius: 5px;
-    padding: 0.2rem 0.5rem;
+
+.auth-card {
+    max-width: 800px;
+    border-radius: 15px;
+    overflow: hidden;
 }
-.language-switcher-form select option {
-    background-color: var(--secondary-color);
+
+.auth-image-section {
+    background: url('../images/auth-bg.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 40px;
     color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
-@media (max-width: 991.98px) {
-    .language-switcher-form {
-        margin-left: 0;
-        margin-top: 1rem;
-        justify-content: center;
-    }
-}
-/* static/css/style.css */
 
-/* Floating Button with Text */
-.floating-post-container {
-    position: fixed;
-    bottom: 25px; /* Increased spacing from bottom */
-    right: 25px;  /* Increased spacing from right */
-    z-index: 1030; /* Ensure it's above most elements */
-    display: flex;
-    align-items: center;
-    gap: 12px;
+.auth-form-section {
+    padding: 40px;
 }
-.floating-post-text {
-    background-color: white;
-    color: var(--secondary-color);
-    padding: 10px 18px; /* Slightly larger padding */
-    border-radius: 50px; /* Pill shape */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    font-weight: 600;
-    white-space: nowrap;
-    
-}
-.floating-post-container:hover .floating-post-text {
-    /* Text appears on hover on desktop */
-    opacity: 1;
-    transform: translateX(0);
-}
-.floating-post-button {
-    width: 60px;
-    height: 60px;
-    /* ... existing styles are fine ... */
-}
+
