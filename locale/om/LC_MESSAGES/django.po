@@ -1,15 +1,3 @@
-
-
-### **Completed `django.po` File for Oromo (`om`) - FINAL CORRECT VERSION**
-
-#### **Action: Please Replace Your `django.po` File**
-
-1.  Open your Oromo translation file in Acode:
-    **`locale/om/LC_MESSAGES/django.po`**
-2.  **Delete everything** inside that file.
-3.  **Carefully copy and paste the entire, completed code block below.** This is the final, fully translated Oromo file.
-
-```po
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
@@ -20,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-28 13:52-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2025-08-28 13:52-0500\n"
+"Last-Translator: Oromo Translator <translator@example.com>\n"
 "Language-Team: Oromo <LL@li.org>\n"
 "Language: om\n"
 "MIME-Version: 1.0\n"
@@ -100,10 +88,6 @@ msgstr "Gara ramaddiiwwan hundaa deebi'i"
 #: templates/home.html:63
 msgid "Search results for"
 msgstr "Bu'aawwan barbaadii"
-
-#: templates/home.html:65
-msgid "Latest Products"
-msgstr "Meeshaalee Haaraa"
 
 #: templates/home.html:72
 msgid "No products found matching your criteria."
@@ -224,3 +208,127 @@ msgstr "Emeelii"
 #: users/templates/users/register.html:74
 msgid "Already have an account? <a href=\"{% url 'login' %}\">Log in</a>"
 msgstr "Kanaan dura herrega qabduu? <a href=\"{% url 'login' %}\">Seenaa</a>"
+
+#: templates/registration/login.html:49
+msgid "Don't have an account? <a href=\"{% url 'register' %}\">Sign up</a>"
+msgstr "Herrega hin qabduu? <a href=\"{% url 'register' %}\">Galmaa'i</a>"
+
+#: templates/registration/password_reset_form.html:10
+msgid "Reset Password"
+msgstr "Jecha Darbii Haaromsi"
+
+#: users/templates/users/product_detail.html:42
+msgid "No Image Available"
+msgstr "Suuraan Hin Jiru"
+
+#: users/templates/users/product_detail.html:49
+msgid "Posted by:"
+msgstr "Kan Maxxanfame:"
+
+#: users/templates/users/product_detail.html:49
+msgid "on"
+msgstr "guyyaa"
+
+#: users/templates/users/product_detail.html:57
+msgid "Phone"
+msgstr "Bilbila"
+
+#: users/templates/users/product_detail.html:59
+msgid "Show Contact"
+msgstr "Qunnamtii Agarsiisi"
+
+#: users/templates/users/product_detail.html:63
+msgid "Chat with Seller"
+msgstr "Gurguraa Waliin Haasa'i"
+
+#: users/templates/users/product_detail.html:67
+msgid "Specifications"
+msgstr "Amaloota"
+
+#: users/templates/users/product_detail.html:85
+msgid "Like"
+msgstr "Jaaladhu"
+
+#: users/templates/users/product_detail.html:88
+msgid "Dislike"
+msgstr "Hin Jaalatin"
+
+#: users/templates/users/product_detail.html:95
+msgid "Edit"
+msgstr "Fooyyessi"
+
+#: users/templates/users/product_detail.html:96
+msgid "Delete"
+msgstr "Haqi"
+
+#: users/templates/users/product_detail.html:98
+msgid "Back to Home"
+msgstr "Gara Fuula Jalqabaatti Deebi'i"
+
+#: users/templates/users/product_detail.html:104
+msgid "Related Products"
+msgstr "Meeshaalee Walsimatan"
+
+#: users/templates/users/product_detail.html:119
+msgid "No related products found in this category."
+msgstr "Ramaddii kana keessatti meeshaan walfakkaatu hin argamne."
+
+#: users/templates/users/product_update.html:4
+msgid "Update Product"
+msgstr "Meeshaa Fooyyessi"
+
+#: users/templates/users/product_update.html:12
+msgid "Update Your Product"
+msgstr "Meeshaa Keessan Haaromsi"
+
+#: users/templates/users/product_update.html:19
+msgid "Current Images"
+msgstr "Suuraalee Ammaa"
+
+#: users/templates/users/product_update.html:23
+msgid "No images uploaded yet."
+msgstr "Hanga ammaatti suuraan ol hin fe'amne."
+
+#: users/templates/users/product_update.html:68
+msgid "Upload New Images"
+msgstr "Suuraalee Haaraa Ol Fe'i"
+
+#: users/templates/users/product_update.html:68
+msgid "this will replace all current images"
+msgstr "kun suuraalee duraanii hunda ni bakka bu'a"
+
+#: users/templates/users/product_update.html:73
+msgid "Save Changes"
+msgstr "Jijjiirama Olkaa'i"
+
+#: users/templates/users/profile.html:6
+msgid "Profile"
+msgstr "Piroofayilii"
+
+#: users/templates/users/profile.html:20
+msgid "Contact"
+msgstr "Qunnamtii"
+
+#: users/templates/users/profile.html:24
+msgid "Edit Profile"
+msgstr "Piroofayilii Fooyyessi"
+
+#: users/templates/users/profile.html:32
+msgid "Items posted by"
+msgstr "Meeshaalee kan maxxanse"
+
+#: users/templates/users/profile.html:53
+msgid "Edit Item"
+msgstr "Meeshaa Fooyyessi"
+
+#: users/templates/users/profile.html:54
+msgid "Delete Item"
+msgstr "Meeshaa Haqi"
+
+#: users/templates/users/profile.html:62
+msgid "has not posted any products yet."
+msgstr "hanga ammaatti meeshaa tokkollee hin maxxansine."
+
+#: users/templates/users/profile.html:64
+msgid "Post Your First Item"
+msgstr "Meeshaa Keessan Isa Jalqabaa Maxxansi"

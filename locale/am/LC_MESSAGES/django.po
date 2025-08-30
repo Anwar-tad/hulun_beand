@@ -1,14 +1,8 @@
-
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 13:52-0500\n"
+"POT-Creation-Date: 2025-08-30 08:53-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Amharic <LL@li.org>\n"
@@ -42,41 +36,38 @@ msgstr "እቃ ለጥፍ"
 msgid "Logout"
 msgstr "ውጣ"
 
-#: templates/base.html:74
+#: templates/base.html:74 templates/registration/login.html:5
 msgid "Login"
 msgstr "ይግቡ"
 
-#: templates/base.html:77
+#: templates/base.html:77 users/templates/users/register.html:5
+#: users/templates/users/register.html:69
 msgid "Register"
 msgstr "ይመዝገቡ"
 
-#: templates/base.html:103
+#: templates/base.html:103 users/templates/users/create_product.html:12
 msgid "Post Your Item"
 msgstr "እቃዎን ይለጥፉ"
 
-#: templates/home.html:6
+#: templates/home.html:10
 msgid "Welcome to"
 msgstr "እንኳን ደህና መጡ ወደ"
 
-#: templates/home.html:12
+#: templates/home.html:23
 msgid "All in One Place"
 msgstr "ሁሉን በአንድ ቦታ"
 
-#: templates/home.html:13
+#: templates/home.html:24
 msgid "Buy what you want, sell what you don't. Simple, fast, and reliable."
 msgstr "የሚፈልጉትን ይግዙ፣ የማይፈልጉትን ይሽጡ። ቀላል፣ ፈጣን እና አስተማማኝ።"
 
-#: templates/home.html:16
+#: templates/home.html:27
 msgid "Search here (e.g., Toyota Vitz)"
 msgstr "እዚህ ይፈልጉ (ለምሳሌ፡ Toyota Vitz)"
 
-#: templates/home.html:28
+#: templates/home.html:37
 msgid "Browse by Category"
 msgstr "በምድብ ያስሱ"
-
-#: templates/home.html:47
-msgid "Latest Products"
-msgstr "አዳዲስ እቃዎች"
 
 #: templates/home.html:60
 msgid "Showing items in"
@@ -94,15 +85,27 @@ msgstr "የፍለጋ ውጤቶች ለ"
 msgid "Latest Products"
 msgstr "አዳዲስ እቃዎች"
 
-#: templates/home.html:72
+#: templates/home.html:83 users/templates/users/product_detail.html:51
+#: users/templates/users/product_detail.html:114
+#: users/templates/users/profile.html:48
+msgid "Price"
+msgstr "ዋጋ"
+
+#: templates/home.html:84
+msgid "Seller"
+msgstr "ሻጭ"
+
+#: templates/home.html:92
 msgid "No products found matching your criteria."
 msgstr "ከፍለጋዎ ጋር የሚዛመድ ምንም እቃ አልተገኘም።"
 
 #: templates/partials/pagination.html:7 templates/partials/pagination.html:9
+#: users/templates/users/product_detail.html:29
 msgid "Previous"
 msgstr "ቀዳሚ"
 
 #: templates/partials/pagination.html:21 templates/partials/pagination.html:23
+#: users/templates/users/product_detail.html:33
 msgid "Next"
 msgstr "ቀጣይ"
 
@@ -111,20 +114,43 @@ msgid "Welcome Back!"
 msgstr "እንኳን በደህና ተመለሱ!"
 
 #: templates/registration/login.html:14
-msgid "Log in to discover great deals, or post your own items for sale. Your next opportunity is just a click away."
-msgstr "ድንቅ ቅናሾችን ለማግኘት ወይም የራስዎን እቃዎች ለሽያጭ ለመለጠፍ ይግቡ። ቀጣዩ እድልዎ አንድ ክሊክ ርቀት ላይ ነው።"
+msgid ""
+"Log in to discover great deals, or post your own items for sale. Your next "
+"opportunity is just a click away."
+msgstr ""
+"ድንቅ ቅናሾችን ለማግኘት ወይም የራስዎን እቃዎች ለሽያጭ ለመለጠፍ ይግቡ። ቀጣዩ እድልዎ አንድ ክሊክ ርቀት ላይ ነው።"
 
 #: templates/registration/login.html:20 templates/registration/login.html:46
 msgid "Log In"
 msgstr "ይግቡ"
 
+#: templates/registration/login.html:36 users/forms.py:24 users/forms.py:72
+#: users/templates/users/register.html:37
+msgid "Username"
+msgstr "የተጠቃሚ ስም"
+
+#: templates/registration/login.html:37 users/forms.py:22
+#, fuzzy
+#| msgid "Enter your email"
+msgid "Enter your username"
+msgstr "የተጠቃሚ ስምዎን ያስገቡ"
+
+#: templates/registration/login.html:41 users/forms.py:25
+#: users/templates/users/register.html:53
+#, fuzzy
+#| msgid "Reset Password"
+msgid "Password"
+msgstr "የይለፍ ቃል"
+
 #: templates/registration/login.html:42
 msgid "Enter your password"
 msgstr "የይለፍ ቃልዎን ያስገቡ"
 
-#: templates/registration/login.html:49
-msgid "Don't have an account? <a href=\"{% url 'register' %}\">Sign up</a>"
-msgstr "አካውንት የለዎትም? <a href=\"{% url 'register' %}\">ይመዝገቡ</a>"
+#: templates/registration/login.html:52
+#, fuzzy, python-format
+#| msgid "Don't have an account? <a href=\"{% url 'register' %}\">Sign up</a>"
+msgid "Don't have an account? <a href=\"%(register_url)s\">Sign up</a>"
+msgstr "አካውንት የለዎትም? <a href=\"%(register_url)s\">ይመዝገቡ</a>"
 
 #: templates/registration/password_reset_complete.html:3
 msgid "Password Reset Complete"
@@ -148,8 +174,12 @@ msgid "Change Password"
 msgstr "የይለፍ ቃል ቀይር"
 
 #: templates/registration/password_reset_confirm.html:20
-msgid "The password reset link was invalid, possibly because it has already been used. Please request a new password reset."
-msgstr "የይለፍ ቃል መቀየሪያ ሊንኩ የተሳሳተ ነው፤ ምናልባት ከዚህ በፊት ጥቅም ላይ ውሎ ሊሆን ይችላል። እባክዎ እንደ አዲስ ይጠይቁ።"
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used. Please request a new password reset."
+msgstr ""
+"የይለፍ ቃል መቀየሪያ ሊንኩ የተሳሳተ ነው፤ ምናልባት ከዚህ በፊት ጥቅም ላይ ውሎ ሊሆን ይችላል። እባክዎ እንደ አዲስ "
+"ይጠይቁ።"
 
 #: templates/registration/password_reset_done.html:3
 msgid "Reset Email Sent"
@@ -157,10 +187,12 @@ msgstr "የይለፍ ቃል መቀየሪያ ኢሜይል ተልኳል"
 
 #: templates/registration/password_reset_done.html:7
 msgid "Check your inbox."
-msgstr "ኢሜይልዎን ይመልከቱ።"
+msgstr "የእርስዎን የኢሜይል ገቢ መልዕክት ሳጥን ይመልከቱ።"
 
 #: templates/registration/password_reset_done.html:8
-msgid "We've emailed you instructions for setting your password. You should receive the email shortly!"
+msgid ""
+"We've emailed you instructions for setting your password. You should receive "
+"the email shortly!"
 msgstr "የይለፍ ቃልዎን እንዴት መቀየር እንደሚችሉ መመሪያ በኢሜይል ልከንልዎታል። በቅርቡ ይደርስዎታል!"
 
 #: templates/registration/password_reset_form.html:3
@@ -169,7 +201,9 @@ msgid "Reset Password"
 msgstr "የይለፍ ቃል ዳግም ያስጀምሩ"
 
 #: templates/registration/password_reset_form.html:11
-msgid "Enter your email address below, and we'll email instructions for setting a new one."
+msgid ""
+"Enter your email address below, and we'll email instructions for setting a "
+"new one."
 msgstr "ከታች የኢሜይል አድራሻዎን ያስገቡ፤ አዲስ የይለፍ ቃል ለማዘጋጀት መመሪያ እንልክልዎታለን።"
 
 #: templates/registration/password_reset_form.html:16
@@ -198,7 +232,7 @@ msgstr "ምድብ"
 
 #: users/forms.py:46
 msgid "Brand"
-msgstr "ዓይነት"
+msgstr "የእቃው ዓይነት/Brand"
 
 #: users/forms.py:47 users/models.py:35
 msgid "Condition"
@@ -206,7 +240,7 @@ msgstr "ሁኔታ"
 
 #: users/forms.py:48
 msgid "Location"
-msgstr "ቦታ"
+msgstr "የሚገኝበት ቦታ"
 
 #: users/forms.py:49
 msgid "Price (in Birr)"
@@ -215,6 +249,26 @@ msgstr "ዋጋ (በብር)"
 #: users/forms.py:50 users/templates/users/product_detail.html:79
 msgid "Description"
 msgstr "መግለጫ"
+
+#: users/forms.py:54
+msgid "e.g., Samsung Galaxy S22"
+msgstr "ለምሳሌ፡ ሳምሰንግ ጋላክሲ ኤስ 22"
+
+#: users/forms.py:56
+msgid "e.g., Samsung"
+msgstr "ለምሳሌ፡ ሳምሰንግ"
+
+#: users/forms.py:58
+msgid "e.g., Addis Ababa, Bole"
+msgstr "ለምሳሌ፡ አዲስ አበባ፣ ቦሌ"
+
+#: users/forms.py:59
+msgid "Price in Birr"
+msgstr "ዋጋ በብር"
+
+#: users/forms.py:60
+msgid "Provide a detailed description..."
+msgstr "ስለ እቃው ዝርዝር ማብራሪያ ያስገቡ..."
 
 #: users/forms.py:85
 msgid "Profile Picture"
@@ -227,6 +281,10 @@ msgstr "አጭር መግለጫ"
 #: users/forms.py:87
 msgid "Phone Number"
 msgstr "ስልክ ቁጥር"
+
+#: users/forms.py:92
+msgid "e.g., 0911...."
+msgstr "ለምሳሌ፡ 0911...."
 
 #: users/models.py:24
 msgid "Brand New"
@@ -287,7 +345,7 @@ msgstr "ከ:"
 
 #: users/templates/users/inbox.html:25
 msgid "You:"
-msgstr "አንተ:"
+msgstr "እርስዎ:"
 
 #: users/templates/users/inbox.html:34
 msgid "You have no conversations yet."
@@ -302,8 +360,7 @@ msgstr "እቃን ሰርዝ"
 #, python-format
 msgid ""
 "Are you sure you want to permanently delete the product \"%(product.name)s\"?"
-msgstr ""
-"እርግጠኛ ነዎት \"% (product.name)s\" የተባለውን እቃ በቋሚነት መሰረዝ ይፈልጋሉ?"
+msgstr "እርግጠኛ ነዎት \"% (product.name)s\" የተባለውን እቃ በቋሚነት መሰረዝ ይፈልጋሉ?"
 
 #: users/templates/users/product_delete.html:16
 msgid "This action cannot be undone."
@@ -332,11 +389,11 @@ msgstr "በ"
 
 #: users/templates/users/product_detail.html:57
 msgid "Phone"
-msgstr "ስልክ"
+msgstr "ስልክ ቁ."
 
 #: users/templates/users/product_detail.html:59
 msgid "Show Contact"
-msgstr "ስልክ ቁጥር አሳይ"
+msgstr "የግንኙነት መረጃ አሳይ"
 
 #: users/templates/users/product_detail.html:63
 msgid "Chat with Seller"
@@ -348,11 +405,11 @@ msgstr "ዝርዝር መግለጫዎች"
 
 #: users/templates/users/product_detail.html:85
 msgid "Like"
-msgstr "ላይክ"
+msgstr "ወድጀዋለሁ"
 
 #: users/templates/users/product_detail.html:88
 msgid "Dislike"
-msgstr "ዲስላይክ"
+msgstr "አልወደድኩትም"
 
 #: users/templates/users/product_detail.html:95
 msgid "Edit"
@@ -376,26 +433,26 @@ msgid "No related products found in this category."
 msgstr "በዚህ ምድብ ውስጥ ምንም ተመሳሳይ እቃ አልተገኘም።"
 
 #: users/templates/users/product_update.html:4
-msgid "Update Product"
+msgid "Update "
 msgstr "እቃ አስተካክል"
 
-#: users/templates/users/product_update.html:12
-msgid "Update Your Product"
+#: users/templates/users/_update.html:12
+msgid "Update Your "
 msgstr "እቃዎን ያዘምኑ"
 
-#: users/templates/users/product_update.html:19
+#: users/templates/users/_update.html:19
 msgid "Current Images"
 msgstr "ያሉ ፎቶዎች"
 
-#: users/templates/users/product_update.html:23
+#: users/templates/users/_update.html:23
 msgid "No images uploaded yet."
 msgstr "እስካሁን የተሰቀለ ፎቶ የለም።"
 
-#: users/templates/users/product_update.html:68
+#: users/templates/users/_update.html:68
 msgid "Upload New Images"
 msgstr "አዲስ ፎቶዎችን ይስቀሉ"
 
-#: users/templates/users/product_update.html:68
+#: users/templates/users/_update.html:68
 msgid "this will replace all current images"
 msgstr "ይህ ያሉትን ፎቶዎች በሙሉ ይተካል"
 
@@ -405,7 +462,7 @@ msgstr "ለውጦችን አስቀምጥ"
 
 #: users/templates/users/profile.html:6
 msgid "Profile"
-msgstr "ፕሮፋይል"
+msgstr "የተጠቃሚ መረጃ"
 
 #: users/templates/users/profile.html:20
 msgid "Contact"
@@ -454,8 +511,1300 @@ msgid "Email"
 msgstr "ኢሜይል"
 
 #: users/templates/users/register.html:74
-msgid "Already have an account? <a href=\"{% url 'login' %}\">Log in</a>"
+#, fuzzy
+#| msgid "Already have an account? <a href=\"{% url 'login' %}\">Log in</a>"
+msgid "Already have an account? <a href=\"url 'login'\">Log in</a>"
 msgstr "አስቀድመው አካውንት አለዎት? <a href=\"{% url 'login' %}\">ይግቡ</a>"
-```
 
+#: venv/lib/python3.12/site-packages/django/contrib/messages/apps.py:16
+msgid "Messages"
+msgstr "መልዕክቶች"
 
+#: venv/lib/python3.12/site-packages/django/contrib/sitemaps/apps.py:8
+msgid "Site Maps"
+msgstr "የጣቢያ ካርታዎች"
+
+#: venv/lib/python3.12/site-packages/django/contrib/staticfiles/apps.py:9
+msgid "Static Files"
+msgstr "የማይንቀሳቀሱ ፋይሎች"
+
+#: venv/lib/python3.12/site-packages/django/contrib/syndication/apps.py:7
+#, fuzzy
+#| msgid "Condition"
+msgid "Syndication"
+msgstr "ሲንዲኬሽን"
+
+#. Translators: String used to replace omitted page numbers in elided page
+#. range generated by paginators, e.g. [1, 2, '…', 5, 6, 7, '…', 9, 10].
+#: venv/lib/python3.12/site-packages/django/core/paginator.py:30
+msgid "…"
+msgstr "..."
+
+#: venv/lib/python3.12/site-packages/django/core/paginator.py:32
+msgid "That page number is not an integer"
+msgstr "ያ የገጽ ቁጥር ሙሉ ቁጥር አይደለም።"
+
+#: venv/lib/python3.12/site-packages/django/core/paginator.py:33
+msgid "That page number is less than 1"
+msgstr "ያ የገጽ ቁጥር ከ 1 ያነሰ ነው።"
+
+#: venv/lib/python3.12/site-packages/django/core/paginator.py:34
+msgid "That page contains no results"
+msgstr "ያ ገጽ ምንም ውጤት አልያዘም።"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:22
+msgid "Enter a valid value."
+msgstr "ትክክለኛ እሴት ያስገቡ።"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:70
+msgid "Enter a valid domain name."
+msgstr "ትክክለኛ የዶሜይን ስም ያስገቡ።"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:153
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:775
+msgid "Enter a valid URL."
+msgstr "ትክክለኛ URL ያስገቡ።"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:200
+msgid "Enter a valid integer."
+msgstr "ትክክለኛ ሙሉ ቁጥር ያስገቡ።"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:211
+msgid "Enter a valid email address."
+msgstr "ትክክለኛ የኢሜይል አድራሻ ያስገቡ።"
+
+#. Translators: "letters" means latin letters: a-z and A-Z.
+#: venv/lib/python3.12/site-packages/django/core/validators.py:289
+msgid ""
+"Enter a valid “slug” consisting of letters, numbers, underscores or hyphens."
+msgstr "ደብዳቤዎች፣ ቁጥሮች፣ ከታች መስመሮች ወይም ሰረዞችን ያካተተ ትክክለኛ “slug” ያስገቡ።"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:297
+msgid ""
+"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or "
+"hyphens."
+msgstr "ዩኒኮድ ደብዳቤዎችን፣ ቁጥሮችን፣ ከታች መስመሮችን ወይም ሰረዞችን ያካተተ ትክክለኛ “slug” ያስገቡ።"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:309
+#: venv/lib/python3.12/site-packages/django/core/validators.py:318
+#: venv/lib/python3.12/site-packages/django/core/validators.py:332
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2220
+#, python-format
+msgid "Enter a valid %(protocol)s address."
+msgstr "ትክክለኛ የሆነ %(protocol)s አድራሻ ያስገቡ።"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:311
+msgid "IPv4"
+msgstr "አይፒቪ4"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:320
+#: venv/lib/python3.12/site-packages/django/utils/ipv6.py:43
+msgid "IPv6"
+msgstr "አይፒቪ6"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:334
+msgid "IPv4 or IPv6"
+msgstr "አይፒቪ4 ወይም አይፒቪ6"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:375
+msgid "Enter only digits separated by commas."
+msgstr "በነጠላ ሰረዝ የተለዩ ቁጥሮችን ብቻ ያስገቡ።"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:381
+#, python-format
+msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
+msgstr "ይህ እሴት %(limit_value)s መሆኑን ያረጋግጡ (እሴቱ %(show_value)s ነው።)"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:416
+#, python-format
+msgid "Ensure this value is less than or equal to %(limit_value)s."
+msgstr "ይህ እሴት ከ %(limit_value)s ጋር እኩል ወይም ከዚያ ያነሰ መሆኑን ያረጋግጡ።"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:425
+#, python-format
+msgid "Ensure this value is greater than or equal to %(limit_value)s."
+msgstr "ይህ እሴት ከ %(limit_value)s ጋር እኩል ወይም ከዚያ የሚበልጥ መሆኑን ያረጋግጡ።"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:434
+#, python-format
+msgid "Ensure this value is a multiple of step size %(limit_value)s."
+msgstr "ይህ እሴት የ %(limit_value)s ብዜት መሆኑን ያረጋግጡ።"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:441
+#, python-format
+msgid ""
+"Ensure this value is a multiple of step size %(limit_value)s, starting from "
+"%(offset)s, e.g. %(offset)s, %(valid_value1)s, %(valid_value2)s, and so on."
+msgstr ""
+"ይህ እሴት የ %(limit_value)s ብዜት መሆኑን ያረጋግጡ፣ ከ %(offset)s ጀምሮ፣ ለምሳሌ %(offset)s, "
+"%(valid_value1)s, %(valid_value2)s እና የመሳሰሉት።"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:473
+#, python-format
+msgid ""
+"Ensure this value has at least %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at least %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+"ይህ እሴት ቢያንስ %(limit_value)d ፊደል ወይም ቁጥር እንዳለው ያረጋግጡ (እሴቱ %(show_value)d ነው)።"
+msgstr[1] ""
+"ይህ እሴት ቢያንስ %(limit_value)d ፊደሎች ወይም ቁጥሮች እንዳሉት ያረጋግጡ (እሴቱ %(show_value)d ነው)።"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:491
+#, python-format
+msgid ""
+"Ensure this value has at most %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at most %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+"ይህ እሴት ቢበዛ %(limit_value)d ፊደል ወይም ቁጥር እንዳለው ያረጋግጡ (እሴቱ %(show_value)d ነው)።"
+msgstr[1] ""
+"ይህ እሴት ቢበዛ %(limit_value)d ፊደሎች ወይም ቁጥሮች እንዳሉት ያረጋግጡ (እሴቱ %(show_value)d ነው)።"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:514
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:366
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:405
+msgid "Enter a number."
+msgstr "ቁጥር ያስገቡ።"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:516
+#, python-format
+msgid "Ensure that there are no more than %(max)s digit in total."
+msgid_plural "Ensure that there are no more than %(max)s digits in total."
+msgstr[0] "በጠቅላላው ከ %(max)s በላይ አሃዝ አለመኖሩን ያረጋግጡ።"
+msgstr[1] "በጠቅላላው ከ %(max)s በላይ አሃዞች አለመኖራቸውን ያረጋግጡ።"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:521
+#, python-format
+msgid "Ensure that there are no more than %(max)s decimal place."
+msgid_plural "Ensure that there are no more than %(max)s decimal places."
+msgstr[0] "ከ %(max)s በላይ የአስርዮሽ ቦታ አለመኖሩን ያረጋግጡ።"
+msgstr[1] "ከ %(max)s በላይ የአስርዮሽ ቦታዎች አለመኖራቸውን ያረጋግጡ።"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:526
+#, python-format
+msgid ""
+"Ensure that there are no more than %(max)s digit before the decimal point."
+msgid_plural ""
+"Ensure that there are no more than %(max)s digits before the decimal point."
+msgstr[0] "ከአስርዮሽ ነጥቡ በፊት ከ %(max)s በላይ አሃዝ አለመኖሩን ያረጋግጡ።"
+msgstr[1] "ከአስርዮሽ ነጥቡ በፊት ከ %(max)s በላይ አሃዞች አለመኖራቸውን ያረጋግጡ።"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:597
+#, python-format
+msgid ""
+"File extension “%(extension)s” is not allowed. Allowed extensions are: "
+"%(allowed_extensions)s."
+msgstr ""
+"የፋይል ቅጥያ “%(extension)s” አይፈቀድም። የተፈቀዱ ቅጥያዎች: %(allowed_extensions)s ናቸው።"
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:659
+msgid "Null characters are not allowed."
+msgstr "የባዶ ቁምፊዎች አይፈቀዱም።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/base.py:1600
+#: venv/lib/python3.12/site-packages/django/forms/models.py:908
+#, fuzzy
+#| msgid "Brand"
+msgid "and"
+msgstr "እና"
+
+#: venv/lib/python3.12/site-packages/django/db/models/base.py:1602
+#, python-format
+msgid "%(model_name)s with this %(field_labels)s already exists."
+msgstr ""
+"%(model_name)s ከዚህ %(field_labels)s ጋር አስቀድሞ አለ።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/constraints.py:22
+#, python-format
+msgid "Constraint “%(name)s” is violated."
+msgstr "ገደብ “%(name)s” ተጥሷል።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:134
+#, python-format
+msgid "Value %(value)r is not a valid choice."
+msgstr "እሴት %(value)r ትክክለኛ ምርጫ አይደለም።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:135
+#, fuzzy
+#| msgid "This action cannot be undone."
+msgid "This field cannot be null."
+msgstr "ይህ መስክ ባዶ ሊሆን አይችልም።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:136
+#, fuzzy
+#| msgid "This action cannot be undone."
+msgid "This field cannot be blank."
+msgstr "ይህ መስክ ባዶ ሊሆን አይችልም።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:137
+#, python-format
+msgid "%(model_name)s with this %(field_label)s already exists."
+msgstr ""
+"%(model_name)s ከዚህ %(field_label)s ጋር አስቀድሞ አለ።"
+
+#. Translators: The 'lookup_type' is one of 'date', 'year' or
+#. 'month'. Eg: "Title must be unique for pub_date year"
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:141
+#, python-format
+msgid ""
+"%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
+msgstr "%(field_label)s ለ %(date_field_label)s %(lookup_type)s ልዩ መሆን አለበት።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:180
+#, python-format
+msgid "Field of type: %(field_type)s"
+msgstr "የመስክ አይነት: %(field_type)s"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1162
+#, python-format
+msgid "“%(value)s” value must be either True or False."
+msgstr "“%(value)s” እሴት እውነት ወይም ውሸት መሆን አለበት።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1163
+#, python-format
+msgid "“%(value)s” value must be either True, False, or None."
+msgstr "“%(value)s” እሴት እውነት፣ ውሸት ወይም ባዶ መሆን አለበት።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1165
+msgid "Boolean (Either True or False)"
+msgstr "ቦሊያን (እውነት ወይም ውሸት)"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1215
+#, python-format
+msgid "String (up to %(max_length)s)"
+msgstr "ሕብረቁምፊ (እስከ %(max_length)s)"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1217
+msgid "String (unlimited)"
+msgstr "ሕብረቁምፊ (ያልተገደበ)"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1326
+msgid "Comma-separated integers"
+msgstr "በነጠላ ሰረዝ የተለዩ ሙሉ ቁጥሮች"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1427
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid date format. It must be in YYYY-MM-DD "
+"format."
+msgstr ""
+"“%(value)s” እሴት የተሳሳተ የቀን ቅርጸት አለው። በ YYYY-MM-DD ቅርጸት መሆን አለበት።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1431
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1566
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD) but it is an invalid "
+"date."
+msgstr ""
+"“%(value)s” እሴት ትክክለኛ ቅርጸት (YYYY-MM-DD) አለው ግን ትክክለኛ ያልሆነ ቀን ነው።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1435
+msgid "Date (without time)"
+msgstr "ቀን (ሰዓት የሌለው)"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1562
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD "
+"HH:MM[:ss[.uuuuuu]][TZ] format."
+msgstr ""
+"“%(value)s” እሴት የተሳሳተ ቅርጸት አለው። በ YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ] ቅርጸት መሆን አለበት።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1570
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
+"[TZ]) but it is an invalid date/time."
+msgstr ""
+"“%(value)s” እሴት ትክክለኛ ቅርጸት (YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ]) አለው ግን ትክክለኛ ያልሆነ ቀን/ሰዓት ነው።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1575
+msgid "Date (with time)"
+msgstr "ቀን (ሰዓት ያለው)"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1702
+#, python-format
+msgid "“%(value)s” value must be a decimal number."
+msgstr "“%(value)s” እሴት የአስርዮሽ ቁጥር መሆን አለበት።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1704
+msgid "Decimal number"
+msgstr "የአስርዮሽ ቁጥር"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1864
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in [DD] "
+"[[HH:]MM:]ss[.uuuuuu] format."
+msgstr ""
+"“%(value)s” እሴት የተሳሳተ ቅርጸት አለው። በ [DD] [[HH:]MM:]ss[.uuuuuu] ቅርጸት መሆን አለበት።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1868
+#, fuzzy
+#| msgid "Description"
+msgid "Duration"
+msgstr "የጊዜ ርዝመት"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1920
+#, fuzzy
+#| msgid "Email Address"
+msgid "Email address"
+msgstr "የኢሜይል አድራሻ"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1945
+msgid "File path"
+msgstr "የፋይል መንገድ"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2023
+#, python-format
+msgid "“%(value)s” value must be a float."
+msgstr "“%(value)s” እሴት ተንሳፋፊ ነጥብ ቁጥር መሆን አለበት።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2025
+msgid "Floating point number"
+msgstr "ተንሳፋፊ ነጥብ ቁጥር"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2065
+#, python-format
+msgid "“%(value)s” value must be an integer."
+msgstr "“%(value)s” እሴት ሙሉ ቁጥር መሆን አለበት።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2067
+msgid "Integer"
+msgstr "ሙሉ ቁጥር"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2163
+msgid "Big (8 byte) integer"
+msgstr "ትልቅ (8 ባይት) ሙሉ ቁጥር"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2180
+msgid "Small integer"
+msgstr "ትንሽ ሙሉ ቁጥር"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2188
+msgid "IPv4 address"
+msgstr "አይፒቪ4 አድራሻ"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2219
+#, fuzzy
+#| msgid "Email Address"
+msgid "IP address"
+msgstr "የአይፒ አድራሻ"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2310
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2311
+#, python-format
+msgid "“%(value)s” value must be either None, True or False."
+msgstr "“%(value)s” እሴት ባዶ፣ እውነት ወይም ውሸት መሆን አለበት።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2313
+msgid "Boolean (Either True, False or None)"
+msgstr "ቦሊያን (እውነት፣ ውሸት ወይም ባዶ)"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2364
+msgid "Positive big integer"
+msgstr "አዎንታዊ ትልቅ ሙሉ ቁጥር"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2379
+msgid "Positive integer"
+msgstr "አዎንታዊ ሙሉ ቁጥር"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2394
+msgid "Positive small integer"
+msgstr "አዎንታዊ ትንሽ ሙሉ ቁጥር"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2410
+#, python-format
+msgid "Slug (up to %(max_length)s)"
+msgstr "ስላግ (እስከ %(max_length)s)"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2446
+msgid "Text"
+msgstr "ጽሑፍ"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2526
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
+"format."
+msgstr ""
+"“%(value)s” እሴት የተሳሳተ ቅርጸት አለው። በ HH:MM[:ss[.uuuuuu]] ቅርጸት መሆን አለበት።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2530
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
+"invalid time."
+msgstr ""
+"“%(value)s” እሴት ትክክለኛ ቅርጸት (HH:MM[:ss[.uuuuuu]]) አለው ግን ትክክለኛ ያልሆነ ሰዓት ነው።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2534
+msgid "Time"
+msgstr "ሰዓት"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2642
+msgid "URL"
+msgstr "ዩአርኤል"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2666
+msgid "Raw binary data"
+msgstr "ጥሬ ሁለትዮሽ መረጃ"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2731
+#, python-format
+msgid "“%(value)s” is not a valid UUID."
+msgstr "“%(value)s” ትክክለኛ UUID አይደለም።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2733
+msgid "Universally unique identifier"
+msgstr "ሁለንተናዊ ልዩ መለያ"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/files.py:244
+msgid "File"
+msgstr "ፋይል"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/files.py:420
+msgid "Image"
+msgstr "ምስል"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/json.py:24
+msgid "A JSON object"
+msgstr "የ JSON ነገር"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/json.py:26
+msgid "Value must be valid JSON."
+msgstr "እሴቱ ትክክለኛ JSON መሆን አለበት።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:979
+#, python-format
+msgid "%(model)s instance with %(field)s %(value)r is not a valid choice."
+msgstr ""
+"%(model)s ቅጂ ከ %(field)s %(value)r ጋር ትክክለኛ ምርጫ አይደለም።"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:982
+msgid "Foreign Key (type determined by related field)"
+msgstr "የውጭ ቁልፍ (አይነቱ ተዛማጅ በሆነው መስክ የሚወሰን)"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:1276
+msgid "One-to-one relationship"
+msgstr "አንድ-ለ-አንድ ግንኙነት"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:1333
+#, python-format
+msgid "%(from)s-%(to)s relationship"
+msgstr "%(from)s-%(to)s ግንኙነት"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:1335
+#, python-format
+msgid "%(from)s-%(to)s relationships"
+msgstr "%(from)s-%(to)s ግንኙነቶች"
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:1383
+msgid "Many-to-many relationship"
+msgstr "ብዙ-ለ-ብዙ ግንኙነት"
+
+#. Translators: If found as last label character, these punctuation
+#. characters will prevent the default label_suffix to be appended to the label
+#: venv/lib/python3.12/site-packages/django/forms/boundfield.py:185
+msgid ":?.!"
+msgstr ":?.!"
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:95
+msgid "This field is required."
+msgstr "ይህ መስክ ያስፈልጋል።"
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:315
+msgid "Enter a whole number."
+msgstr "ሙሉ ቁጥር ያስገቡ።"
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:486
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:1267
+msgid "Enter a valid date."
+msgstr "ትክክለኛ ቀን ያስገቡ።"
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:509
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:1268
+msgid "Enter a valid time."
+msgstr "ትክክለኛ ሰዓት ያስገቡ።"
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:536
+msgid "Enter a valid date/time."
+msgstr "ትክክለኛ ቀን/ሰዓት ያስገቡ።"
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:570
+msgid "Enter a valid duration."
+msgstr "ትክክለኛ የጊዜ ርዝመት ያስገቡ።"
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:571
+#, python-brace-format
+msgid "The number of days must be between {min_days} and {max_days}."
+msgstr "የቀኖች ብዛት በ {min_days} እና {max_days} መካከል መሆን አለበት።"
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:640
+msgid "No file was submitted. Check the encoding type on the form."
+msgstr "ምንም ፋይል አልተላከም። በቅጹ ላይ ያለውን የምልክት አይነት (encoding) ያረጋግጡ።"
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:641
+msgid "No file was submitted."
+msgstr "ምንም ፋይል አልተላከም።"
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:642
+msgid "The submitted file is empty."
+msgstr "የተላከው ፋይል ባዶ ነው።"
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:644
+#, python-format
+msgid "Ensure this filename has at most %(max)d character (it has %(length)d)."
+msgid_plural ""
+"Ensure this filename has at most %(max)d characters (it has %(length)d)."
+msgstr[0] ""
+"ይህ የፋይል ስም ቢበዛ %(max)d ፊደል ወይም ቁጥር እንዳለው ያረጋግጡ (እሴቱ %(length)d ነው)።"
+msgstr[1] ""
+"ይህ የፋይል ስም ቢበዛ %(max)d ፊደሎች ወይም ቁጥሮች እንዳሉት ያረጋግጡ (እሴቱ %(length)d ነው)።"
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:649
+msgid "Please either submit a file or check the clear checkbox, not both."
+msgstr "እባክዎ ፋይል ይላኩ ወይም የጸዳ ሳጥኑን ይምረጡ፣ ሁለቱንም አይምረጡ።"
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:717
+msgid ""
+"Upload a valid image. The file you uploaded was either not an image or a "
+"corrupted image."
+msgstr ""
+"ትክክለኛ ምስል ይስቀሉ። የሰቀሉት ፋይል ምስል ላይሆን ወይም የተበላሸ ሊሆን ይችላል።"
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:889
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:975
+#: venv/lib/python3.12/site-packages/django/forms/models.py:1592
+#, python-format
+msgid "Select a valid choice. %(value)s is not one of the available choices."
+msgstr "ትክክለኛ ምርጫ ይምረጡ። %(value)s ከሚገኙት ምርጫዎች አንዱ አይደለም።"
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:977
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:1096
+#: venv/lib/python3.12/site-packages/django/forms/models.py:1590
+msgid "Enter a list of values."
+msgstr "የእሴቶች ዝርዝር ያስገቡ።"
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:1097
+msgid "Enter a complete value."
+msgstr "ሙሉ እሴት ያስገቡ።"
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:1339
+msgid "Enter a valid UUID."
+msgstr "ትክክለኛ ዩዩአይዲ (UUID) ያስገቡ።"
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:1369
+msgid "Enter a valid JSON."
+msgstr "ትክክለኛ ጄሰን (JSON) ያስገቡ።"
+
+#. Translators: This is the default suffix added to form field labels
+#: venv/lib/python3.12/site-packages/django/forms/forms.py:97
+msgid ":"
+msgstr ":"
+
+#: venv/lib/python3.12/site-packages/django/forms/forms.py:239
+#, python-format
+msgid "(Hidden field %(name)s) %(error)s"
+msgstr "(የተደበቀ መስክ %(name)s) %(error)s"
+
+#: venv/lib/python3.12/site-packages/django/forms/formsets.py:61
+#, python-format
+msgid ""
+"ManagementForm data is missing or has been tampered with. Missing fields: "
+"%(field_names)s. You may need to file a bug report if the issue persists."
+msgstr ""
+"የማኔጅመንት ፎርም (ManagementForm) መረጃ ጠፍቷል ወይም ተዛብቷል። የጎደሉ መስኮች: %(field_names)s። "
+"ችግሩ ከቀጠለ የሳንካ ሪፖርት (bug report) ማቅረብ ሊያስፈልግዎ ይችላል።"
+
+#: venv/lib/python3.12/site-packages/django/forms/formsets.py:65
+#, python-format
+msgid "Please submit at most %(num)d form."
+msgid_plural "Please submit at most %(num)d forms."
+msgstr[0] "እባክዎ ቢበዛ %(num)d ቅጽ ይላኩ።"
+msgstr[1] "እባክዎ ቢበዛ %(num)d ቅጾች ይላኩ።"
+
+#: venv/lib/python3.12/site-packages/django/forms/formsets.py:70
+#, python-format
+msgid "Please submit at least %(num)d form."
+msgid_plural "Please submit at least %(num)d forms."
+msgstr[0] "እባክዎ ቢያንስ %(num)d ቅጽ ይላኩ።"
+msgstr[1] "እባክዎ ቢያንስ %(num)d ቅጾች ይላኩ።"
+
+#: venv/lib/python3.12/site-packages/django/forms/formsets.py:484
+#: venv/lib/python3.12/site-packages/django/forms/formsets.py:491
+msgid "Order"
+msgstr "ቅደም ተከተል"
+
+#: venv/lib/python3.12/site-packages/django/forms/models.py:901
+#, python-format
+msgid "Please correct the duplicate data for %(field)s."
+msgstr "እባክዎ ለ %(field)s የተደጋገመውን መረጃ ያስተካክሉ።"
+
+#: venv/lib/python3.12/site-packages/django/forms/models.py:906
+#, python-format
+msgid "Please correct the duplicate data for %(field)s, which must be unique."
+msgstr "እባክዎ ለ %(field)s ልዩ መሆን ያለበትን የተደጋገመ መረጃ ያስተካክሉ።"
+
+#: venv/lib/python3.12/site-packages/django/forms/models.py:913
+#, python-format
+msgid ""
+"Please correct the duplicate data for %(field_name)s which must be unique "
+"for the %(lookup)s in %(date_field)s."
+msgstr ""
+"እባክዎ ለ %(field_name)s የተደጋገመውን መረጃ ያስተካክሉ። ይህም በ %(date_field)s ውስጥ ለ %(lookup)s ልዩ መሆን አለበት።"
+
+#: venv/lib/python3.12/site-packages/django/forms/models.py:922
+msgid "Please correct the duplicate values below."
+msgstr "እባክዎ ከታች ያሉትን የተደጋገሙ እሴቶች ያስተካክሉ።"
+
+#: venv/lib/python3.12/site-packages/django/forms/models.py:1359
+msgid "The inline value did not match the parent instance."
+msgstr "የውስጠኛው እሴት ከወላጅ ቅጂው ጋር አይመሳሰልም።"
+
+#: venv/lib/python3.12/site-packages/django/forms/models.py:1450
+msgid "Select a valid choice. That choice is not one of the available choices."
+msgstr "ትክክለኛ ምርጫ ይምረጡ። ያ ምርጫ ከሚገኙት ምርጫዎች አንዱ አይደለም።"
+
+#: venv/lib/python3.12/site-packages/django/forms/models.py:1594
+#, python-format
+msgid "“%(pk)s” is not a valid value."
+msgstr "“%(pk)s” ትክክለኛ እሴት አይደለም።"
+
+#: venv/lib/python3.12/site-packages/django/forms/utils.py:229
+#, python-format
+msgid ""
+"%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; it "
+"may be ambiguous or it may not exist."
+msgstr ""
+"%(datetime)s በጊዜ ሰቅ %(current_timezone)s ውስጥ ሊተረጎም አልቻለም፤ ግልጽ ያልሆነ ወይም የሌለ ሊሆን "
+"ይችላል።"
+
+#: venv/lib/python3.12/site-packages/django/forms/widgets.py:527
+msgid "Clear"
+msgstr "አጥፋ"
+
+#: venv/lib/python3.12/site-packages/django/forms/widgets.py:528
+#, fuzzy
+#| msgid "Current Images"
+msgid "Currently"
+msgstr "አሁን"
+
+#: venv/lib/python3.12/site-packages/django/forms/widgets.py:529
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Change"
+msgstr "ቀይር"
+
+#: venv/lib/python3.12/site-packages/django/forms/widgets.py:866
+msgid "Unknown"
+msgstr "ያልታወቀ"
+
+#: venv/lib/python3.12/site-packages/django/forms/widgets.py:867
+msgid "Yes"
+msgstr "አዎ"
+
+#: venv/lib/python3.12/site-packages/django/forms/widgets.py:868
+msgid "No"
+msgstr "አይ"
+
+#. Translators: Please do not add spaces around commas.
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:873
+msgid "yes,no,maybe"
+msgstr "አዎ፣አይ፣ምናልባት"
+
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:903
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:920
+#, python-format
+msgid "%(size)d byte"
+msgid_plural "%(size)d bytes"
+msgstr[0] "%(size)d ባይት"
+msgstr[1] "%(size)d ባይት"
+
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:922
+#, python-format
+msgid "%s KB"
+msgstr "%s ኪ.ባ."
+
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:924
+#, python-format
+msgid "%s MB"
+msgstr "%s ሜ.ባ."
+
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:926
+#, python-format
+msgid "%s GB"
+msgstr "%s ጊ.ባ."
+
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:928
+#, python-format
+msgid "%s TB"
+msgstr "%s ቴ.ባ."
+
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:930
+#, python-format
+msgid "%s PB"
+msgstr "%s ፒ.ባ."
+
+#: venv/lib/python3.12/site-packages/django/utils/dateformat.py:74
+msgid "p.m."
+msgstr "ከሰዓት"
+
+#: venv/lib/python3.12/site-packages/django/utils/dateformat.py:75
+msgid "a.m."
+msgstr "ጥዋት"
+
+#: venv/lib/python3.12/site-packages/django/utils/dateformat.py:80
+msgid "PM"
+msgstr "ከሰዓት"
+
+#: venv/lib/python3.12/site-packages/django/utils/dateformat.py:81
+msgid "AM"
+msgstr "ጥዋት"
+
+#: venv/lib/python3.12/site-packages/django/utils/dateformat.py:153
+msgid "midnight"
+msgstr "እኩለ ሌሊት"
+
+#: venv/lib/python3.12/site-packages/django/utils/dateformat.py:155
+msgid "noon"
+msgstr "እኩለ ቀን"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:7
+msgid "Monday"
+msgstr "ሰኞ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:8
+msgid "Tuesday"
+msgstr "ማክሰኞ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:9
+msgid "Wednesday"
+msgstr "ረቡዕ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:10
+msgid "Thursday"
+msgstr "ሐሙስ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:11
+msgid "Friday"
+msgstr "አርብ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:12
+msgid "Saturday"
+msgstr "ቅዳሜ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:13
+msgid "Sunday"
+msgstr "እሁድ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:16
+#, fuzzy
+#| msgid "on"
+msgid "Mon"
+msgstr "ሰኞ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:17
+msgid "Tue"
+msgstr "ማክ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:18
+msgid "Wed"
+msgstr "ረቡ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:19
+msgid "Thu"
+msgstr "ሐሙ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:20
+msgid "Fri"
+msgstr "አርብ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:21
+msgid "Sat"
+msgstr "ቅዳ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:22
+msgid "Sun"
+msgstr "እሁ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:25
+msgid "January"
+msgstr "ጥር"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:26
+msgid "February"
+msgstr "የካቲት"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:27
+msgid "March"
+msgstr "መጋቢት"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:28
+msgid "April"
+msgstr "ሚያዝያ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:29
+msgid "May"
+msgstr "ግንቦት"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:30
+msgid "June"
+msgstr "ሰኔ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:31
+msgid "July"
+msgstr "ሐምሌ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:32
+msgid "August"
+msgstr "ነሐሴ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:33
+msgid "September"
+msgstr "መስከረም"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:34
+msgid "October"
+msgstr "ጥቅምት"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:35
+#, fuzzy
+#| msgid "Phone Number"
+msgid "November"
+msgstr "ህዳር"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:36
+msgid "December"
+msgstr "ታህሳስ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:39
+msgid "jan"
+msgstr "ጥር"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:40
+msgid "feb"
+msgstr "የካ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:41
+#, fuzzy
+#| msgid "Amharic"
+msgid "mar"
+msgstr "መጋ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:42
+msgid "apr"
+msgstr "ሚያ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:43
+msgid "may"
+msgstr "ግን"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:44
+msgid "jun"
+msgstr "ሰኔ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:45
+msgid "jul"
+msgstr "ሐም"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:46
+msgid "aug"
+msgstr "ነሐ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:47
+msgid "sep"
+msgstr "መስ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:48
+#, fuzzy
+#| msgid "Contact"
+msgid "oct"
+msgstr "ጥቅ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:49
+msgid "nov"
+msgstr "ህዳ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:50
+msgid "dec"
+msgstr "ታህ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:53
+msgctxt "abbrev. month"
+msgid "Jan."
+msgstr "ጥር"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:54
+msgctxt "abbrev. month"
+msgid "Feb."
+msgstr "የካ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:55
+msgctxt "abbrev. month"
+msgid "March"
+msgstr "መጋቢት"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:56
+msgctxt "abbrev. month"
+msgid "April"
+msgstr "ሚያዝያ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:57
+msgctxt "abbrev. month"
+msgid "May"
+msgstr "ግንቦት"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:58
+msgctxt "abbrev. month"
+msgid "June"
+msgstr "ሰኔ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:59
+msgctxt "abbrev. month"
+msgid "July"
+msgstr "ሐምሌ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:60
+msgctxt "abbrev. month"
+msgid "Aug."
+msgstr "ነሐሴ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:61
+msgctxt "abbrev. month"
+msgid "Sept."
+msgstr "መስከረም"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:62
+msgctxt "abbrev. month"
+msgid "Oct."
+msgstr "ጥቅምት"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:63
+msgctxt "abbrev. month"
+msgid "Nov."
+msgstr "ህዳር"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:64
+msgctxt "abbrev. month"
+msgid "Dec."
+msgstr "ታህሳስ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:67
+msgctxt "alt. month"
+msgid "January"
+msgstr "ጥር"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:68
+msgctxt "alt. month"
+msgid "February"
+msgstr "የካቲት"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:69
+msgctxt "alt. month"
+msgid "March"
+msgstr "መጋቢት"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:70
+msgctxt "alt. month"
+msgid "April"
+msgstr "ሚያዝያ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:71
+msgctxt "alt. month"
+msgid "May"
+msgstr "ግንቦት"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:72
+msgctxt "alt. month"
+msgid "June"
+msgstr "ሰኔ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:73
+msgctxt "alt. month"
+msgid "July"
+msgstr "ሐምሌ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:74
+msgctxt "alt. month"
+msgid "August"
+msgstr "ነሐሴ"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:75
+msgctxt "alt. month"
+msgid "September"
+msgstr "መስከረም"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:76
+msgctxt "alt. month"
+msgid "October"
+msgstr "ጥቅምት"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:77
+#, fuzzy
+#| msgid "Phone Number"
+msgctxt "alt. month"
+msgid "November"
+msgstr "ህዳር"
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:78
+msgctxt "alt. month"
+msgid "December"
+msgstr "ታህሳስ"
+
+#: venv/lib/python3.12/site-packages/django/utils/ipv6.py:20
+msgid "This is not a valid IPv6 address."
+msgstr "ይህ ትክክለኛ አይፒቪ6 አድራሻ አይደለም።"
+
+#: venv/lib/python3.12/site-packages/django/utils/text.py:76
+#, python-format
+msgctxt "String to return when truncating text"
+msgid "%(truncated_text)s…"
+msgstr "%(truncated_text)s..."
+
+#: venv/lib/python3.12/site-packages/django/utils/text.py:287
+msgid "or"
+msgstr "ወይም"
+
+#. Translators: This string is used as a separator between list elements
+#: venv/lib/python3.12/site-packages/django/utils/text.py:306
+#: venv/lib/python3.12/site-packages/django/utils/timesince.py:135
+msgid ", "
+msgstr "፣ "
+
+#: venv/lib/python3.12/site-packages/django/utils/timesince.py:8
+#, python-format
+msgid "%(num)d year"
+msgid_plural "%(num)d years"
+msgstr[0] "%(num)d ዓመት"
+msgstr[1] "%(num)d ዓመታት"
+
+#: venv/lib/python3.12/site-packages/django/utils/timesince.py:9
+#, python-format
+msgid "%(num)d month"
+msgid_plural "%(num)d months"
+msgstr[0] "%(num)d ወር"
+msgstr[1] "%(num)d ወራት"
+
+#: venv/lib/python3.12/site-packages/django/utils/timesince.py:10
+#, python-format
+msgid "%(num)d week"
+msgid_plural "%(num)d weeks"
+msgstr[0] "%(num)d ሳምንት"
+msgstr[1] "%(num)d ሳምንታት"
+
+#: venv/lib/python3.12/site-packages/django/utils/timesince.py:11
+#, python-format
+msgid "%(num)d day"
+msgid_plural "%(num)d days"
+msgstr[0] "%(num)d ቀን"
+msgstr[1] "%(num)d ቀናት"
+
+#: venv/lib/python3.12/site-packages/django/utils/timesince.py:12
+#, python-format
+msgid "%(num)d hour"
+msgid_plural "%(num)d hours"
+msgstr[0] "%(num)d ሰዓት"
+msgstr[1] "%(num)d ሰዓታት"
+
+#: venv/lib/python3.12/site-packages/django/utils/timesince.py:13
+#, python-format
+msgid "%(num)d minute"
+msgid_plural "%(num)d minutes"
+msgstr[0] "%(num)d ደቂቃ"
+msgstr[1] "%(num)d ደቂቃዎች"
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:29
+msgid "Forbidden"
+msgstr "የተከለከለ"
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:30
+msgid "CSRF verification failed. Request aborted."
+msgstr "የሲኤስአርኤፍ (CSRF) ማረጋገጫ አልተሳካም። ጥያቄው ተቋርጧል።"
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:34
+msgid ""
+"You are seeing this message because this HTTPS site requires a “Referer "
+"header” to be sent by your web browser, but none was sent. This header is "
+"required for security reasons, to ensure that your browser is not being "
+"hijacked by third parties."
+msgstr ""
+"ይህንን መልዕክት እያዩ ያሉት ይህ የኤችቲቲፒኤስ (HTTPS) ድረ-ገጽ የ“Referer header”ን አድራሻ ከድር አሳሽዎ "
+"መላክን ስለሚፈልግ ግን አድራሻው ስላልተላከ ነው። ይህ አድራሻ ለደህንነት ምክንያቶች ያስፈልጋል።"
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:40
+msgid ""
+"If you have configured your browser to disable “Referer” headers, please re-"
+"enable them, at least for this site, or for HTTPS connections, or for “same-"
+"origin” requests."
+msgstr ""
+"ድር አሳሽዎ የ“Referer” አድራሻዎችን እንዳይልክ ካዋቀሩት፣ እባክዎ እንደገና ያንቁት፤ ቢያንስ ለዚህ ድረ-ገጽ፣ ለኤችቲቲፒኤስ "
+"ግንኙነቶች ወይም ለ“same-origin” ጥያቄዎች።"
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:45
+msgid ""
+"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or "
+"including the “Referrer-Policy: no-referrer” header, please remove them. The "
+"CSRF protection requires the “Referer” header to do strict referer checking. "
+"If you’re concerned about privacy, use alternatives like <a "
+"rel=\"noreferrer\" …> for links to third-party sites."
+msgstr ""
+"የ<meta name=\"referrer\" content=\"no-referrer\"> ታግ ወይም የ“Referrer-Policy: no-referrer” "
+"አድራሻን የሚጠቀሙ ከሆነ፣ እባክዎ ያስወግዱት። የሲኤስአርኤፍ ጥበቃ ጥብቅ ማረጋገጫ ለማድረግ የ“Referer” አድራሻውን "
+"ይፈልጋል። ስለግላዊነትዎ የሚያሳስብዎት ከሆነ ወደ ሌሎች ድረ-ገጾች ለመሄድ <a rel=\"noreferrer\" …>ን "
+"ይጠቀሙ።"
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:54
+msgid ""
+"You are seeing this message because this site requires a CSRF cookie when "
+"submitting forms. This cookie is required for security reasons, to ensure "
+"that your browser is not being hijacked by third parties."
+msgstr ""
+"ይህንን መልዕክት እያዩ ያሉት ይህ ድረ-ገጽ ቅጾችን ሲያስገቡ የሲኤስአርኤፍ ኩኪን ስለሚፈልግ ነው። ይህ ኩኪ "
+"የሚያስፈልገው ለደህንነት ሲባል የድር አሳሽዎ በሌሎች ወገኖች እንዳይጠለፍ ለማረጋገጥ ነው።"
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:60
+msgid ""
+"If you have configured your browser to disable cookies, please re-enable "
+"them, at least for this site, or for “same-origin” requests."
+msgstr ""
+"ድር አሳሽዎን ኩኪዎችን እንዳይጠቀም ካዋቀሩት፣ እባክዎ እንደገና ያንቁት፤ ቢያንስ ለዚህ ድረ-ገጽ ወይም ለ“same-origin” "
+"ጥያቄዎች።"
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:66
+msgid "More information is available with DEBUG=True."
+msgstr "ተጨማሪ መረጃ በ DEBUG=True ይገኛል።"
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:44
+msgid "No year specified"
+msgstr "ምንም ዓመት አልተገለጸም።"
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:64
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:115
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:214
+msgid "Date out of range"
+msgstr "ቀን ከክልል ውጭ ነው"
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:94
+msgid "No month specified"
+msgstr "ምንም ወር አልተገለጸም።"
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:147
+msgid "No day specified"
+msgstr "ምንም ቀን አልተገለጸም።"
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:194
+msgid "No week specified"
+msgstr "ምንም ሳምንት አልተገለጸም።"
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:353
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:384
+#, python-format
+msgid "No %(verbose_name_plural)s available"
+msgstr "ምንም %(verbose_name_plural)s አይገኝም።"
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:680
+#, python-format
+msgid ""
+"Future %(verbose_name_plural)s not available because "
+"%(class_name)s.allow_future is False."
+msgstr ""
+"የወደፊት %(verbose_name_plural)s አይገኝም ምክንያቱም %(class_name)s.allow_future ውሸት ነው።"
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:720
+#, python-format
+msgid "Invalid date string “%(datestr)s” given format “%(format)s”"
+msgstr "ከተሰጠው ቅርጸት “%(format)s” ጋር ሲነጻጸር የተሳሳተ የቀን ሕብረቁምፊ “%(datestr)s”።"
+
+#: venv/lib/python3.12/site-packages/django/views/generic/detail.py:56
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr "ጥያቄውን የሚመጥን ምንም %(verbose_name)s አልተገኘም።"
+
+#: venv/lib/python3.12/site-packages/django/views/generic/list.py:70
+msgid "Page is not “last”, nor can it be converted to an int."
+msgstr "ገጹ “last” አይደለም፣ ወይም ወደ ሙሉ ቁጥር ሊቀየር አይችልም።"
+
+#: venv/lib/python3.12/site-packages/django/views/generic/list.py:77
+#, python-format
+msgid "Invalid page (%(page_number)s): %(message)s"
+msgstr "የተሳሳተ ገጽ (%(page_number)s): %(message)s"
+
+#: venv/lib/python3.12/site-packages/django/views/generic/list.py:173
+#, python-format
+msgid "Empty list and “%(class_name)s.allow_empty” is False."
+msgstr "ባዶ ዝርዝር እና “%(class_name)s.allow_empty” ውሸት ነው።"
+
+#: venv/lib/python3.12/site-packages/django/views/static.py:49
+msgid "Directory indexes are not allowed here."
+msgstr "የማውጫ ማውጫዎች እዚህ አይፈቀዱም።"
+
+#: venv/lib/python3.12/site-packages/django/views/static.py:51
+#, python-format
+msgid "“%(path)s” does not exist"
+msgstr "“%(path)s” የለም"
+
+#: venv/lib/python3.12/site-packages/django/views/static.py:68
+#: venv/lib/python3.12/site-packages/django/views/templates/directory_index.html:8
+#: venv/lib/python3.12/site-packages/django/views/templates/directory_index.html:11
+#, python-format
+msgid "Index of %(directory)s"
+msgstr "የ %(directory)s ማውጫ"
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:7
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:204
+msgid "The install worked successfully! Congratulations!"
+msgstr "መጫኑ በተሳካ ሁኔታ ተጠናቋል! እንኳን ደስ አሎት!"
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:206
+#, python-format
+msgid ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+msgstr ""
+"ለ Django %(version)s የ<a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">የመልቀቂያ ማስታወሻዎችን</a> ይመልከቱ።"
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:208
+#, python-format
+msgid ""
+"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" "
+"rel=\"noopener\">DEBUG=True</a> is in your settings file and you have not "
+"configured any URLs."
+msgstr ""
+"ይህንን ገጽ እያዩ ያሉት በቅንብሮች ፋይልዎ ውስጥ <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" "
+"rel=\"noopener\">DEBUG=True</a> ስለሆነ እና ምንም URL ስላላዋቀሩ ነው።"
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:217
+msgid "Django Documentation"
+msgstr "የዲጃንጎ (Django) ሰነዶች"
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:218
+msgid "Topics, references, &amp; how-to’s"
+msgstr "ርዕሶች፣ ማጣቀሻዎች እና እንዴት-እንዴት ማድረግ እንደሚቻል"
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:226
+msgid "Tutorial: A Polling App"
+msgstr "መማሪያ: የሕዝብ አስተያየት መስጫ መተግበሪያ"
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:227
+msgid "Get started with Django"
+msgstr "በዲጃንጎ (Django) ይጀምሩ"
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:235
+#, fuzzy
+#| msgid "Join Our Community!"
+msgid "Django Community"
+msgstr "የዲጃንጎ (Django) ማህበረሰብ"
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:236
+msgid "Connect, get help, or contribute"
+msgstr "ይገናኙ፣ እርዳታ ያግኙ ወይም አስተዋጽኦ ያድርጉ"

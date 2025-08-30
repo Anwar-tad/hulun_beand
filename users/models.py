@@ -26,14 +26,14 @@ class Product(models.Model):
         ('Refurbished', _('Refurbished')),
     ]
   
-    name = models.CharField(max_length=200, verbose_name=" ")
-    description = models.TextField(verbose_name=" ")
-    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=" ()")
+    name = models.CharField(max_length=200, verbose_name="Product Name")
+    description = models.TextField(verbose_name="Description")
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Price (in Birr)")
     
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=False, verbose_name="")
-    brand = models.CharField(max_length=100, blank=True, verbose_name=" (Brand)")
-    condition = models.CharField(max_length=20, choices=CONDITION_CHOICES, blank=True, verbose_name=_("Condition"))
-    location = models.CharField(max_length=200, blank=True, verbose_name=" ")
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=False, verbose_name="Category")
+    brand = models.CharField(max_length=100, blank=True, verbose_name="Brand")
+    condition = models.CharField(max_length=20, choices=CONDITION_CHOICES, blank=True, verbose_name="Condition")
+    location = models.CharField(max_length=200, blank=True, verbose_name="Location")
     
     seller = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="")
     created_at = models.DateTimeField(auto_now_add=True)
