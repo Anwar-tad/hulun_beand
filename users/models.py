@@ -12,30 +12,28 @@ from django.utils.translation import gettext_lazy as _
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
-
     class Meta:
-        verbose_name_plural = "Categories"
-
+        verbose_name_plural = _("Categories")
     def __str__(self):
         return self.name
 
 class Product(models.Model):
-    CONDITION_CHOICES =[
+    CONDITION_CHOICES = [
         ('New', _('Brand New')),
         ('Used', _('Used')),
         ('Refurbished', _('Refurbished')),
     ]
   
-    name = models.CharField(max_length=200, verbose_name="Product Name")
-    description = models.TextField(verbose_name="Description")
-    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Price (in Birr)")
+    name = models.CharField(max_length=200, verbose_name=_("Product Name"))
+    description = models.TextField(verbose_name=_("Description"))
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Price (in Birr)"))
     
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=False, verbose_name="Category")
-    brand = models.CharField(max_length=100, blank=True, verbose_name="Brand")
-    condition = models.CharField(max_length=20, choices=CONDITION_CHOICES, blank=True, verbose_name="Condition")
-    location = models.CharField(max_length=200, blank=True, verbose_name="Location")
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=False, verbose_name=_("Category"))
+    brand = models.CharField(max_length=100, blank=True, verbose_name=_("Brand"))
+    condition = models.CharField(max_length=20, choices=CONDITION_CHOICES, blank=True, verbose_name=_("Condition"))
+    location = models.CharField(max_length=200, blank=True, verbose_name=_("Location"))
     
-    seller = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="")
+    seller = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("Seller")) # Corrected verbose_name
     created_at = models.DateTimeField(auto_now_add=True)
 
     likes = models.ManyToManyField(User, related_name='liked_products', blank=True)
@@ -58,7 +56,10 @@ class ProductImage(models.Model):
     image = models.ImageField(upload_to='product_images/')
 
     def __str__(self):
-        return f"Image for {self.product.name}"
+        try:
+            return f"Image for {self.product.name}"
+        except Product.DoesNotExist:
+            return f"Orphan Image (ID: {self.id})"
 
 # ==========================
 # ==== 2. Profile Model ====
@@ -72,21 +73,20 @@ class Profile(models.Model):
     following = models.ManyToManyField(User, related_name='followers', blank=True)
 
     def __str__(self):
-        return f'{self.user.username} Profile'
+        try:
+            return f'{self.user.username} Profile'
+        except User.DoesNotExist:
+            return f'Orphan Profile (ID: {self.id})'
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        
         try:
             img = Image.open(self.profile_picture.path)
-
             if img.height > 300 or img.width > 300:
                 output_size = (300, 300)
                 img.thumbnail(output_size)
                 img.save(self.profile_picture.path)
         except (FileNotFoundError, ValueError):
-            # This handles cases where the default image doesn't exist yet
-            # or the file is corrupted.
             pass
 
 # =================================
@@ -103,8 +103,12 @@ class Conversation(models.Model):
         ordering = ['-updated_at']
 
     def __str__(self):
-        participant_names = ", ".join([user.username for user in self.participants.all()])
-        return f'Conversation about "{self.product.name}" between {participant_names}'
+        try:
+            participant_names = ", ".join([user.username for user in self.participants.all()])
+            product_name = self.product.name if self.product else "Deleted Product"
+            return f'Conversation about "{product_name}" between {participant_names}'
+        except Exception:
+            return f'Conversation (ID: {self.id})'
 
 class Message(models.Model):
     conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, related_name='messages')
@@ -112,9 +116,7 @@ class Message(models.Model):
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
     is_read = models.BooleanField(default=False)
-
     class Meta:
         ordering = ['timestamp']
-
     def __str__(self):
         return f'Message from {self.sender.username} at {self.timestamp.strftime("%Y-%m-%d %H:%M")}'
