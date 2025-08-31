@@ -359,7 +359,7 @@ msgstr "እቃን ሰርዝ"
 #: users/templates/users/product_delete.html:14
 #, python-format
 msgid "Are you sure you want to permanently delete the product \"%(product.name)s\"?"
-msgstr "እርግጠኛ ነዎት \"% (product.name)s\" የተባለውን እቃ በቋሚነት መሰረዝ ይፈልጋሉ?"
+msgstr "እርግጠኛ ነዎት %(product.name)s የተባለውን እቃ እስከመጨረሻው መሰረዝ ይፈልጋሉ?"
 
 #: users/templates/users/product_delete.html:16
 msgid "This action cannot be undone."
