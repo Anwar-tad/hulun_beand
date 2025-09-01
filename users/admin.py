@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Product,Category,Profile, Conversation, Message # Product ሞዴልን እናስገባለን
+from .models import FAQ  # Make sure to import the new model
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'seller', 'price', 'category', 'created_at')
     list_filter = ('category', 'created_at', 'seller')
@@ -12,3 +13,10 @@ admin.site.register(Profile)
 
 admin.site.register(Conversation)
 admin.site.register(Message)
+
+
+@admin.register(FAQ)
+class FAQAdmin(admin.ModelAdmin):
+    list_display = ('question', 'order')
+    list_editable = ('order',)
+

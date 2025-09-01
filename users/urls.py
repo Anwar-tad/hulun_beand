@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.generic import TemplateView
 from . import views
 
 urlpatterns = [
@@ -16,4 +17,9 @@ urlpatterns = [
     path('inbox/', views.inbox, name='inbox'),
     path('conversation/start/<int:product_pk>/', views.start_conversation, name='start_conversation'),
     path('conversation/<int:pk>/', views.conversation_detail, name='conversation_detail'),
+    # ... ሌሎች url patterns
+    path('help/', TemplateView.as_view(template_name='help.html'), name='help'),
+
+    path('help/', views.help_page, name='help'),
 ]
+

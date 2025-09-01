@@ -32,7 +32,7 @@
     </div>
 
     <!-- Category Icons Section -->
-    <div class="category-section">
+   <!-- <div class="category-section">
         <div class="container">
             <h2 class="text-center mb-5">{% translate "Browse by Category" %}</h2>
             <div class="row text-center">
@@ -48,21 +48,42 @@
                 {% endfor %}
             </div>
         </div>
+    </div>-->
+    <div class="category-section">
+    <div class="container">
+        <h2 class="text-center mb-4" data-bs-toggle="collapse" data-bs-target="#categoryContent" aria-expanded="true" aria-controls="categoryContent">
+            {% translate "Browse by Category" %} <i class="bi bi-chevron-down"></i>
+        </h2>
+        <div class="collapse" id="categoryContent">
+            <div class="row text-center">
+                {% for category in categories %}
+                    <div class="col-2 mb-6">
+                     <a href="?category={{ category.name }}" class="category-icon">
+                       <div class="icon-circle">
+                                <img src="{% static 'images/icons/'|add:category.name|add:'.png' %}" alt="{{ category.name }}">
+                            </div>
+                            <span>{{ category.name }}</span>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
+</div>
 {% endif %}
 <!-- ============================== -->
 <!-- ==== የማጣሪያ ክፍል እዚህ ያበቃል ==== -->
 <!-- ============================== -->
 
-<div class="container mt-4">
+<div class="container mt-2">
     <!-- ይህ ርዕስ የሚታየው አንድ ምድብ ሲመረጥ ወይም ፍለጋ ሲካሄድ ነው -->
     {% if selected_category %}
-        <h2 class="mb-4">{% translate "Showing items in" %}: <strong>{{ selected_category }}</strong></h2>
+        <h2 class="mb-1">{% translate "Showing items in" %}: <strong>{{ selected_category }}</strong></h2>
         <a href="{% url 'home' %}">‹ {% translate "Back to all categories" %}</a>
     {% elif request.GET.q %}
-        <h2 class="mb-4">{% translate "Search results for" %}: <strong>"{{ request.GET.q }}"</strong></h2>
+        <h2 class="mb-1">{% translate "Search results for" %}: <strong>"{{ request.GET.q }}"</strong></h2>
     {% else %}
-        <h2 class="mb-4">{% translate "Latest Products" %}</h2>
+        <h2 class="mb-1">{% translate "Latest Products" %}</h2>
     {% endif %}
 
     <div class="row mt-4">

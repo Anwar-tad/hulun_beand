@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Help & Support" %} | Menalesh{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">{% translate "Help & Support" %}</h1>
+    <p class="lead text-center">{% translate "Find answers to common questions about using Menalesh." %}</p>
+
+    <div class="accordion" id="faqAccordion">
+        {% for faq in faqs %}
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading-{{ faq.id }}">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ faq.id }}" aria-expanded="false" aria-controls="collapse-{{ faq.id }}">
+                    {{ faq.question }}
+                </button>
+            </h2>
+            <div id="collapse-{{ faq.id }}" class="accordion-collapse collapse" aria-labelledby="heading-{{ faq.id }}" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    {{ faq.answer }}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center text-muted">{% translate "No questions are available at the moment." %}</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

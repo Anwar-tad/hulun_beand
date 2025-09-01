@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import JsonResponse
+from .models import FAQ  # FAQ ሞዴሉን አስገባ
 
 # Import Forms
 from .forms import (
@@ -243,3 +244,8 @@ def conversation_detail(request, pk):
 
     context = { 'conversation': conversation }
     return render(request, 'users/conversation_detail.html', context)
+
+def help_page(request):
+    faqs = FAQ.objects.all().order_by('order')
+    context = {'faqs': faqs}
+    return render(request, 'help.html', context)

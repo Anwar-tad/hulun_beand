@@ -120,3 +120,16 @@ class Message(models.Model):
         ordering = ['timestamp']
     def __str__(self):
         return f'Message from {self.sender.username} at {self.timestamp.strftime("%Y-%m-%d %H:%M")}'
+
+class FAQ(models.Model):
+    question = models.CharField(max_length=255)
+    answer = models.TextField()
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        verbose_name = "FAQ"
+        verbose_name_plural = "FAQs"
+        ordering = ['order']
+
+    def __str__(self):
+        return self.question
