@@ -1,78 +1,214 @@
-/* static/css/style.css */
+ 
+/* static/css/style.css - FINAL CLEAN VERSION */
 
 /* =================================
-   1. Global Styles & Body Background
+   1. Global Styles & Color Variables
    ================================= */
+:root {
+    --primary-color: #D4AF37; /* A rich Gold/Ochre color */
+    --secondary-color: #2c3e50; /* A dark slate blue */
+}
+
 body {
-    /* This sets a soft, light grey background for the entire page */
-    background-color: #f8f9fa; 
+    background-color: #f8f9fa; /* A soft, light grey background */
+}
+
+a {
+    color: var(--secondary-color);
 }
 
 /* =================================
-   2. Card Styles
+   2. Navbar
+   ================================= */
+.navbar.navbar-dark {
+    background-color: var(--secondary-color) !important; /* Dark Slate Blue */
+}
+
+.language-switcher-form select {
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    padding: 0.2rem 0.5rem;
+}
+
+.language-switcher-form select option {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* =================================
+   3. Hero Section (Homepage)
+   ================================= */
+.hero-section-v2 {
+    background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.7)), url('../images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 6rem 1rem;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+.hero-section-v2 .display-4 {
+    font-weight: 700;
+}
+
+.hero-section-v2 .form-control {
+    border-radius: 50px 0 0 50px;
+    border: none;
+    padding: 1.2rem; /* Adjusted padding */
+}
+
+.hero-section-v2 .btn-primary {
+    border-radius: 0 50px 50px 0;
+    padding: 1.2rem 1.5rem; /* Adjusted padding */
+    font-weight: 600;
+}
+
+/* =================================
+   4. Category Icons (Homepage)
+   ================================= */
+.category-section {
+    padding: 3rem 0;
+}
+
+.category-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--secondary-color);
+    transition: transform 0.2s;
+}
+
+.category-icon:hover {
+    transform: scale(1.1);
+    color: var(--primary-color);
+}
+
+.category-icon .icon-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.category-icon img {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+}
+
+.category-icon span {
+    font-weight: 100;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* =================================
+   5. Card Styles (General)
    ================================= */
 .card {
-    /* This adds a slightly more pronounced shadow to all cards */
     box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    border: none; /* Removes the default card border for a cleaner look */
-    transition: transform .2s; /* Animation for hover effect */
+    border: none;
+    transition: transform .2s, box-shadow .2s;
 }
 
 .card:hover {
-    transform: scale(1.02); /* Slightly enlarges the card on hover */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
 }
 
 .card-img-top {
     height: 200px;
-    object-fit: cover; /* Ensures images fill the space without distortion */
-}
-
-/* =================================
-   3. Navbar Customization
-   ================================= */
-.navbar.navbar-light.bg-light {
-    background-color: #004AAD !important; /* የድሮው ሰማያዊ ቀለም */
-    border-bottom: none; /* ከስር ያለውን መስመር እናጥፋው */
-}
-
-/* የ Navbar ጽሑፎችን እና ሊንኮችን ነጭ ማድረግ */
-.navbar.navbar-light .navbar-brand,
-.navbar.navbar-light .navbar-nav .nav-link {
-    color: white !important;
-}
-
-/* የ Navbar toggle button አይከንን ነጭ ማድረግ */
-.navbar-light .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-}
-
-/* =================================
-   4. Profile Page Enhancements
-   ================================= */
-.profile-picture-lg {
-    width: 150px;
-    height: 150px;
     object-fit: cover;
 }
 
+.card-title a:hover {
+    color: var(--primary-color);
+}
+
 /* =================================
-   5. Form Customizations
+   6. Floating Action Button
    ================================= */
+.floating-post-container {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 1030;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.floating-post-text {
+    background-color: white;
+    color: var(--secondary-color);
+    padding: 10px 18px;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.floating-post-button {
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+}
+
+.floating-post-button:hover {
+    transform: scale(1.1);
+    color: white;
+}
+
+/* =================================
+   7. Auth Page Styles
+   ================================= */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
 .auth-card {
     max-width: 800px;
     border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* To keep the rounded corners with the image */
+    overflow: hidden;
 }
+
 .auth-image-section {
-    background: url('/static/images/auth-bg.jpg') no-repeat center center;
+    background: url('../images/auth-bg.jpg') no-repeat center center;
     background-size: cover;
     padding: 40px;
     color: white;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
+
 .auth-form-section {
     padding: 40px;
 }
 
-/* You can add any other custom styles you want here in the future */
+/* Style for the "Help" link */
+.nav-link help-button {
+    color: #ff3454; /* White text color for visibility */
+    background-color: #3f5; /* A distinct background color (e.g., a shade of blue) */
+    border-radius: 5px; /* Rounded corners for a button look */
+    padding: 8px 15px; /* Add some padding for size */
+    margin-right: 10px; /* Add some space to the right if needed */
+}
