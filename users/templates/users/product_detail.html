@@ -18,12 +18,12 @@
                     <div class="carousel-inner rounded">
                         {% for p_image in product.images.all %}
                             <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                <a href="{{ p_image.image.url }}" data-lightbox="product-gallery" data-title="{{ product.name }}">
+                                <!--<a href="{{ p_image.image.url }}" data-lightbox="product-gallery" data-title="{{ product.name }}"> -->
                                     <img src="{{ p_image.image.url }}" class="d-block w-100" alt="Product Image" style="height: 400px; object-fit: cover;">
                                 </a>
                             </div>
                         {% endfor %}
-                    </div>
+                    </div> 
                     <button class="carousel-control-prev" type="button" data-bs-target="#productImageCarousel" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">{% translate "Previous" %}</span>
@@ -54,7 +54,16 @@
             {% if product.seller.profile.phone_number %}
                 <div id="contact-section" class="mt-3 mb-3">
                     <div id="contact-info" style="display:none;">
-                        <p class="fs-5"><strong>{% translate "Phone" %}:</strong> <a href="tel:{{ product.seller.profile.phone_number }}">{{ product.seller.profile.phone_number }}</a></p>
+                        <p class="fs-5"><strong>{% translate "Phone" %}:</strong>
+                      {% if user.is_authenticated %}
+                        <a href="tel:{{ product.seller.profile.phone_number }}">{{ product.seller.profile.phone_number }}</a>
+                {% else %}
+        <!-- If the user is NOT logged in, link to the login page -->
+        <a href="{% url 'login' %}" >
+            <i class="bi bi-plus-lg"> login first to get the phone </i>
+            </a>
+                    {% endif %}
+                        </p>
                     </div>
                     <button id="show-contact-btn" class="btn btn-success btn-lg">{% translate "Show Contact" %}</button>
                 </div>
@@ -82,7 +91,9 @@
             <!-- Like/Dislike Buttons -->
             <div class="mt-4">
                 <form action="{% url 'like_product' product.id %}" method="POST" style="display: inline;">
-                    {% csrf_token %}<button type="submit" class="btn btn-outline-primary">👍 {% translate "Like" %} <span class="badge bg-secondary">{{ product.total_likes }}</span></button>
+                    {% csrf_token %}
+                    
+                    <button type="submit" class="btn btn-outline-primary">👍 {% translate "Like" %} <span class="badge bg-secondary">{{ product.total_likes }}</span></button>
                 </form>
                 <form action="{% url 'dislike_product' product.id %}" method="POST" style="display: inline;">
                     {% csrf_token %}<button type="submit" class="btn btn-outline-secondary">👎 {% translate "Dislike" %} <span class="badge bg-secondary">{{ product.total_dislikes }}</span></button>

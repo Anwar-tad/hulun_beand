@@ -33,11 +33,24 @@ class RegisterForm(UserCreationForm):
 # ==========================
 # ==== 2. Product Form ====
 # ==========================
-
-class ProductForm(forms.ModelForm):
+class RetailProductForm(forms.ModelForm):
+    # ይህ ፎርም ለችርቻሮ ንግድ የሚያስፈልጉትን መስኮች ብቻ ይይዛል
     class Meta:
         model = Product
-        fields = ['name', 'category', 'brand', 'condition', 'location', 'price', 'description']
+        fields = [
+            'name', 'category', 'condition', 'brand', 'location', 
+            'price', 'description'
+        ]
+
+class WholesaleProductForm(forms.ModelForm):
+    # ይህ ፎርም ለጅምላ ንግድ የሚያስፈልጉትን ሁሉንም መስኮች ይይዛል
+    class Meta:
+        model = Product
+        fields = [
+            'name', 'category', 'condition', 'brand', 'location', 
+            'price', 'description', 'is_wholesale', 'minimum_order'
+        ]
+
         
         # 2. Define translatable labels for each field
         labels = {

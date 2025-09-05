@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification Successful - Menalesh</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #0a0a0a;
+            --primary-light: #1a1a1a;
+            --accent-blue: #00d4ff;
+            --accent-purple: #764ba2;
+            --success: #00ff8c;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+        }
+        
+        body {
+            background: var(--primary-dark);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .success-container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            color: var(--success);
+            margin-bottom: 1rem;
+        }
+        
+        .success-badge {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .next-steps {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .next-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .next-step i {
+            color: var(--accent-blue);
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .action-btn {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 0.5rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+            color: white;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent-blue);
+            color: var(--accent-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        
+        <div class="success-badge">VERIFICATION APPROVED</div>
+        
+        <h1>Business Verification Successful!</h1>
+        
+        <p class="text-muted">
+            Congratulations! Your business <strong>{{ business_name }}</strong> has been successfully verified.
+        </p>
+        
+        <p class="text-muted">
+            Verification Date: {{ verification_date|date:"F j, Y" }}
+        </p>
+        
+        <div class="next-steps">
+            <h5>What's Next?</h5>
+            
+            <div class="next-step">
+                <i class="fas fa-rocket"></i>
+                <div>
+                    <strong>Access Wholesale Marketplace</strong>
+                    <p class="text-muted mb-0">Start browsing and purchasing wholesale products</p>
+                </div>
+            </div>
+            
+            <div class="next-step">
+                <i class="fas fa-box"></i>
+                <div>
+                    <strong>List Your Products</strong>
+                    <p class="text-muted mb-0">Start selling your products to other businesses</p>
+                </div>
+            </div>
+            
+            <div class="next-step">
+                <i class="fas fa-chart-line"></i>
+                <div>
+                    <strong>Grow Your Business</strong>
+                    <p class="text-muted mb-0">Access analytics and business tools</p>
+                </div>
+            </div>
+        </div>
+        
+        <div>
+            <a href="{% url 'wholesale_dashboard' %}" class="action-btn">
+                <i class="fas fa-store me-2"></i>Go to Wholesale Dashboard
+            </a>
+            
+            <a href="{% url 'home' %}" class="action-btn btn-outline">
+                <i class="fas fa-home me-2"></i>Return to Home
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

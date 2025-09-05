@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wholesale Suppliers - Menalesh</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #0a0a0a;
+            --primary-light: #1a1a1a;
+            --accent-blue: #00d4ff;
+            --accent-purple: #764ba2;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --success: #00ff8c;
+            --warning: #ffcc00;
+        }
+        
+        body {
+            background: var(--primary-dark);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        
+        .suppliers-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .premium-badge {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .search-filters {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .search-box {
+            position: relative;
+        }
+        
+        .search-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+            border-radius: 25px;
+            padding: 0.75rem 1rem 0.75rem 3rem;
+            width: 100%;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+        
+        .filter-select {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+            border-radius: 10px;
+            padding: 0.75rem;
+            width: 100%;
+        }
+        
+        .suppliers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .supplier-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            height: 100%;
+        }
+        
+        .supplier-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+        
+        .supplier-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .supplier-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+        
+        .verified-badge {
+            background: var(--success);
+            color: var(--primary-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .supplier-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+        
+        .stat-number {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-blue);
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .product-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .product-tag {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--accent-blue);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+            border: none;
+            border-radius: 25px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            flex: 1;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent-blue);
+            color: var(--accent-blue);
+            border-radius: 25px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+        }
+        
+        .pagination {
+            justify-content: center;
+            margin-top: 3rem;
+        }
+        
+        .page-link {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+            padding: 0.75rem 1.25rem;
+        }
+        
+        .page-link:hover {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: var(--primary-dark);
+        }
+        
+        .page-item.active .page-link {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+            border-color: var(--accent-blue);
+        }
+        
+        .rating {
+            color: var(--warning);
+            margin: 0.5rem 0;
+        }
+        
+        .contact-info {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .contact-item i {
+            color: var(--accent-blue);
+            margin-right: 0.5rem;
+            width: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .suppliers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .supplier-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="suppliers-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="premium-badge">WHOLESALE SUPPLIERS DIRECTORY</div>
+            <h1>Verified Business Suppliers</h1>
+            <p class="text-muted">Connect with trusted wholesale suppliers and manufacturers</p>
+        </div>
+
+        <!-- Search and Filters -->
+        <div class="search-filters">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" placeholder="Search suppliers, products, or categories...">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <select class="filter-select">
+                        <option value="">All Categories</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="clothing">Clothing & Apparel</option>
+                        <option value="food">Food & Beverages</option>
+                        <option value="construction">Construction Materials</option>
+                        <option value="agriculture">Agricultural Products</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="filter-select">
+                        <option value="">All Locations</option>
+                        <option value="addis">Addis Ababa</option>
+                        <option value="dire">Dire Dawa</option>
+                        <option value="mekelle">Mekelle</option>
+                        <option value="hawassa">Hawassa</option>
+                        <option value="bahirdar">Bahir Dar</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Suppliers Grid -->
+        <div class="suppliers-grid">
+            <!-- Supplier Card 1 -->
+            <div class="supplier-card">
+                <div class="supplier-header">
+                    <div class="supplier-avatar">ET</div>
+                    <div>
+                        <h4 class="mb-1">EthioTech Solutions</h4>
+                        <span class="verified-badge">
+                            <i class="fas fa-check-circle"></i> Verified Supplier
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span class="text-muted ms-2">4.5 (128 reviews)</span>
+                </div>
+                
+                <p class="text-muted">Leading supplier of electronics and technology products with wholesale pricing.</p>
+                
+                <div class="product-tags">
+                    <span class="product-tag">Electronics</span>
+                    <span class="product-tag">Gadgets</span>
+                    <span class="product-tag">Computers</span>
+                </div>
+                
+                <div class="supplier-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Products</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Rating</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">2D</div>
+                        <div class="stat-label">Delivery</div>
+                    </div>
+                </div>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Addis Ababa, Ethiopia</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+251 911 234 567</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-globe"></i>
+                        <span>www.ethiotech.com</span>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-store me-2"></i>View Products
+                    </button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-envelope me-2"></i>Contact
+                    </button>
+                </div>
+            </div>
+
+            <!-- Supplier Card 2 -->
+            <div class="supplier-card">
+                <div class="supplier-header">
+                    <div class="supplier-avatar">AG</div>
+                    <div>
+                        <h4 class="mb-1">AgriGrow Ethiopia</h4>
+                        <span class="verified-badge">
+                            <i class="fas fa-check-circle"></i> Verified Supplier
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span class="text-muted ms-2">4.8 (92 reviews)</span>
+                </div>
+                
+                <p class="text-muted">Premium agricultural products and organic food suppliers for wholesale buyers.</p>
+                
+                <div class="product-tags">
+                    <span class="product-tag">Agriculture</span>
+                    <span class="product-tag">Organic</span>
+                    <span class="product-tag">Food</span>
+                </div>
+                
+                <div class="supplier-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">200+</div>
+                        <div class="stat-label">Products</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Organic</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">3D</div>
+                        <div class="stat-label">Delivery</div>
+                    </div>
+                </div>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Hawassa, Ethiopia</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+251 922 345 678</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-globe"></i>
+                        <span>www.agrigrow.et</span>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-store me-2"></i>View Products
+                    </button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-envelope me-2"></i>Contact
+                    </button>
+                </div>
+            </div>
+
+            <!-- Supplier Card 3 -->
+            <div class="supplier-card">
+                <div class="supplier-header">
+                    <div class="supplier-avatar">TF</div>
+                    <div>
+                        <h4 class="mb-1">Textile Factory Direct</h4>
+                        <span class="verified-badge">
+                            <i class="fas fa-check-circle"></i> Verified Supplier
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <span class="text-muted ms-2">4.2 (156 reviews)</span>
+                </div>
+                
+                <p class="text-muted">Manufacturer and wholesale supplier of premium textiles and clothing materials.</p>
+                
+                <div class="product-tags">
+                    <span class="product-tag">Textiles</span>
+                    <span class="product-tag">Clothing</span>
+                    <span class="product-tag">Fabric</span>
+                </div>
+                
+                <div class="supplier-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">300+</div>
+                        <div class="stat-label">Products</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">MOQ</div>
+                        <div class="stat-label">100 units</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5D</div>
+                        <div class="stat-label">Delivery</div>
+                    </div>
+                </div>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Dire Dawa, Ethiopia</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+251 933 456 789</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-globe"></i>
+                        <span>www.textilefactory.et</span>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-store me-2"></i>View Products
+                    </button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-envelope me-2"></i>Contact
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <nav aria-label="Suppliers pagination">
+            <ul class="pagination">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Simple search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.querySelector('.search-input');
+            const supplierCards = document.querySelectorAll('.supplier-card');
+            
+            searchInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                
+                supplierCards.forEach(card => {
+                    const supplierName = card.querySelector('h4').textContent.toLowerCase();
+                    const supplierDesc = card.querySelector('p').textContent.toLowerCase();
+                    const supplierTags = card.querySelector('.product-tags').textContent.toLowerCase();
+                    
+                    if (supplierName.includes(searchTerm) || 
+                        supplierDesc.includes(searchTerm) || 
+                        supplierTags.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Filter functionality
+            const categoryFilter = document.querySelectorAll('.filter-select')[0];
+            const locationFilter = document.querySelectorAll('.filter-select')[1];
+            
+            function applyFilters() {
+                const categoryValue = categoryFilter.value;
+                const locationValue = locationFilter.value;
+                
+                supplierCards.forEach(card => {
+                    const cardCategory = card.querySelector('.product-tags').textContent.toLowerCase();
+                    const cardLocation = card.querySelector('.fa-map-marker-alt').nextSibling.textContent.toLowerCase();
+                    
+                    const categoryMatch = !categoryValue || cardCategory.includes(categoryValue);
+                    const locationMatch = !locationValue || cardLocation.includes(locationValue);
+                    
+                    if (categoryMatch && locationMatch) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+            
+            categoryFilter.addEventListener('change', applyFilters);
+            locationFilter.addEventListener('change', applyFilters);
+        });
+    </script>
+</body>
+</html>

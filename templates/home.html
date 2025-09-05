@@ -14,11 +14,85 @@
 {% block content %}
 
 <!-- ==================================================================== -->
-<!-- ==== ይህ ክፍል የሚታየው ምንም አይነት ምድብ ካልተመረጠ ብቻ ነው ==== -->
+<!-- ==== Horizontal Scrollable Quick Links ==== -->
+<!-- ==================================================================== -->
+<div class="container-fluid py-2 border-bottom shadow-sm bg-light">
+    <div class="d-flex flex-nowrap overflow-x-auto pb-2">
+        <!-- Retail products button -->
+        <a href="{% url 'home' %}" class="btn btn-outline-primary flex-shrink-0 mx-1">
+            <i class="fas fa-shopping-cart me-1"></i> {% translate "Retail" %}
+        </a>
+
+        <!-- Wholesale products button -->
+        <a href="{% url 'premium_upgrade'%}" class="btn btn-outline-success flex-shrink-0 mx-1">
+            <i class="fas fa-box me-1"></i> {% translate "Wholesale" %}
+        </a>
+        
+        <!-- Additional Quick Links -->
+        <a href="#" class="btn btn-outline-info flex-shrink-0 mx-1" data-bs-toggle="modal" data-bs-target="#comingSoonModal">
+            <i class="fas fa-briefcase me-1"></i> {% translate "Jobs" %}
+        </a>
+        
+        <a href="#" class="btn btn-outline-warning flex-shrink-0 mx-1" data-bs-toggle="modal" data-bs-target="#comingSoonModal">
+            <i class="fas fa-file-contract me-1"></i> {% translate "Tenders" %}
+        </a>
+        
+        <a href="#" class="btn btn-outline-secondary flex-shrink-0 mx-1" data-bs-toggle="modal" data-bs-target="#comingSoonModal">
+            <i class="fas fa-home me-1"></i> {% translate "Real Estate" %}
+        </a>
+        
+        <a href="#" class="btn btn-outline-danger flex-shrink-0 mx-1" data-bs-toggle="modal" data-bs-target="#comingSoonModal">
+            <i class="fas fa-car me-1"></i> {% translate "Vehicles" %}
+        </a>
+        
+        <a href="#" class="btn btn-outline-dark flex-shrink-0 mx-1" data-bs-toggle="modal" data-bs-target="#comingSoonModal">
+            <i class="fas fa-concierge-bell me-1"></i> {% translate "Services" %}
+        </a>
+        
+        <a href="#" class="btn btn-outline-success flex-shrink-0 mx-1" data-bs-toggle="modal" data-bs-target="#comingSoonModal">
+            <i class="fas fa-heartbeat me-1"></i> {% translate "Healthcare" %}
+        </a>
+        
+        <a href="#" class="btn btn-outline-primary flex-shrink-0 mx-1" data-bs-toggle="modal" data-bs-target="#comingSoonModal">
+            <i class="fas fa-tshirt me-1"></i> {% translate "Fashion" %}
+        </a>
+        
+        <a href="#" class="btn btn-outline-info flex-shrink-0 mx-1" data-bs-toggle="modal" data-bs-target="#comingSoonModal">
+            <i class="fas fa-mobile-alt me-1"></i> {% translate "Electronics" %}
+        </a>
+        
+        <a href="#" class="btn btn-outline-warning flex-shrink-0 mx-1" data-bs-toggle="modal" data-bs-target="#comingSoonModal">
+            <i class="fas fa-utensils me-1"></i> {% translate "Food" %}
+        </a>
+    </div>
+</div>
+
+<!-- Coming Soon Modal -->
+<div class="modal fade" id="comingSoonModal" tabindex="-1" aria-labelledby="comingSoonModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="comingSoonModalLabel">{% translate "Coming Soon!" %}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center py-4">
+                <i class="fas fa-tools fa-3x text-warning mb-3"></i>
+                <h4>{% translate "This feature is under development" %}</h4>
+                <p class="text-muted">{% translate "We're working hard to bring you this feature. Please check back soon!" %}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Close" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================================================================== -->
+<!-- ==== This section is only visible if no category is selected ==== -->
 <!-- ==================================================================== -->
 {% if not selected_category and not request.GET.q %}
     <!-- Hero Section -->
-    <div class="hero-section-v2 text-center">
+    <div class="hero-section-v2 text-center py-5" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1563014959-7aaa83350992?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); background-size: cover; color: white;">
         <div class="container">
             <h1 class="display-4">Menalesh - {% translate "All in One Place" %}</h1>
             <p class="lead mb-4">{% translate "Buy what you want, sell what you don't. Simple, fast, and reliable." %}</p>
@@ -32,70 +106,65 @@
     </div>
 
     <!-- Category Icons Section -->
-   <!-- <div class="category-section">
+    <div class="category-section py-5 bg-white">
         <div class="container">
-            <h2 class="text-center mb-5">{% translate "Browse by Category" %}</h2>
-            <div class="row text-center">
-                {% for category in categories %}
-                    <div class="col-3 mb-4">
-                     <a href="?category={{ category.name }}" class="category-icon">
-                       <div class="icon-circle">
-                                <img src="{% static 'images/icons/'|add:category.name|add:'.png' %}" alt="{{ category.name }}">
-                            </div>
-                            <span>{{ category.name }}</span>
-                        </a>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>-->
-    <div class="category-section">
-    <div class="container">
-        <h2 class="text-center mb-4" data-bs-toggle="collapse" data-bs-target="#categoryContent" aria-expanded="true" aria-controls="categoryContent">
-            {% translate "Browse by Category" %} <i class="bi bi-chevron-down"></i>
-        </h2>
-        <div class="collapse" id="categoryContent">
-            <div class="row text-center">
-                {% for category in categories %}
-                    <div class="col-2 mb-6">
-                     <a href="?category={{ category.name }}" class="category-icon">
-                       <div class="icon-circle">
-                                <img src="{% static 'images/icons/'|add:category.name|add:'.png' %}" alt="{{ category.name }}">
-                            </div>
-                            <span>{{ category.name }}</span>
-                        </a>
-                    </div>
-                {% endfor %}
+            <h2 class="text-center mb-4" data-bs-toggle="collapse" data-bs-target="#categoryContent" aria-expanded="true" aria-controls="categoryContent">
+                {% translate "Browse by Category" %} <i class="bi bi-chevron-down"></i>
+            </h2>
+            <div class="collapse" id="categoryContent">
+                <div class="row text-center">
+                    {% for category in categories %}
+                        <div class="col-2 mb-4">
+                            <a href="?category={{ category.name }}" class="category-icon text-decoration-none">
+                                <div class="icon-circle mb-2 bg-light rounded-circle d-flex align-items-center justify-content-center mx-auto" style="width: 70px; height: 70px;">
+                                    <img src="{% static 'images/icons/'|add:category.name|add:'.png' %}" alt="{{ category.name }}" style="max-width: 40px; max-height: 40px;">
+                                </div>
+                                <span class="text-dark">{{ category.name }}</span>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endif %}
+
 <!-- ============================== -->
-<!-- ==== የማጣሪያ ክፍል እዚህ ያበቃል ==== -->
+<!-- ==== Products Section ==== -->
 <!-- ============================== -->
 
-<div class="container mt-2">
-    <!-- ይህ ርዕስ የሚታየው አንድ ምድብ ሲመረጥ ወይም ፍለጋ ሲካሄድ ነው -->
+<div class="container mt-5">
+    <!-- This title is displayed when a category is selected or a search is performed -->
     {% if selected_category %}
-        <h2 class="mb-1">{% translate "Showing items in" %}: <strong>{{ selected_category }}</strong></h2>
-        <a href="{% url 'home' %}">‹ {% translate "Back to all categories" %}</a>
+        <h2 class="mb-3">{% translate "Showing items in" %}: <strong>{{ selected_category }}</strong></h2>
+        <a href="{% url 'home' %}" class="btn btn-outline-secondary mb-4">‹ {% translate "Back to all categories" %}</a>
     {% elif request.GET.q %}
-        <h2 class="mb-1">{% translate "Search results for" %}: <strong>"{{ request.GET.q }}"</strong></h2>
+        <h2 class="mb-3">{% translate "Search results for" %}: <strong>"{{ request.GET.q }}"</strong></h2>
     {% else %}
-        <h2 class="mb-1">{% translate "Latest Products" %}</h2>
+        <h2 class="mb-3">{% translate "Latest Products" %}</h2>
     {% endif %}
 
     <div class="row mt-4">
         {% for product in products %}
           <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card h-100">
+            <div class="card h-100 shadow-sm">
               <a href="{% url 'product_detail' product.id %}">
                   {% if product.images.first %}
-                    <img src="{{ product.images.first.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    <img src="{{ product.images.first.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: cover;">
                   {% else %}
-                    <img src="{% static 'images/default_product.png' %}" class="card-img-top" alt="No Image">
+                    <img src="{% static 'images/default_product.png' %}" class="card-img-top" alt="No Image" style="height: 200px; object-fit: cover;">
                   {% endif %}
+                  
+                  <!-- Price and Location Overlay -->
+                  <div class="position-absolute top-0 start-0 m-2">
+                    <span class="badge bg-success fs-6">{{ product.price|intcomma }} Br</span>
+                  </div>
+                  <div class="position-absolute top-0 end-0 m-2">
+                    <span class="badge bg-info fs-6">
+                      <i class="fas fa-map-marker-alt"></i> 
+                      {% if product.location %}{{ product.location }}{% else %}{% translate "Addis Ababa" %}{% endif %}
+                    </span>
+                  </div>
               </a>
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title">
@@ -109,8 +178,12 @@
             </div>
           </div>
         {% empty %}
-          <div class="col">
-            <p class="text-center text-muted">{% translate "No products found matching your criteria." %}</p>
+          <div class="col-12">
+            <div class="text-center py-5 bg-light rounded">
+                <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                <p class="text-muted fs-5">{% translate "No products found matching your criteria." %}</p>
+                <a href="{% url 'home' %}" class="btn btn-primary">{% translate "Browse All Products" %}</a>
+            </div>
           </div>
         {% endfor %}
     </div>

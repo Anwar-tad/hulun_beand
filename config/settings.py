@@ -4,6 +4,21 @@ import os
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 
+CHAPA = {
+    "SECRET_KEY": os.environ.get("CHAPA_SECRET_KEY"),
+    "PUBLIC_KEY": os.environ.get("CHAPA_PUBLIC_KEY"),
+    "BASE_URL": os.environ.get("CHAPA_BASE_URL", "https://api.chapa.co"),
+}
+TELEBIRR = {
+    "APP_ID": os.environ.get("TELEBIRR_APP_ID"),
+    "MERCHANT_ID": os.environ.get("TELEBIRR_MERCHANT_ID"),
+    "SECRET": os.environ.get("TELEBIRR_SECRET"),
+    "BASE_URL": os.environ.get("TELEBIRR_BASE_URL"),
+}
+PAYMENT_ENDPOINTS = {
+    "callback_base": os.environ.get("PAYMENT_CALLBACK_BASE"),
+    "webhook_base": os.environ.get("PAYMENT_WEBHOOK_BASE"),
+}
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -16,7 +31,6 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Application definition
-
 INSTALLED_APPS = [
     'jazzmin',
     'django.contrib.admin',
@@ -25,11 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.humanize',  
+    'django.contrib.humanize',
     'users.apps.UsersConfig',
+    'products.apps.ProductsConfig', # ይህን ስም አስተካክል
 ]
 
+
 MIDDLEWARE = [
+  
+    'users.middleware.PremiumAccessMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware', # Correct position

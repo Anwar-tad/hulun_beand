@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upgrade to Premium - EliteB2B</title>
+    <style>
+        :root {
+            --primary-dark: #0a0a0a;
+            --primary-light: #1a1a1a;
+            --accent-blue: #00d4ff;
+            --accent-purple: #764ba2;
+            --success: #00ff8c;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+        }
+        
+        body {
+            background: var(--primary-dark);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 2rem;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .tier-selection {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .tier-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-secondary);
+            padding: 1rem 2rem;
+            margin: 0 0.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tier-btn.active {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .plan-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .plan-card.featured {
+            border: 2px solid var(--accent-blue);
+            transform: scale(1.05);
+        }
+        
+        .plan-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin: 1.5rem 0;
+            text-align: left;
+            padding: 0;
+        }
+        
+        .plan-features li {
+            margin: 0.5rem 0;
+            color: var(--text-secondary);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .plan-features li:before {
+            content: "✓";
+            color: var(--success);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .upgrade-btn {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .upgrade-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+        }
+        
+        .save-badge {
+            background: var(--success);
+            color: var(--primary-dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Upgrade Your Account</h1>
+            <p>Choose the right plan for your business needs</p>
+        </div>
+        
+        <div class="tier-selection">
+            <button class="tier-btn active" onclick="selectTier('standard')">Standard</button>
+            <button class="tier-btn" onclick="selectTier('wholesale')">Wholesale</button>
+        </div>
+        
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="tier_type" id="tierType" value="standard">
+            
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <h3>Monthly</h3>
+                    <div class="plan-price">$49<span style="font-size: 1rem;">/month</span></div>
+                    <ul class="plan-features">
+                        <li>Basic marketplace access</li>
+                        <li>Up to 10 product listings</li>
+                        <li>Standard support</li>
+                        <li>Basic analytics</li>
+                    </ul>
+                    <button type="submit" name="plan_type" value="monthly" class="upgrade-btn">
+                        Choose Monthly
+                    </button>
+                </div>
+                
+                <div class="plan-card featured">
+                    <h3>Annual</h3>
+                    <div class="plan-price">$499<span style="font-size: 1rem;">/year</span></div>
+                    <span class="save-badge">Save 15%</span>
+                    <ul class="plan-features">
+                        <li>Full marketplace access</li>
+                        <li>Unlimited product listings</li>
+                        <li>Priority support</li>
+                        <li>Advanced analytics</li>
+                        <li>Early access to new features</li>
+                    </ul>
+                    <button type="submit" name="plan_type" value="annual" class="upgrade-btn">
+                        Choose Annual
+                    </button>
+                </div>
+                
+                <div class="plan-card">
+                    <h3>Lifetime</h3>
+                    <div class="plan-price">$1,999</div>
+                    <span class="save-badge">One-time</span>
+                    <ul class="plan-features">
+                        <li>Lifetime premium access</li>
+                        <li>Unlimited everything</li>
+                        <li>VIP support</li>
+                        <li>All future features</li>
+                        <li>Dedicated account manager</li>
+                    </ul>
+                    <button type="submit" name="plan_type" value="lifetime" class="upgrade-btn">
+                        Choose Lifetime
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function selectTier(tier) {
+            document.getElementById('tierType').value = tier;
+            document.querySelectorAll('.tier-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update prices based on tier
+            const priceElements = document.querySelectorAll('.plan-price');
+            if (tier === 'wholesale') {
+                priceElements[0].innerHTML = '$99<span style="font-size: 1rem;">/month</span>';
+                priceElements[1].innerHTML = '$999<span style="font-size: 1rem;">/year</span>';
+                priceElements[2].innerHTML = '$3,999';
+            } else {
+                priceElements[0].innerHTML = '$49<span style="font-size: 1rem;">/month</span>';
+                priceElements[1].innerHTML = '$499<span style="font-size: 1rem;">/year</span>';
+                priceElements[2].innerHTML = '$1,999';
+            }
+        }
+    </script>
+</body>
+</html>

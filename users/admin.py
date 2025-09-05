@@ -1,6 +1,22 @@
 from django.contrib import admin
-from .models import Product,Category,Profile, Conversation, Message # Product ሞዴልን እናስገባለን
-from .models import FAQ  # Make sure to import the new model
+from .models import Product,Category,Profile, Conversation, Message 
+from .models import FAQ  
+from .models import UserTier
+
+@admin.register(UserTier)
+class UserTierAdmin(admin.ModelAdmin):
+    """
+    Custom admin view for the UserTier model.
+    """
+    # This line FIXES the problem by making the 'user' field selectable.
+    fields = ('user', 'tier', 'is_paid', 'paid_until')
+
+    # These lines configure the list view in the admin.
+    list_display = ('user', 'tier', 'is_paid', 'paid_until')
+    list_filter = ('tier', 'is_paid')
+    search_fields = ('user__username',) # Search for users by their username
+
+
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'seller', 'price', 'category', 'created_at')
     list_filter = ('category', 'created_at', 'seller')

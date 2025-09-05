@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wholesale Dashboard - Menalesh</title>
+    <style>
+        :root {
+            --primary-dark: #0a0a0a;
+            --primary-light: #1a1a1a;
+            --accent-blue: #00d4ff;
+            --accent-purple: #764ba2;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+        }
+        
+        body {
+            background: var(--primary-dark);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .premium-badge {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-left: 1rem;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .action-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .action-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-blue);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>Welcome to Wholesale Dashboard <span class="premium-badge">PREMIUM</span></h1>
+            <p>Manage your wholesale business efficiently</p>
+        </div>
+        
+        <div class="quick-actions">
+            <div class="action-card" onclick="location.href='{% url 'wholesale_products' %}'">
+                <h3>📦 Manage Products</h3>
+                <p>Add and manage your wholesale products</p>
+            </div>
+            
+            <div class="action-card" onclick="location.href='{% url 'wholesale_suppliers' %}'">
+                <h3>👥 Find Suppliers</h3>
+                <p>Connect with reliable suppliers</p>
+            </div>
+            
+            <div class="action-card" onclick="location.href='{% url 'wholesale_orders' %}'">
+                <h3>📋 View Orders</h3>
+                <p>Manage your wholesale orders</p>
+            </div>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">0</div>
+                <div>Active Products</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">0</div>
+                <div>Total Orders</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">0</div>
+                <div>Suppliers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">0 ETB</div>
+                <div>Revenue</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

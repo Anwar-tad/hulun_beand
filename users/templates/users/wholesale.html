@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Wholesale Marketplace" %} | Menalesh{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">{% translate "Wholesale Marketplace" %}</h1>
+    
+    <div class="row">
+        {% for product in wholesale_products %}
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card h-100">
+                    <a href="{% url 'product_detail' product.id %}">
+                        {% if product.images.first %}
+                            <img src="{{ product.images.first.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                        {% else %}
+                            <img src="{% static 'images/default_product.png' %}" class="card-img-top" alt="No Image">
+                        {% endif %}
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{% translate "Price" %}: {{ product.price|intcomma }} Br.</p>
+                        <p class="card-text"><small class="text-muted">{% translate "Minimum order" %}: {{ product.minimum_order }}</small></p>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col">
+                <p class="text-center text-muted">{% translate "No wholesale products found." %}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

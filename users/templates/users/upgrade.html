@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upgrade to Premium</title>
+    <style>
+        .pricing-plans {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            padding: 2rem;
+        }
+        .plan-card {
+            border: 1px solid #ccc;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .plan-card.premium {
+            border-color: #00d4ff;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <h1>Choose Your Premium Plan</h1>
+    <div class="pricing-plans">
+        <div class="plan-card">
+            <h2>Basic</h2>
+            <p>$99/month</p>
+            <button>Select Basic</button>
+        </div>
+        <div class="plan-card premium">
+            <h2>Professional</h2>
+            <p>$299/month</p>
+            <button>Select Professional</button>
+        </div>
+        <div class="plan-card">
+            <h2>Enterprise</h2>
+            <p>Custom Pricing</p>
+            <button>Contact Sales</button>
+        </div>
+    </div>
+</body>
+</html>
