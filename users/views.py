@@ -38,7 +38,23 @@ from .models import (
     Message
 )
 
-
+def handle_product_creation(request, form_class, is_wholesale=False):
+    """Handles product creation for both retail and wholesale products."""
+    form = form_class(request.POST, request.FILES)
+    if form.is_valid():
+        product = form.save(commit=False)
+        product.seller = request.user
+        if is_wholesale:
+            product.is_wholesale = True
+        product.save()
+        
+        # Handle Image Uploads (Common Logic)
+        images = request.FILES.getlist('images')
+        for image in images:
+            ProductImage.objects.create(product=product, image=image)
+        
+        return product  # Return the created product
+    return None
 
 @login_required
 def premium_upgrade(request):
@@ -329,34 +345,27 @@ def payment_required_view(request):
     return render(request, 'payment_required.html')
     # users/views.py
 
+@login_required
 def create_retail_product(request):
     if request.method == 'POST':
-        form = RetailProductForm(request.POST, request.FILES)
-        if form.is_valid():
-            product = form.save(commit=False)
-            product.seller = request.user
-            product.save()
-            return redirect('some-success-page') # ወደምትፈልገው ገጽ ቀይረው
+        product = handle_product_creation(request, RetailProductForm)
+        if product:
+            messages.success(request, 'Your product has been posted successfully!')
+            return redirect('home')
     else:
         form = RetailProductForm()
     return render(request, 'users/create_product.html', {'form': form})
-# users/views.py
 
-
+@login_required
 def create_wholesale_product(request):
     if request.method == 'POST':
-        form = WholesaleProductForm(request.POST, request.FILES)
-        if form.is_valid():
-            product = form.save(commit=False)
-            product.seller = request.user
-            product.is_wholesale = True # የጅምላ ምርት መሆኑን ያመለክታል
-            product.save()
-            return redirect('some-success-page') # ወደምትፈልገው ገጽ ቀይረው
+        product = handle_product_creation(request, WholesaleProductForm, is_wholesale=True)
+        if product:
+            messages.success(request, 'Your wholesale product has been posted successfully!')
+            return redirect('some-success-page')  # You should change this URL
     else:
         form = WholesaleProductForm()
     return render(request, 'users/create_product.html', {'form': form})
-
-@login_required
 def wholesale_view(request):
     try:
         user_tier = UserTier.objects.get(user=request.user)
@@ -444,11 +453,10 @@ def home(request):
         'selected_category': selected_category
     }
     return render(request, 'home.html', context)
-
 @login_required
 def create_product(request):
     if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES)
+        form = RetailProductForm(request.POST, request.FILES)
         if form.is_valid():
             product = form.save(commit=False)
             product.seller = request.user
@@ -459,8 +467,7 @@ def create_product(request):
             messages.success(request, 'Your product has been posted successfully!')
             return redirect('home')
     else:
-        form = ProductForm()
-    
+        form = RetailProductForm()    
     return render(request, 'users/create_product.html', {'form': form})
 
 def product_detail(request, pk):
@@ -475,25 +482,37 @@ def product_detail(request, pk):
 @login_required
 def product_update(request, pk):
     product = get_object_or_404(Product, id=pk)
-    
+
     if product.seller != request.user:
         messages.error(request, "You are not authorized to edit this product.")
         return redirect('home')
 
+    if product.is_wholesale:
+        FormClass = WholesaleProductForm
+    else:
+        FormClass = BaseProductForm
+
     if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES, instance=product)
+        form = FormClass(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
+
+            # Handle image deletions
+            existing_image_ids = request.POST.getlist('existing_images')
+            for image in product.images.all():
+                if str(image.id) not in existing_image_ids:
+                    image.delete()
+
+            # Handle image uploads
             new_images = request.FILES.getlist('images')
-            if new_images:
-                product.images.all().delete()
-                for image in new_images:
-                    ProductImage.objects.create(product=product, image=image)
+            for image in new_images:
+                ProductImage.objects.create(product=product, image=image)
+
             messages.success(request, 'Your product has been updated!')
             return redirect('product_detail', pk=product.id)
     else:
-        form = ProductForm(instance=product)
-    
+        form = FormClass(instance=product)
+
     context = {
         'form': form,
         'product': product
